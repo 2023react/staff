@@ -1,8 +1,7 @@
 import React from "react";
 
 const Jobs = () => {
-  console.log("jobs");
-  return <div>jobs</div>;
+  return <div>jobsssssssssssssss</div>;
 };
 
 export default Jobs;
