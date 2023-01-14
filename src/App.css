@@ -14,3 +14,15 @@
 .not-Active {
   color: rgb(11, 0, 0);
 }
+.sidebar {
+  flex: 1;
+  background-color: azure;
+  position: relative;
+}
+.maincontent {
+  flex: 2;
+}
+
+.jobs {
+  display: flex;
+}
