@@ -4,6 +4,7 @@ const JobTitle = () => {
   return (
     <div className="jobInfo">
       <div>
+        photo
         <img src="" alt="" />
       </div>
     </div>
