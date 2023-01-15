@@ -4,20 +4,31 @@ const setActive = ({ isActive }) => (isActive ? "active-link " : "not-Active");
 
 const Header = () => {
   return (
-    <div>
-      <header className="header">
-        <NavLink to="/" className={setActive}>
-          {" "}
-          Home
+    <header className="header">
+      <div className="container">
+        <NavLink to="/" className="logo">
+          STAFF
         </NavLink>
-        <NavLink to="/jobs" className={setActive}>
-          Jobs
-        </NavLink>
-        <NavLink to="/companies" className={setActive}>
-          Companies
-        </NavLink>
-      </header>
-    </div>
+        <ul className="menu">
+          <li className="item">
+            <NavLink to="/" className={setActive}>
+              {" "}
+              Home
+            </NavLink>
+          </li>
+          <li className="item">
+            <NavLink to="/jobs" className={setActive}>
+              Jobs
+            </NavLink>
+          </li>
+          <li className="item">
+            <NavLink to="/companies" className={setActive}>
+              Companies
+            </NavLink>
+          </li>
+        </ul>
+      </div>
+    </header>
   );
 };
 
