@@ -1,0 +1,53 @@
+.mainSidebar {
+  display: flex;
+  flex-flow: column, wrap;
+  background-color: transparent;
+  position: relative;
+  width: 200px;
+  box-sizing: border-box;
+  position: relative;
+  .sidebarAds {
+    background-color: white;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-left: 20px;
+    width: calc (100% "-" 70px);
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding-right: 15px;
+    padding-left: 15px;
+    padding-top: 15px;
+    margin-left: 20px;
+    margin-top: 20px;
+  }
+  .searchSidebar {
+    background-color: white;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-left: 20px;
+    width: calc (100% "-" 70px);
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    .searchTitle {
+      padding: 1px;
+      h1 {
+        font-size: 17px !important;
+        text-align: center;
+        color: #46af3a !important;
+        margin-bottom: 16px !important;
+        font-weight: 700;
+        margin-top: 20px !important;
+      }
+    }
+    .searchButton {
+      align-self: flex-end;
+      align-items: flex-end;
+      padding: 15px;
+      float: right;
+    }
+  }
+}

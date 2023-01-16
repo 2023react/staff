@@ -3,7 +3,7 @@ import JobTitle from "./JobTitle";
 
 const MainContent = () => {
   return (
-    <div>
+    <div className="mainContent">
       <div>hot jobs</div>
       <div>navbar</div>
       <JobTitle />
