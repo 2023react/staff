@@ -5,6 +5,7 @@ import { margin } from "@mui/system";
 import Slider from "../components/Carousel";
 import styles from "../components/modules/Home.module.css";
 const Home = () => {
+ 
   return (
     <div className={styles.main}>
       <div className={styles.search_section}>
@@ -81,6 +82,9 @@ const Home = () => {
       </div>
     </div>
   );
+ 
+  
+ 
 };
 
 export default Home;
