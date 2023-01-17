@@ -1,13 +1,9 @@
 import React from "react";
-
+import styles from "../sidebars.module.scss";
 const Clear = () => {
   return (
-    <div>
-      <div class="col-lg-12">
-        <a href="/en/jobs" class="green_color pull-right jobClearFilter">
-          Clear filters{" "}
-        </a>
-      </div>
+    <div className={styles.clearFilter}>
+      <a href="/en/jobs">Clear filters </a>
     </div>
   );
 };

@@ -1,23 +1,30 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
+import Select from "@mui/material/Select";
 
+import styles from "../components/sidebars/sidebars.module.scss";
 export default function SearchTextField() {
   return (
     <Box
+      size="small"
+      required={true}
       component="form"
       sx={{
-        "& > :not(style)": { m: 1, width: "25ch" },
+        width: "calc(100 % - 20px)",
       }}
       noValidate
       autoComplete="off"
     >
       <TextField
+        fullWidth
+        size="small"
         color="success"
         id="outlined-basic"
         label="Search"
         variant="outlined"
         placeholder="All keywords"
+        // classes={styles.searchInput}
       />
     </Box>
   );

@@ -11,6 +11,7 @@ const MainSidebar = () => {
         <Search />
         <Ads />
         <Filter />
+        <Ads href="https://staff.am/staffmedia/mobile/" />
       </form>
     </div>
   );

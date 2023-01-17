@@ -1,14 +1,10 @@
 import React from "react";
-
-const Title = ({ children }) => {
+import styles from "../sidebars.module.scss";
+const Title = ({ children, filterTitle }) => {
   return (
-    <div class="categories-sidebar">
-      <h2>Filter by job category</h2>
-      <div class="form-group field-jobsfilter-category">
-        {children}
-
-        <div class="help-block"></div>
-      </div>{" "}
+    <div class={styles.categoriesFilterTitle}>
+      <h2>{filterTitle}</h2>
+      <div class={styles.categoriesCheckboxes}>{children}</div>{" "}
     </div>
   );
 };

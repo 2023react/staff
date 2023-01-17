@@ -23,7 +23,7 @@ const theme = createTheme({
 
 export default function CustomColoredButton({ children }) {
   return (
-    <Button variant="contained" color="success">
+    <Button variant="contained" color="success" size="small">
       {children}
     </Button>
   );

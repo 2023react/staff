@@ -1,11 +1,13 @@
 import React from "react";
-
-const Checkbox = (props) => {
+import styles from "../sidebars.module.scss";
+const Checkbox = ({ countJobs, name }) => {
   return (
-    <div>
-      <label>
-        <input type="checkbox" value="0" />
-        Employer<span> (3835)</span>
+    <div className={styles.jobCandidateType}>
+      {" "}
+      <input type="checkbox" />
+      <label className={styles.checkboxLabel}>
+        {name}
+        <span> ({countJobs})</span>
       </label>
     </div>
   );
