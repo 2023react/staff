@@ -1,14 +1,14 @@
 import React from "react";
 import MainContent from "../components/content/MainContent";
-import MainSidebar from "../components/sidebars/MainSidebar";
-
+import MainSidebar from "../components/sidebars/MainSidebar.js";
+import "../styles.scss";
 const Jobs = () => {
   return (
     <div className="jobs">
       <div className="sidebar">
         <MainSidebar />
       </div>
-      <div className="maincontent">
+      <div className="content">
         <MainContent />
       </div>
     </div>
