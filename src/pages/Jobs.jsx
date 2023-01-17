@@ -3,6 +3,8 @@ import MainContent from "../components/content/MainContent";
 import MainSidebar from "../components/sidebars/MainSidebar";
 
 const Jobs = () => {
+ 
+ 
   return (
     <div className="jobs">
       <div className="sidebar">
@@ -13,6 +15,7 @@ const Jobs = () => {
       </div>
     </div>
   );
+ 
 };
 
 export default Jobs;
