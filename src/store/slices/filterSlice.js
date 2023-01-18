@@ -201,7 +201,7 @@ const initialState = {
           title: "Human Resources",
         },
         {
-          title: " Sports/Beauty",
+          title: "Sports/Beauty",
         },
         {
           title: "Procurement/Logistics/Courier",

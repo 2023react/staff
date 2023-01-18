@@ -6,7 +6,8 @@ import {
 } from "react-router-dom";
 import "./App.scss";
 import { Layout } from "./components/Layout";
-import SiginUser from "./components/SiginUser";
+// import RegisterCompany from "./components/login/companyRegister/RegisterCompany";
+
 import Componies from "./pages/Componies";
 import Home from "./pages/Home";
 import Jobs from "./pages/Jobs";
@@ -17,6 +18,7 @@ const r = createBrowserRouter(
       <Route index element={<Home />} />
       <Route path="/jobs" element={<Jobs />} />
       <Route path="/companies" element={<Componies />} />
+      {/* <Route path="/companiesregister" element={<RegisterCompany />} /> */}
     </Route>
   )
 );
