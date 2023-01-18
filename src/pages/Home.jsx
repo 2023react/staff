@@ -1,13 +1,7 @@
 import React from "react";
-import Modal from "../components/login/loginModal/Modal";
 
 const Home = () => {
-  return (
-    <div>
-      home
-      {/* <Modal /> */}
-    </div>
-  );
+  return <div>home</div>;
 };
 
 export default Home;
