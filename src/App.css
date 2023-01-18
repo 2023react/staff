@@ -61,15 +61,3 @@
 .carousel-wrapper button {
   display: none;
 }
-.sidebar {
-  flex: 1;
-  background-color: azure;
-  position: relative;
-}
-.maincontent {
-  flex: 2;
-}
-
-.jobs {
-  display: flex;
-}
