@@ -1,0 +1,34 @@
+.registerForm{
+    margin-top: 30px;
+}
+
+.form{
+    width: 100%;
+.block{
+ width: 100%;
+ display: flex;
+ flex-direction: column;
+ gap: 15px;
+
+.inputBlock{
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    input{
+        height: 30px;
+    }
+
+    .parag{
+        max-width: 140px;
+        width: 100%;
+    }
+}
+
+}
+}
+
+
+.phoneInput{
+max-width: 350px;
+width: 100%;
+}
