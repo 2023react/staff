@@ -6,7 +6,6 @@ import {
 } from "react-router-dom";
 import "./App.scss";
 import { Layout } from "./components/Layout";
-import SiginUser from "./components/SiginUser";
 import Componies from "./pages/Componies";
 import Home from "./pages/Home";
 import Jobs from "./pages/Jobs";

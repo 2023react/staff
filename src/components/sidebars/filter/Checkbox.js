@@ -1,12 +1,19 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import styles from "../sidebars.module.scss";
-const Checkbox = ({ countJobs, name, ...props }) => {
+const Checkbox = ({ countJobs, name, onChange, categoryType, ...props }) => {
+  const isChecked = useSelector((state) =>
+    state.filterSlice[categoryType].find((item) => name === item)
+  );
+
   return (
-    <div className={styles.jobCandidateType} {...props}>
-      {" "}
+    <div className={styles.jobCandidateType}>
       <label className={styles.checkboxLabel}>
-        {" "}
-        <input type="checkbox" />
+        <input
+          onChange={(e) => onChange(name, e)}
+          type="checkbox"
+          checked={!!isChecked}
+        />
         {name}
         <span> ({countJobs})</span>
       </label>
