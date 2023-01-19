@@ -30,6 +30,9 @@ const Header = () => {
             <NavLink to="/companiesRegister" className={setActive}>
               Companies Register
             </NavLink>
+            <NavLink to="/Register" className={setActive}>
+              User Register
+            </NavLink>
           </li>
         </ul>
       </div>

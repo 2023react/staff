@@ -10,9 +10,6 @@ import Button from "../../UI/Button";
 import { v4 as uuid } from "uuid";
 
 const theme = createTheme({
-  status: {
-    danger: "#e53e3e",
-  },
   palette: {
     student: {
       light: "#757ce8",
@@ -54,14 +51,6 @@ const theme = createTheme({
 });
 
 const Navbar = () => {
-  const dispatch = useDispatch();
-  const specialistLevel = useSelector(
-    (state) => state.staffdata.specialistLevel[0].categories
-  );
-  const onClickButton = (target) => {
-    dispatch(toggleIsClickedLevel({ level: target.name }));
-  };
-
   return (
     <>
       <div className={styles.navbarCheckboxes}>
@@ -79,18 +68,10 @@ const Navbar = () => {
 
       <div className={styles.navbarButtons}>
         <ThemeProvider theme={theme}>
-          {specialistLevel.map((level) => {
+          {["1", "2", "3", "4"].map((level) => {
             return (
-              <Button
-                name={level.title}
-                color={level.config.color}
-                variant={level.config.isClicked ? "outlined" : "contained"}
-                size="small"
-                className={styles.button}
-                key={uuid()}
-                onClick={(e) => onClickButton(e.target)}
-              >
-                {level.title}
+              <Button size="small" className={styles.button} key={uuid()}>
+                add
               </Button>
             );
           })}{" "}

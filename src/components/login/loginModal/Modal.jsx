@@ -2,7 +2,7 @@ import React from "react";
 import LoginForm from "../loginForm/LoginForm";
 import style from "../loginModal/modale.module.scss";
 import RegisterForm from "../registerForm/RegisterForm";
-console.log(style);
+
 const Modal = () => {
   return (
     <div className={style.modal}>
@@ -17,9 +17,9 @@ const Modal = () => {
           </button>
         </div>
 
-        {/* <RegisterForm /> */}
+        <RegisterForm />
 
-        <LoginForm />
+        {/* <LoginForm /> */}
       </div>
     </div>
   );

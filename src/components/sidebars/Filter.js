@@ -5,45 +5,35 @@ import Title from "./filter/Title";
 import styles from "./sidebars.module.scss";
 import { v4 as uuid } from "uuid";
 import { useDispatch, useSelector } from "react-redux";
-import { onChange, onAdd, onClick } from "../../store/slices/filterSlice";
+
 import { useLocation } from "react-router";
-import { PhotoSizeSelectActualRounded } from "@mui/icons-material";
+import {
+  CITIES,
+  ACTIVITY_TYPE_LEVELS,
+  JOB_CATEGORY_LEVELS,
+  INDUSTRIES_LEVELS,
+  SPECIALIST_LEVELS,
+} from "../constants/options";
+
 const Filter = () => {
   const location = useLocation().pathname;
+  const data = useSelector((state) => state);
+  console.log(data);
+  let filterCategories = [SPECIALIST_LEVELS, JOB_CATEGORY_LEVELS, CITIES];
 
-  const filterCategory = useSelector((state) => state.staffdata);
-  let levels = [];
-  if (location === "/companies") {
-    levels = filterCategory.companies;
-  } else {
-    levels = filterCategory.specialistLevel;
-  }
-  const onClick1 = () => {
-    console.log("onClick1");
-  };
-  const onClick2 = () => {
-    console.log("onClick2");
-  };
   return (
     <div className={styles.filterSidebar}>
       <Clear />
 
       <div className={styles.filterCategories}>
-        {levels.map((level) => {
-          let onClick;
-          if (level.title === "Filter by specialist level") {
-            onClick = onClick1;
-          } else {
-            onClick = onClick2;
-          }
-
+        {filterCategories.map((categoryType) => {
           return (
-            <Title filterTitle={level.title.trim()} key={uuid()}>
-              {level.categories.map((type) => {
+            <Title filterTitle={categoryType.title.trim()} key={uuid()}>
+              {categoryType.levels.map((level) => {
                 return (
                   <Checkbox
-                    onClick={onClick}
-                    name={type.title.trim()}
+                    category={categoryType.categories}
+                    value={level.trim()}
                     countJobs="9"
                     key={uuid()}
                   />
