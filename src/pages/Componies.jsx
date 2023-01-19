@@ -1,12 +1,8 @@
 import React from "react";
 import MainContent from "../components/content/MainContent";
-import RegisterCompany from "../components/login/companyRegister/RegisterCompany";
-import RegisterForm from "../components/login/registerForm/RegisterForm";
-import MainSidebar from "../components/sidebars/MainSidebar";
-
+import MainSidebar from "../components/sidebars/MainSidebar.js";
 const Componies = () => {
   return (
-    // <RegisterCompany />
     <div className="jobs">
       <div className="sidebar">
         <MainSidebar />
