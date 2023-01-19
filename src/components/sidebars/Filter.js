@@ -2,6 +2,7 @@ import React from "react";
 import Clear from "./filter/Clear";
 import styles from "./sidebars.module.scss";
 import { v4 as uuid } from "uuid";
+
 import {
   LEVEL_CATEGORY,
   JOB__CATEGORY,
@@ -19,14 +20,17 @@ const Filter = () => {
       ? [LEVEL_CATEGORY, JOB__CATEGORY]
       : [LEVEL__CATEGORY__COMPANY, COMPANY__INDUSTRIES];
 
+ 
   return (
     <div className={styles.filterSidebar}>
       <Clear />
 
       <div className={styles.filterCategories}>
+ 
         {categoryTypes.map((category, i) => (
           <CategoryItem filterData={category} key={uuid()} />
         ))}
+ 
       </div>
     </div>
   );

@@ -6,8 +6,6 @@ import Search from "./Search";
 import { useLocation } from "react-router";
 
 const MainSidebar = () => {
-  const location = useLocation().pathname;
-
   return (
     <div className={styles.mainSidebar}>
       <form>

@@ -1,18 +1,17 @@
 import React from "react";
 import styles from "./contents.module.scss";
 import verified from "../../images/verifed.png";
-const JobTitle = () => {
+import BasicButtons from "../../UI/Button";
+import { Link } from "react-router-dom";
+const JobTitle = ({ photoUrl, jobName, companyName, location, ...props }) => {
   return (
     <div className={styles.jobInfo}>
-      <img
-        src="https://galaxygroup.am/wp-content/uploads/2019/05/Ucom.png"
-        alt=""
-      />
+      <img src={photoUrl} alt="" />
       <div className={styles.jobInfoTitle}>
-        <h4>Administrator</h4>
+        <h4> {jobName}</h4>
 
         <span>
-          Company name
+          {companyName}
           <img src={verified} />
         </span>
       </div>
@@ -20,16 +19,16 @@ const JobTitle = () => {
         <h4>
           <i> icon</i>17 feb 2021
         </h4>
-        <span>Yerevan</span>
+        <span>{location}</span>
       </div>
 
       <div className={styles.jobInfoButton}>
-        <button type="button" class="btn btn-outline-primary">
-          Primary
-        </button>
-        <button type="button" class="btn btn-outline-secondary">
-          Secondary
-        </button>
+        <BasicButtons size="small" variant="outlined">
+          View more
+        </BasicButtons>
+        <BasicButtons size="small" variant="outlined">
+          Follow
+        </BasicButtons>
       </div>
     </div>
   );

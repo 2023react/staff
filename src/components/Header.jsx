@@ -25,7 +25,7 @@ const Header = () => {
             <NavLink to="/companies" className={setActive}>
               Companies
             </NavLink>
-          </li>
+          </li>{" "}
           <div className="dropdown">
             <a className="dropbtn">
               For Companies
