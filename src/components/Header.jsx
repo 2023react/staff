@@ -26,14 +26,6 @@ const Header = () => {
               Companies
             </NavLink>
           </li>{" "}
-          <li className="item">
-            <NavLink to="/companiesRegister" className={setActive}>
-              Companies Register
-            </NavLink>
-            <NavLink to="/Register" className={setActive}>
-              User Register
-            </NavLink>
-          </li>
           <div className="dropdown">
             <a className="dropbtn">
               For Companies
