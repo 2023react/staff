@@ -6,7 +6,8 @@ import {
 } from "react-router-dom";
 import "./App.scss";
 import { Layout } from "./components/Layout";
-import Componies from "./pages/Componies";
+import Companies from "./pages/Companies";
+
 import Home from "./pages/Home";
 import Jobs from "./pages/Jobs";
 const r = createBrowserRouter(
@@ -14,7 +15,7 @@ const r = createBrowserRouter(
     <Route path="/" element={<Layout />}>
       <Route index element={<Home />} />
       <Route path="/jobs" element={<Jobs />} />
-      <Route path="/companies" element={<Componies />} />
+      <Route path="/companies" element={<Companies />} />
     </Route>
   )
 );
