@@ -1,56 +1,37 @@
 import React from "react";
 
-import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { ThemeProvider } from "@mui/material/styles";
+import Button from "../../UI/Button";
+
 import { useDispatch, useSelector } from "react-redux";
-import { toggleIsClickedLevel } from "../../store/slices/filterSlice";
 import remote from "../../images/remote_job.png";
 import crown from "../../images/crown.svg";
 import styles from "./contents.module.scss";
-import Button from "../../UI/Button";
+
 import { v4 as uuid } from "uuid";
 
-const theme = createTheme({
-  palette: {
-    student: {
-      light: "#757ce8",
-      main: "#ff7f50",
-      dark: "#ff7f50",
-      contrastText: "#fff",
-    },
-    junior: {
-      light: "#ff7961",
-      main: "#9c27b0",
-      dark: "#9c27b0",
-      contrastText: "#000",
-    },
-    mid_level: {
-      light: "#757ce8",
-      main: "#673ab7",
-      dark: "#673ab7",
-      contrastText: "#fff",
-    },
-    senior: {
-      light: "#757ce8",
-      main: "#00bcd4",
-      dark: "#00bcd4",
-      contrastText: "#fff",
-    },
-    c_level: {
-      light: "#757ce8",
-      main: "#009688",
-      dark: "#009688",
-      contrastText: "#fff",
-    },
-    not_defined: {
-      light: "#757ce8",
-      main: "#07689f",
-      dark: "#07689f",
-      contrastText: "#fff",
-    },
-  },
-});
+
+import { LEVEL_CATEGORY } from "../constants/category";
+import { deleteFilter, setFilter } from "../../store/slices/filterSlice";
+import { theme } from "../constants/styles";
 
 const Navbar = () => {
+  const dispatch = useDispatch();
+  const specialistLevel = useSelector(
+    (state) => state.filterSlice.levelCategory
+  );
+
+  const onClickButton = (level) => {
+    specialistLevel.find((item) => item === level)
+      ? dispatch(
+          deleteFilter({ value: level, category: LEVEL_CATEGORY.categoryType })
+        )
+      : dispatch(
+          setFilter({ value: level, category: LEVEL_CATEGORY.categoryType })
+        );
+  };
+
+ 
   return (
     <>
       <div className={styles.navbarCheckboxes}>
@@ -68,10 +49,23 @@ const Navbar = () => {
 
       <div className={styles.navbarButtons}>
         <ThemeProvider theme={theme}>
-          {["1", "2", "3", "4"].map((level) => {
+
+          {LEVEL_CATEGORY.data.map((level, i) => {
             return (
-              <Button size="small" className={styles.button} key={uuid()}>
-                add
+              <Button
+                color={`student` + i}
+                variant={
+                  specialistLevel.find((item) => item === level)
+                    ? "outlined"
+                    : "contained"
+                }
+                size="small"
+                className={styles.button}
+                key={uuid()}
+                onClick={() => onClickButton(level)}
+              >
+                {level}
+ 
               </Button>
             );
           })}{" "}

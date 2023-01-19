@@ -1,29 +1,30 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
+  levelCategory: [],
   jobCategory: [],
-
-  specialistLevel: [],
-  jobCities: [],
-  industry: [],
-  activityType: [],
+  activTypeCategoryCompany: [],
+  industryCategoryCompany: [],
 };
 
 const filterSlice = createSlice({
-  name: "filterSlice",
+  name: "filter",
   initialState,
+
   reducers: {
-    toggleIsClickedLevel(state, action) {
-      const categoryName = action.payload.category;
-      state[categoryName].push(action.payload.value);
+    setFilter(state, action) {
+      const category = action.payload.category;
+      state[category].push(action.payload.value);
     },
-    toggleIsClickedLevel2(state, action) {
-      const categoryName = action.payload.category;
-      state[categoryName].push(action.payload.value);
+
+    deleteFilter(state, action) {
+      const category = action.payload.category;
+      state[category] = state[category].filter(
+        (item) => item !== action.payload.value
+      );
     },
   },
 });
 
-export const { toggleIsClickedLevel } = filterSlice.actions;
-
+export const { deleteFilter, setFilter } = filterSlice.actions;
 export default filterSlice.reducer;

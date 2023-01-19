@@ -7,10 +7,9 @@ import {
 import "./App.scss";
 import CarouselComponent from "./components/content/Carousel";
 import { Layout } from "./components/Layout";
-import RegisterCompany from "./components/login/companyRegister/RegisterCompany";
-import Modal from "./components/login/loginModal/Modal";
-import Companies from "./pages/Companies";
-
+ 
+import Componies from "./pages/Componies";
+ 
 import Home from "./pages/Home";
 import Jobs from "./pages/Jobs";
 
@@ -19,9 +18,9 @@ const r = createBrowserRouter(
     <Route path="/" element={<Layout />}>
       <Route index element={<Home />} />
       <Route path="/jobs" element={<Jobs />} />
-      <Route path="/companies" element={<CarouselComponent />} />
-      <Route path="/companiesRegister" element={<RegisterCompany />} />
-      <Route path="/Register" element={<Modal />} />
+ 
+      <Route path="/companies" element={<Componies />} />
+ 
     </Route>
   )
 );

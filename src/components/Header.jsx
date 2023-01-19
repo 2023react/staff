@@ -34,6 +34,40 @@ const Header = () => {
               User Register
             </NavLink>
           </li>
+          <div className="dropdown">
+            <a className="dropbtn">
+              For Companies
+              <span className="caret"></span>
+            </a>
+
+            <div className="dropdown-content">
+              <nav>
+                <div className="arrow-up arrow-on"></div>
+                <div className="arrow-up arrow-under"></div>
+                <NavLink>Sign In</NavLink>
+              </nav>
+              <nav>
+                <NavLink>Register</NavLink>
+              </nav>
+            </div>
+          </div>
+          <div className="dropdown">
+            <a className="dropbtn">
+              For Job-Seekers
+              <span className="caret"></span>
+            </a>
+
+            <div className="dropdown-content">
+              <nav>
+                <div className="arrow-up arrow-on"></div>
+                <div className="arrow-up arrow-under"></div>
+                <NavLink>Sign In</NavLink>
+              </nav>
+              <nav>
+                <NavLink>Register</NavLink>
+              </nav>
+            </div>
+          </div>
         </ul>
       </div>
     </header>

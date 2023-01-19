@@ -1,23 +1,24 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import styles from "../sidebars.module.scss";
-import { useDispatch, useSelector } from "react-redux";
-import { toggleIsClickedLevel } from "../../../store/slices/filterSlice";
-const Checkbox = ({ countJobs, value, category, ...props }) => {
-  const dispatch = useDispatch();
-  return (
-    <div className={styles.jobCandidateType} {...props}>
-      {" "}
-      <label
-        className={styles.checkboxLabel}
-        onClick={(e) => {
-          console.log(e.target.checked);
+ 
+ 
+const Checkbox = ({ countJobs, name, onChange, categoryType, ...props }) => {
+  const isChecked = useSelector((state) =>
+    state.filterSlice[categoryType].find((item) => name === item)
+  );
 
-          dispatch(toggleIsClickedLevel({ category, value }));
-        }}
-      >
-        {" "}
-        <input type="checkbox" value={value} />
-        {value} <span> ({countJobs})</span>
+  return (
+    <div className={styles.jobCandidateType}>
+      <label className={styles.checkboxLabel}>
+        <input
+          onChange={(e) => onChange(name, e)}
+          type="checkbox"
+          checked={!!isChecked}
+        />
+        {name}
+        <span> ({countJobs})</span>
+ 
       </label>
     </div>
   );

@@ -1,47 +1,36 @@
 import React from "react";
-import Checkbox from "./filter/Checkbox";
 import Clear from "./filter/Clear";
-import Title from "./filter/Title";
 import styles from "./sidebars.module.scss";
 import { v4 as uuid } from "uuid";
-import { useDispatch, useSelector } from "react-redux";
 
-import { useLocation } from "react-router";
 import {
-  CITIES,
-  ACTIVITY_TYPE_LEVELS,
-  JOB_CATEGORY_LEVELS,
-  INDUSTRIES_LEVELS,
-  SPECIALIST_LEVELS,
-} from "../constants/options";
+  LEVEL_CATEGORY,
+  JOB__CATEGORY,
+  LEVEL__CATEGORY__COMPANY,
+  COMPANY__INDUSTRIES,
+} from "../constants/category";
+import CategoryItem from "./filter/CategoryItem";
+import { useLocation } from "react-router";
 
 const Filter = () => {
-  const location = useLocation().pathname;
-  const data = useSelector((state) => state);
-  console.log(data);
-  let filterCategories = [SPECIALIST_LEVELS, JOB_CATEGORY_LEVELS, CITIES];
+  const pathname = useLocation().pathname;
 
+  let categoryTypes =
+    pathname === "/jobs"
+      ? [LEVEL_CATEGORY, JOB__CATEGORY]
+      : [LEVEL__CATEGORY__COMPANY, COMPANY__INDUSTRIES];
+
+ 
   return (
     <div className={styles.filterSidebar}>
       <Clear />
 
       <div className={styles.filterCategories}>
-        {filterCategories.map((categoryType) => {
-          return (
-            <Title filterTitle={categoryType.title.trim()} key={uuid()}>
-              {categoryType.levels.map((level) => {
-                return (
-                  <Checkbox
-                    category={categoryType.categories}
-                    value={level.trim()}
-                    countJobs="9"
-                    key={uuid()}
-                  />
-                );
-              })}{" "}
-            </Title>
-          );
-        })}
+ 
+        {categoryTypes.map((category, i) => (
+          <CategoryItem filterData={category} key={uuid()} />
+        ))}
+ 
       </div>
     </div>
   );
