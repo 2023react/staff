@@ -50,6 +50,7 @@ const RegisterCompany = () => {
   return (
     <div className={style.registerForm}>
       <form onSubmit={handleSubmit(onSubmit)} className={style.form}>
+        <h1>Register Now</h1>
         <div className={style.block}>
           <div className={style.inputBlock}>
             <p className={style.parag}>Company name</p>
@@ -116,7 +117,7 @@ const RegisterCompany = () => {
                   international
                   countryCallingCodeEditable={false}
                   onChange={onChange}
-                  defaultCountry="RU"
+                  defaultCountry="AM"
                   id="phone-input"
                 />
               )}
