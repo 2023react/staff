@@ -1,6 +1,9 @@
-import { createTheme } from "@mui/material/styles";
+import { createTheme, responsiveFontSizes } from "@mui/material/styles";
 
 export const theme = createTheme({
+  typography: {
+    simple: { fontSize: 12 },
+  },
   palette: {
     student0: {
       light: "#757ce8",
@@ -38,5 +41,33 @@ export const theme = createTheme({
       dark: "#07689f",
       contrastText: "#fff",
     },
+    customGreen: {
+      light: "#757ce8",
+      main: "#46af3a",
+      dark: "#07689f",
+      contrastText: "#fff",
+    },
+
+    customRed: {
+      light: "#757ce8",
+      main: "#e14c4c",
+      dark: "#07689f",
+      contrastText: "#fff",
+    },
   },
 });
+
+theme.typography.h3 = {
+  fontSize: "1.2rem",
+  "@media (min-width:600px)": {
+    fontSize: "1.5rem",
+  },
+  [theme.breakpoints.up("md")]: {
+    fontSize: "2.4rem",
+  },
+};
+
+export const COLORS = {
+  customRed: "#e14c4c",
+  customGreen: "#46af3a",
+};

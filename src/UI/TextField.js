@@ -22,7 +22,6 @@ export default function SearchTextField() {
         label="Search"
         variant="outlined"
         placeholder="All keywords"
-        // classes={styles.searchInput}
       />
     </Box>
   );

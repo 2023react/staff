@@ -55,7 +55,33 @@ export const JOB__CATEGORY = {
     "IT Support/Technician",
   ],
 };
-
+export const CITIES = {
+  title: " Filter by job cities",
+  categoryType: "jobCities",
+  data: [
+    "Yerevan",
+    "Gyumri",
+    "Vanadzor",
+    "Abovyan",
+    "Akhuryan",
+    "Alaverdi",
+    "Amasia",
+    "Aparan",
+    "Armavir",
+    "Armenia (All cities)",
+    "Artashat",
+    "Artik",
+    "Arzni",
+    "Ashtarak",
+    "Baghramyan",
+    "Berd",
+    "Berlin",
+    "Dilijan",
+    "Dubai",
+    "Emmen",
+    "Fresno",
+  ],
+};
 export const LEVEL__CATEGORY__COMPANY = {
   categoryType: "activTypeCategoryCompany",
   title: "Filter by activity type",

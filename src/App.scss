@@ -5,48 +5,12 @@
 }
 
 .container {
-  max-width: 1200px;
+  max-width: 1170px;
   width: 100%;
   margin: 0 auto;
   padding: 0 15px;
 }
 
-.header {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 1.2rem;
-  position: sticky;
-  top: 0;
-  background-color: #fff;
-}
-.container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 80px;
-  max-width: 1500px;
-}
-.logo {
-  align-items: center;
-  margin-left: 20px;
-  cursor: pointer;
-  text-decoration: none;
-  font-size: 2rem;
-  font-weight: bold;
-  flex-grow: 1;
-  color: black;
-}
-.menu {
-  display: flex;
-  list-style: none;
-  text-align: center;
-  margin-right: 2rem;
-}
-.item {
-  margin-right: 1rem;
-}
 .active-link {
   font-weight: bold;
   color: green;

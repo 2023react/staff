@@ -5,6 +5,7 @@ const initialState = {
   jobCategory: [],
   activTypeCategoryCompany: [],
   industryCategoryCompany: [],
+  jobCities: [],
 };
 
 const filterSlice = createSlice({
