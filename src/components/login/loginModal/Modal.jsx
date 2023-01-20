@@ -8,7 +8,6 @@ import {
 import LoginForm from "../loginForm/LoginForm";
 import style from "../loginModal/modale.module.scss";
 import RegisterForm from "../registerForm/RegisterForm";
-
 console.log(style);
 const Modal = () => {
   const modalRef = useRef();
@@ -69,9 +68,9 @@ const Modal = () => {
           </button>
         </div>
 
-        {showLogin && <LoginForm />}
+        {/* <RegisterForm /> */}
 
-        {showRegister && <RegisterForm />}
+        <LoginForm />
       </div>
     </div>
   );

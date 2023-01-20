@@ -10,6 +10,7 @@ import styles from "./contents.module.scss";
 
 import { v4 as uuid } from "uuid";
 
+
 import { LEVEL_CATEGORY } from "../constants/category";
 import { deleteFilter, setFilter } from "../../store/slices/filterSlice";
 import { theme } from "../constants/styles";
@@ -30,6 +31,7 @@ const Navbar = () => {
         );
   };
 
+ 
   return (
     <>
       <div className={styles.navbarCheckboxes}>
@@ -47,6 +49,7 @@ const Navbar = () => {
 
       <div className={styles.navbarButtons}>
         <ThemeProvider theme={theme}>
+
           {LEVEL_CATEGORY.data.map((level, i) => {
             return (
               <Button
@@ -62,6 +65,7 @@ const Navbar = () => {
                 onClick={() => onClickButton(level)}
               >
                 {level}
+ 
               </Button>
             );
           })}{" "}
