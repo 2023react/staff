@@ -1,5 +1,6 @@
 export const jobsData = [
   {
+    deadline: " 21 January 2023",
     companyName: "BostonGene Technologies",
     jobName: "Junior Frontend Developer",
     photoUrl:
@@ -18,6 +19,7 @@ export const jobsData = [
     Additionalinformation: "",
   },
   {
+    deadline: " 21 January 2023",
     companyName: "DPD in Armenia",
     jobName: "Customer Service Agent",
     photoUrl:
@@ -36,6 +38,7 @@ export const jobsData = [
     Additionalinformation: "",
   },
   {
+    deadline: " 21 January 2023",
     companyName: "BostonGene Technologies",
     jobName: "Junior Frontend Developer",
     photoUrl:
@@ -89,6 +92,7 @@ export const jobsData = [
     ],
   },
   {
+    deadline: " 21 January 2023",
     companyName: "DPD in Armenia",
     jobName: "Customer Service Agent",
     photoUrl:

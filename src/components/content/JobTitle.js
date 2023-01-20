@@ -1,36 +1,100 @@
 import React from "react";
 import styles from "./contents.module.scss";
-import verified from "../../images/verifed.png";
 import BasicButtons from "../../UI/Button";
+import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
+import LocationOnIcon from "@mui/icons-material/LocationOn";
+import VerifiedIcon from "@mui/icons-material/Verified";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import { Link } from "react-router-dom";
-const JobTitle = ({ photoUrl, jobName, companyName, location, ...props }) => {
+import { ThemeProvider } from "@emotion/react";
+import { COLORS, theme } from "../constants/styles";
+const JobTitle = ({
+  photoUrl,
+  jobName,
+  companyName,
+  location,
+  deadline,
+  ...props
+}) => {
+  const customButtonStylesRed = {
+    textTransform: "none",
+    "&:hover": {
+      color: "white",
+      backgroundColor: COLORS.customRed,
+    },
+  };
+
+  const customButtonStylesGreen = {
+    textTransform: "none",
+    "&:hover": {
+      color: "white",
+      backgroundColor: COLORS.customGreen,
+    },
+  };
+  const iconWidth = { width: "15px" };
+  const heartIconStyles = {
+    width: "18px",
+    marginRight: "5px",
+  };
   return (
-    <div className={styles.jobInfo}>
-      <img src={photoUrl} alt="" />
-      <div className={styles.jobInfoTitle}>
-        <h4> {jobName}</h4>
+    <Link>
+      <ThemeProvider theme={theme}>
+        {" "}
+        <div className={styles.jobInfo}>
+          <img src={photoUrl} alt="" />
+          <div className={styles.jobInfoTitleBlocks}>
+            <h4> {jobName}</h4>
 
-        <span>
-          {companyName}
-          <img src={verified} />
-        </span>
-      </div>
-      <div className={styles.jobInfoDate}>
-        <h4>
-          <i> icon</i>17 feb 2021
-        </h4>
-        <span>{location}</span>
-      </div>
+            <div className={styles.jobInfoTitle}>
+              <VerifiedIcon
+                color="customGreen"
+                sx={{ ...iconWidth }}
+              ></VerifiedIcon>
+              <span>{companyName}</span>
+            </div>
+          </div>
+          <div className={styles.jobInfoTitleBlocks}>
+            <div className={styles.jobInfoTitle}>
+              {" "}
+              <CalendarMonthIcon
+                color="customGreen"
+                sx={{ ...iconWidth }}
+              ></CalendarMonthIcon>
+              <span>{deadline}</span>
+            </div>
+            <div className={styles.jobInfoTitle}>
+              <LocationOnIcon
+                color="customGreen"
+                sx={{ ...iconWidth }}
+              ></LocationOnIcon>
 
-      <div className={styles.jobInfoButton}>
-        <BasicButtons size="small" variant="outlined">
-          View more
-        </BasicButtons>
-        <BasicButtons size="small" variant="outlined">
-          Follow
-        </BasicButtons>
-      </div>
-    </div>
+              <span>{location}</span>
+            </div>
+          </div>
+
+          <div className={styles.jobInfoButton}>
+            <BasicButtons
+              size="small"
+              color="customRed"
+              variant="outlined"
+              customStyles={customButtonStylesRed}
+            >
+              <FavoriteBorderIcon
+                sx={{ ...heartIconStyles }}
+              ></FavoriteBorderIcon>
+              Follow
+            </BasicButtons>
+            <BasicButtons
+              size="small"
+              variant="outlined"
+              sx={{ ...customButtonStylesGreen }}
+            >
+              View more
+            </BasicButtons>
+          </div>
+        </div>
+      </ThemeProvider>
+    </Link>
   );
 };
 

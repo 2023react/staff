@@ -7,9 +7,8 @@ import { useDispatch, useSelector } from "react-redux";
 import remote from "../../images/remote_job.png";
 import crown from "../../images/crown.svg";
 import styles from "./contents.module.scss";
-
+import HighlightOffOutlinedIcon from "@mui/icons-material/HighlightOffOutlined";
 import { v4 as uuid } from "uuid";
-
 
 import { LEVEL_CATEGORY } from "../constants/category";
 import { deleteFilter, setFilter } from "../../store/slices/filterSlice";
@@ -30,8 +29,12 @@ const Navbar = () => {
           setFilter({ value: level, category: LEVEL_CATEGORY.categoryType })
         );
   };
-
- 
+  // const customButtonStyle={
+  //   width: "14px",
+  //   minWidth:"",
+  //   paddingBottom: "10px",
+  //   paddingLeft: "2px",
+  // }
   return (
     <>
       <div className={styles.navbarCheckboxes}>
@@ -49,10 +52,10 @@ const Navbar = () => {
 
       <div className={styles.navbarButtons}>
         <ThemeProvider theme={theme}>
-
           {LEVEL_CATEGORY.data.map((level, i) => {
             return (
               <Button
+                style={{ textTransform: "none" }}
                 color={`student` + i}
                 variant={
                   specialistLevel.find((item) => item === level)
@@ -64,8 +67,17 @@ const Navbar = () => {
                 key={uuid()}
                 onClick={() => onClickButton(level)}
               >
-                {level}
- 
+                {[
+                  level,
+                  specialistLevel.find((item) => item === level) ? (
+                    <HighlightOffOutlinedIcon
+                      sx={{
+                        width: "14px",
+                        paddingBottom: "13px",
+                      }}
+                    />
+                  ) : null,
+                ]}
               </Button>
             );
           })}{" "}

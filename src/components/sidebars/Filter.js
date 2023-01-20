@@ -8,6 +8,7 @@ import {
   JOB__CATEGORY,
   LEVEL__CATEGORY__COMPANY,
   COMPANY__INDUSTRIES,
+  CITIES,
 } from "../constants/category";
 import CategoryItem from "./filter/CategoryItem";
 import { useLocation } from "react-router";
@@ -17,20 +18,17 @@ const Filter = () => {
 
   let categoryTypes =
     pathname === "/jobs"
-      ? [LEVEL_CATEGORY, JOB__CATEGORY]
+      ? [LEVEL_CATEGORY, JOB__CATEGORY, CITIES]
       : [LEVEL__CATEGORY__COMPANY, COMPANY__INDUSTRIES];
 
- 
   return (
     <div className={styles.filterSidebar}>
       <Clear />
 
       <div className={styles.filterCategories}>
- 
         {categoryTypes.map((category, i) => (
           <CategoryItem filterData={category} key={uuid()} />
         ))}
- 
       </div>
     </div>
   );
