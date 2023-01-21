@@ -38,13 +38,12 @@ const JobTitle = ({
   };
 
   return (
-    <Link>
-      <ThemeProvider theme={theme}>
-        {" "}
-        <div className={styles.jobInfo}>
-          <img src={photoUrl} alt="" />
-          <div className={styles.jobInfoTitleBlocks}>
-            <h4> {jobName}</h4>
+    <Link to={`/jobs/${companyName}`}>
+      {" "}
+      <div className={styles.jobInfo}>
+        <img src={photoUrl} alt="" />
+        <div className={styles.jobInfoTitleBlocks}>
+          <h4> {jobName}</h4>
 
           <div className={styles.jobInfoTitle}>
             <VerifiedIcon
