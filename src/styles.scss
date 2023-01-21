@@ -14,7 +14,12 @@ body {
 .not-Active {
   color: rgb(11, 0, 0);
 }
+.outContiner {
+  background-color: #ddd;
+  justify-content: center;
+}
 .jobs {
+  width: 100%;
   display: flex;
   background-color: #ddd;
 }
@@ -23,23 +28,10 @@ body {
   background-color: transparent;
   flex: 1;
   width: 25%;
-  padding: 15px;
 }
 
 .content {
   flex: 3;
-  padding: 15px;
-  box-sizing: border-box;
-  width: 75%;
 
-  .mainContent {
-    background-color: white;
-    position: relative;
-    width: 100%;
-  }
+  width: 75%;
 }
-// .App {
-//   display: flex;
-//   flex-direction: column;
-//   background-color: #ddd;
-// }

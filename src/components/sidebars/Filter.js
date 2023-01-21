@@ -23,9 +23,8 @@ const Filter = () => {
 
   return (
     <div className={styles.filterSidebar}>
-      <Clear />
-
       <div className={styles.filterCategories}>
+        <Clear />
         {categoryTypes.map((category, i) => (
           <CategoryItem filterData={category} key={uuid()} />
         ))}
