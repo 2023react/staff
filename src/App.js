@@ -9,7 +9,8 @@ import {
 import "./App.scss";
 import { Layout } from "./components/Layout";
 import Modal from "./components/login/loginModal/Modal";
-import RegisterForm from "./components/login/registerForm/RegisterForm";
+ 
+import RegisterForm from "./components/login/registerForm/RegisterForm"; 
 import Componies from "./pages/Companies";
 import Home from "./pages/Home";
 import Jobs from "./pages/Jobs";

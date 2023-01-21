@@ -18,7 +18,7 @@ const Header = () => {
       <div className="container">
         <div className={style.header__block}>
           <NavLink to="/" className={style.logo}>
-            STAFF
+            <img style={{ width: "130px" }} src="/img/staff.png" alt="image" />
           </NavLink>
           <ul className={style.menu}>
             <NavLink to="/" className={setActive}>
