@@ -14,6 +14,9 @@ const Modal = () => {
   const dispatch = useDispatch();
   const showLogin = useSelector((state) => state.loginSlice.showLogin);
   const showRegister = useSelector((state) => state.loginSlice.showRegister);
+  const showComponyLogin = useSelector(
+    (state) => state.loginSlice.showComponyLogin
+  );
 
   const closeModal = () => {
     dispatch(closeLoginModal());
@@ -47,26 +50,28 @@ const Modal = () => {
             X
           </span>
         </div>
-        <div className={style.btnBlock}>
-          <button
-            onClick={onClickBtnRegister}
-            className={
-              !showRegister
-                ? `${style.btn}`
-                : `${style.btn}  ${style.activeBtn}`
-            }
-          >
-            Register your account
-          </button>
-          <button
-            onClick={onClickBtnLogin}
-            className={
-              !showLogin ? `${style.btn}` : `${style.btn}  ${style.activeBtn}`
-            }
-          >
-            Sign in to your account
-          </button>
-        </div>
+        {!showComponyLogin && (
+          <div className={style.btnBlock}>
+            <button
+              onClick={onClickBtnRegister}
+              className={
+                !showRegister
+                  ? `${style.btn}`
+                  : `${style.btn}  ${style.activeBtn}`
+              }
+            >
+              Register your account
+            </button>
+            <button
+              onClick={onClickBtnLogin}
+              className={
+                !showLogin ? `${style.btn}` : `${style.btn}  ${style.activeBtn}`
+              }
+            >
+              Sign in to your account
+            </button>
+          </div>
+        )}
 
         {/* <RegisterForm /> */}
 

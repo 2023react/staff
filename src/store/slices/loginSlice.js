@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   showLogin: false,
   showRegister: false,
+  showComponyLogin: false,
 };
 
 const loginSlice = createSlice({
@@ -19,12 +20,18 @@ const loginSlice = createSlice({
       state.showRegister = true;
     },
 
+    openComponyLogin(state) {
+      state.showComponyLogin = true;
+    },
+
     closeLoginModal(state) {
       state.showLogin = false;
       state.showRegister = false;
+      state.showComponyLogin = false;
     },
   },
 });
 
-export const { openLogin, openRegister, closeLoginModal } = loginSlice.actions;
+export const { openLogin, openRegister, closeLoginModal, openComponyLogin } =
+  loginSlice.actions;
 export default loginSlice.reducer;

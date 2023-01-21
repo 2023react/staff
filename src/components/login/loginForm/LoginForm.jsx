@@ -4,8 +4,15 @@ import { useForm } from "react-hook-form";
 import Input from "../input/Input";
 import InputField from "../input/Input";
 import LoginButton from "../../loginButton/LoginButton";
+import { auth } from "../../../firebase";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { Navigate, useNavigate } from "react-router";
+import { useDispatch } from "react-redux";
+import { closeLoginModal } from "../../../store/slices/loginSlice";
 
 const LoginForm = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const {
     register,
     formState: { errors, isValid },
@@ -16,7 +23,15 @@ const LoginForm = () => {
 
   const onSubmit = async (data) => {
     try {
-      console.log(data);
+      const res = await signInWithEmailAndPassword(
+        auth,
+        data.email,
+        data.password
+      );
+
+      navigate("/");
+      dispatch(closeLoginModal());
+      console.log(res.user);
     } catch (error) {
       console.log(data);
     }

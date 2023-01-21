@@ -3,7 +3,11 @@ import { useDispatch } from "react-redux";
 import { Link, NavLink } from "react-router-dom";
 import style from "../header/header.module.scss";
 
-import { openLogin, openRegister } from "../../store/slices/loginSlice";
+import {
+  openComponyLogin,
+  openLogin,
+  openRegister,
+} from "../../store/slices/loginSlice";
 
 const setActive = ({ isActive }) => (isActive ? "active-link " : "not-Active");
 
@@ -12,6 +16,7 @@ const Header = () => {
 
   const onClickLoginUser = () => dispatch(openLogin());
   const onClickLoginRegiter = () => dispatch(openRegister());
+  const openLoginCompany = () => dispatch(openComponyLogin());
 
   return (
     <header className={style.header}>
@@ -39,7 +44,9 @@ const Header = () => {
               <div className={style.arrow_up}></div>
               <div className={style.block__down}>
                 <div className={style.dropdown__button}>
-                  <button className={style.btn}>Sign In</button>
+                  <button onClick={openLoginCompany} className={style.btn}>
+                    Sign In
+                  </button>
                 </div>
 
                 <div className={style.dropdown__button}>
