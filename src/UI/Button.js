@@ -2,16 +2,20 @@ import * as React from "react";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import { Box } from "@mui/material";
+import { theme } from "../components/constants/styles";
+import { ThemeProvider } from "@emotion/react";
 
 export default function BasicButtons({ children, customStyles, ...props }) {
   return (
-    <Button
-      variant="contained"
-      color="success"
-      sx={{ ...customStyles }}
-      {...props}
-    >
-      {children}
-    </Button>
+    <ThemeProvider theme={theme}>
+      <Button
+        variant="contained"
+        color="customGreen"
+        sx={{ ...customStyles }}
+        {...props}
+      >
+        {children}
+      </Button>
+    </ThemeProvider>
   );
 }

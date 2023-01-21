@@ -8,12 +8,10 @@ import { useLocation } from "react-router";
 const MainSidebar = () => {
   return (
     <div className={styles.mainSidebar}>
-      <form>
-        <Search />
-        <Ads />
-        <Filter />
-        <Ads href="https://staff.am/staffmedia/mobile/" />
-      </form>
+      <Search />
+      <Ads />
+      <Filter />
+      <Ads href="https://staff.am/staffmedia/mobile/" />
     </div>
   );
 };

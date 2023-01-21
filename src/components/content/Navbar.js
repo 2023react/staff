@@ -9,10 +9,8 @@ import crown from "../../images/crown.svg";
 import styles from "./contents.module.scss";
 import HighlightOffOutlinedIcon from "@mui/icons-material/HighlightOffOutlined";
 import { v4 as uuid } from "uuid";
-
 import { LEVEL_CATEGORY } from "../constants/category";
 import { deleteFilter, setFilter } from "../../store/slices/filterSlice";
-import { theme } from "../constants/styles";
 
 const Navbar = () => {
   const dispatch = useDispatch();
@@ -29,12 +27,24 @@ const Navbar = () => {
           setFilter({ value: level, category: LEVEL_CATEGORY.categoryType })
         );
   };
-  // const customButtonStyle={
-  //   width: "14px",
-  //   minWidth:"",
-  //   paddingBottom: "10px",
-  //   paddingLeft: "2px",
-  // }
+  const customButtonStyle = {
+    position: "relative",
+    textTransform: "none",
+    minHeight: "40px",
+    font: " 12px normal Roboto, sans-serif",
+    "&:hover": {
+      transition: "all 0.3s linear",
+      transform: " scale(1.05)",
+    },
+  };
+
+  const customIconStyle = {
+    width: "14px",
+    right: "0",
+    top: "-4px",
+    position: "absolute",
+  };
+
   return (
     <>
       <div className={styles.navbarCheckboxes}>
@@ -51,6 +61,7 @@ const Navbar = () => {
       </div>
 
       <div className={styles.navbarButtons}>
+<<<<<<< HEAD
         <ThemeProvider theme={theme}>
           {LEVEL_CATEGORY.data.map((level, i) => {
             return (
@@ -84,6 +95,29 @@ const Navbar = () => {
             );
           })}{" "}
         </ThemeProvider>
+=======
+        {LEVEL_CATEGORY.data.map((level, i) => {
+          const isClicked = specialistLevel.find((item) => item === level);
+
+          return (
+            <Button
+              color={`student` + i}
+              variant={isClicked ? "outlined" : "contained"}
+              size="small"
+              customStyles={{ ...customButtonStyle }}
+              key={uuid()}
+              onClick={() => onClickButton(level)}
+            >
+              {[
+                level,
+                isClicked ? (
+                  <HighlightOffOutlinedIcon sx={{ ...customIconStyle }} />
+                ) : null,
+              ]}
+            </Button>
+          );
+        })}{" "}
+>>>>>>> cab678cfb10f866cdea4390f29782c5317e2b09d
       </div>
     </>
   );

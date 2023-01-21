@@ -9,7 +9,7 @@ import "./App.scss";
 import { Layout } from "./components/Layout";
 import RegisterCompany from "./components/login/companyRegister/RegisterCompany";
 import Modal from "./components/login/loginModal/Modal";
-import Componies from "./pages/Companies";
+import Componies from "./pages/Componies";
 import Home from "./pages/Home";
 import Jobs from "./pages/Jobs";
 const r = createBrowserRouter(
