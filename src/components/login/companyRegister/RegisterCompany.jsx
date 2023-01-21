@@ -13,7 +13,20 @@ import { CITIES, INDUSTRIES_LEVELS, COUNTRIES } from "../../constants/options";
 import PhoneInput from "react-phone-number-input";
 import "react-phone-number-input/style.css";
 
+import { auth, db, storage } from "../../../firebase";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+
+import {
+  getStorage,
+  ref,
+  uploadBytesResumable,
+  getDownloadURL,
+} from "firebase/storage";
+import { doc, setDoc } from "firebase/firestore";
+import { useNavigate } from "react-router";
+
 const RegisterCompany = () => {
+  const navigate = useNavigate();
   const [image, setImage] = useState("");
   const [img, setImg] = useState(null);
   const {
@@ -39,9 +52,41 @@ const RegisterCompany = () => {
 
   const onSubmit = async (data) => {
     try {
+      const res = await createUserWithEmailAndPassword(
+        auth,
+        data.email,
+        data.password
+      );
+
+      const storageRef = ref(storage, data.CompanyName);
+      console.log("nerqev");
+      await uploadBytesResumable(storageRef, data.image[0]).then(() => {
+        getDownloadURL(storageRef).then(async (downloadURL) => {
+          try {
+            console.log(res);
+            await updateProfile(res.user, {
+              displayName: data.CompanyName,
+              photoURL: downloadURL,
+            });
+            await setDoc(doc(db, "companies", res.user.uid), {
+              uid: res.user.uid,
+              companyName: data.CompanyName,
+              address: data.address,
+              city: data.city,
+              country: data.country,
+              email: data.email,
+              industry: data.industry,
+              phone: data.phoneInput,
+              photoURL: downloadURL,
+            });
+          } catch (err) {
+            console.log(err);
+          }
+        });
+      });
       console.log(data);
       setImage(data.image[0].name);
-      reset();
+      navigate("/");
     } catch (error) {
       console.log(error);
     }
@@ -108,7 +153,7 @@ const RegisterCompany = () => {
           <div className={style.inputBlock}>
             <p className={style.parag}>Phone Number</p>
             <Controller
-              name="phone-input"
+              name="phoneInput"
               control={control}
               render={({ field: { onChange, value } }) => (
                 <PhoneInput

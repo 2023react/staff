@@ -55,7 +55,7 @@ const Navbar = () => {
           {LEVEL_CATEGORY.data.map((level, i) => {
             return (
               <Button
-                style={{ textTransform: "none" }}
+                style={{ textTransform: "none", position: "relative" }}
                 color={`student` + i}
                 variant={
                   specialistLevel.find((item) => item === level)
@@ -72,8 +72,10 @@ const Navbar = () => {
                   specialistLevel.find((item) => item === level) ? (
                     <HighlightOffOutlinedIcon
                       sx={{
+                        position: "absolute",
                         width: "14px",
-                        paddingBottom: "13px",
+                        top: "-5px",
+                        right: 0,
                       }}
                     />
                   ) : null,

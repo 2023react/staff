@@ -15,8 +15,6 @@ const InputField = ({
   const hasType = type === "file" ? { display: "none" } : null;
 
   if (type === "file") {
-    console.log(img);
-    console.log(imageContent);
   }
 
   const fileInputRef = useRef(null);
