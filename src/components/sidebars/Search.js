@@ -6,6 +6,9 @@ import SearchTextField from "../../UI/TextField";
 import styles from "./sidebars.module.scss";
 const Search = () => {
   const location = useLocation().pathname;
+  const customButtonStyle = {
+    borderRadius: "0",
+  };
 
   let titleText =
     location === "/companies"
@@ -14,13 +17,15 @@ const Search = () => {
 
   return (
     <div className={styles.searchSidebar}>
-      <div className={styles.searchTitle}>
+      <div className={styles.searchSidebarBlock}>
         <h1>{titleText}</h1>
-        <div class="search-input">
-          <SearchTextField />
-        </div>
+
+        <SearchTextField />
+
         <div className={styles.searchButton}>
-          <Button size="small">Search</Button>
+          <Button size="small" customStyles={{ ...customButtonStyle }}>
+            Search
+          </Button>
         </div>
       </div>
     </div>

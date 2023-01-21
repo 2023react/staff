@@ -18,6 +18,7 @@ export const jobsData = [
     ],
     Additionalinformation: "",
   },
+
   {
     deadline: " 21 January 2023",
     companyName: "DPD in Armenia",
@@ -37,6 +38,7 @@ export const jobsData = [
     ],
     Additionalinformation: "",
   },
+
   {
     deadline: " 21 January 2023",
     companyName: "BostonGene Technologies",
@@ -56,13 +58,14 @@ export const jobsData = [
     ],
     Additionalinformation: "",
   },
+
   {
     companyName: "BostonGene Technologies",
     jobName: "Junior Frontend Developer",
     deadline: " 21 January 2023",
     photoUrl:
       "https://681828296218-prod-staff.s3.eu-central-1.amazonaws.com/staff.am/upload/2/8/8/9/28891283.png",
-    JobDescription:
+    jobDescription:
       "BostonGene is a pioneer company that uses biomedical software to identify new and personalized treatment options with next-generation multi-platform analytics, improving and optimizing cancer patient outcomes. We develop a distributed information and analytical system that provides oncologists with the necessary data for diagnosis and personalized treatment of patients.",
     jobCategory: "Software development",
     jobType: "Full time",
@@ -99,6 +102,7 @@ export const jobsData = [
       "competitive salary and healthcare insurance, on-site catering.",
     ],
   },
+
   {
     deadline: " 21 January 2023",
     companyName: "DPD in Armenia",
@@ -118,52 +122,4 @@ export const jobsData = [
     ],
     additionalinformation: "",
   },
-];
-
-let b = [
-  "Software development",
-  "Quality Assurance /Control",
-  " UI/UX/Graphic Design",
-  " Product/Project Management",
-  "Hardware design",
-  "Other IT",
-  "Sales/service management",
-  "Administrative/office-work",
-  "Tourism/Hospitality/HoReCa",
-  "Marketing/Advertising",
-  "Communications/Journalism/PR",
-  " Accounting/Bookkeeping/Cash register",
-  " Finance Management",
-  "Banking/credit",
-  "TV/Radio",
-  "Education/training",
-  " Legal",
-  " Audit/Compliance",
-  "Healthcare/Pharmaceuticalt",
-  "Construction",
-  "Human Resources",
-  "Sports/Beauty",
-  "Procurement/Logistics/Courier",
-  "Production/Bookkeeping/Cash register",
-  "Business/Management",
-  "Art/Design/Architecture",
-  " General/professional/Other services",
-  "IT security/Networks",
-  " NGO/Nonprofit",
-  "Insurance",
-  "Entertainment",
-  "Data Science/Data Engineering",
-  " Foreign language",
-  "Hardware Design",
-  " Data Research/Analysis",
-  " Mechanical/Engineering",
-  "System Admin/Engineer",
-  " Network Administratio",
-  "Consultancys",
-  "State/ Public/ Civil servic",
-  "Science",
-  "Content writing",
-  "Security",
-  "DevOps/Infrastructure",
-  "IT Support/Technician",
 ];
