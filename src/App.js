@@ -8,6 +8,7 @@ import {
 } from "react-router-dom";
 import "./App.scss";
 import { Layout } from "./components/Layout";
+import RegisterCompany from "./components/login/companyRegister/RegisterCompany";
 import Modal from "./components/login/loginModal/Modal";
 import RegisterForm from "./components/login/registerForm/RegisterForm";
 import Componies from "./pages/Companies";
@@ -19,7 +20,7 @@ const r = createBrowserRouter(
       <Route index element={<Home />} />
       <Route path="/jobs" element={<Jobs />} />
       <Route path="/companies" element={<Componies />} />
-      <Route path="/company/register" element={<RegisterForm />} />
+      <Route path="/company/register" element={<RegisterCompany />} />
     </Route>
   )
 );
