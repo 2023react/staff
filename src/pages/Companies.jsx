@@ -1,17 +1,27 @@
 import React from "react";
 import MainContent from "../components/content/MainContent";
 import MainSidebar from "../components/sidebars/MainSidebar.js";
-const Componies = () => {
+import "../styles.scss";
+import "../App.scss";
+import { theme } from "../components/constants/styles";
+import { ThemeProvider } from "@emotion/react";
+const Jobs = () => {
   return (
-    <div className="jobs">
-      <div className="sidebar">
-        <MainSidebar />
+    <ThemeProvider theme={theme}>
+      <div className="outContiner">
+        <div className="container">
+          <div className="jobs">
+            <div className="sidebar">
+              <MainSidebar />
+            </div>
+            <div className="content">
+              <MainContent />
+            </div>
+          </div>
+        </div>
       </div>
-      <div className="content">
-        <MainContent />
-      </div>
-    </div>
+    </ThemeProvider>
   );
 };
 
-export default Componies;
+export default Jobs;
