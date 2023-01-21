@@ -8,7 +8,7 @@ import InputField from "../input/Input";
 import LoginButton from "../../loginButton/LoginButton";
 import Select from "../../select/Select";
 
-import { cities, counries, industries } from "../../constants/options";
+import { CITIES, INDUSTRIES_LEVELS, COUNTRIES } from "../../constants/options";
 
 import PhoneInput from "react-phone-number-input";
 import "react-phone-number-input/style.css";
@@ -50,6 +50,7 @@ const RegisterCompany = () => {
   return (
     <div className={style.registerForm}>
       <form onSubmit={handleSubmit(onSubmit)} className={style.form}>
+        <h1>Register Now</h1>
         <div className={style.block}>
           <div className={style.inputBlock}>
             <p className={style.parag}>Company name</p>
@@ -80,7 +81,7 @@ const RegisterCompany = () => {
               name="country"
               register={register}
               errors={errors}
-              options={counries}
+              options={COUNTRIES}
             />
           </div>
 
@@ -90,7 +91,7 @@ const RegisterCompany = () => {
               name="city"
               register={register}
               errors={errors}
-              options={cities}
+              options={CITIES}
             />
           </div>
 
@@ -100,7 +101,7 @@ const RegisterCompany = () => {
               name="industry"
               register={register}
               errors={errors}
-              options={industries}
+              options={INDUSTRIES_LEVELS}
             />
           </div>
 
@@ -116,7 +117,7 @@ const RegisterCompany = () => {
                   international
                   countryCallingCodeEditable={false}
                   onChange={onChange}
-                  defaultCountry="RU"
+                  defaultCountry="AM"
                   id="phone-input"
                 />
               )}

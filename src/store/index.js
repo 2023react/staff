@@ -1,9 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit";
-import dataReducer from "./slices/filterSlice";
+import filterSlice from "./slices/filterSlice";
+import dataSlice from "./slices/dataSlice";
+import loginSlice from "./slices/loginSlice";
 
 const store = configureStore({
   reducer: {
-    staffdata: dataReducer,
+    staffdata: dataSlice,
+    filterSlice,
+    loginSlice,
   },
 });
 

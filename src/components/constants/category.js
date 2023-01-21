@@ -1,55 +1,13 @@
-export const COUNTRIES = ["USA", "ARMENIA", "RUSSIA"];
-export const CITIES = {
-  title: " Filter by job cities",
-  categories: "jobCities",
-  levels: [
-    "Yerevan",
-    "Gyumri",
-    "Vanadzor",
-    "Abovyan",
-    "Akhuryan",
-    "Alaverdi",
-    "Amasia",
-    "Aparan",
-    "Armavir",
-    "Armenia (All cities)",
-    "Artashat",
-    "Artik",
-    "Arzni",
-    "Ashtarak",
-    "Baghramyan",
-    "Berd",
-    "Berlin",
-    "Dilijan",
-    "Dubai",
-    "Emmen",
-    "Fresno",
-  ],
-};
-
-export const SPECIALIST_LEVELS = {
+export const LEVEL_CATEGORY = {
+  categoryType: "levelCategory",
   title: "Filter by specialist level",
-  categories: "specialistLevel",
-  levels: [
-    "Student",
-    "Junior",
-    "Mid level",
-    "Senior",
-    "C level",
-    "Not defined",
-  ],
+  data: ["Student", "Junior", "Mid level", "Senior", "C level", "Not defined"],
 };
 
-export const ACTIVITY_TYPE_LEVELS = {
-  title: "Filter by activity type",
-  categories: "activityType",
-  levels: ["Employer", "Training provider"],
-};
-
-export const JOB_CATEGORY_LEVELS = {
+export const JOB__CATEGORY = {
+  categoryType: "jobCategory",
   title: "Filter by job category",
-  categories: "jobCategory",
-  levels: [
+  data: [
     "Software development",
     "Quality Assurance /Control",
     " UI/UX/Graphic Design",
@@ -97,11 +55,44 @@ export const JOB_CATEGORY_LEVELS = {
     "IT Support/Technician",
   ],
 };
+export const CITIES = {
+  title: " Filter by job cities",
+  categoryType: "jobCities",
+  data: [
+    "Yerevan",
+    "Gyumri",
+    "Vanadzor",
+    "Abovyan",
+    "Akhuryan",
+    "Alaverdi",
+    "Amasia",
+    "Aparan",
+    "Armavir",
+    "Armenia (All cities)",
+    "Artashat",
+    "Artik",
+    "Arzni",
+    "Ashtarak",
+    "Baghramyan",
+    "Berd",
+    "Berlin",
+    "Dilijan",
+    "Dubai",
+    "Emmen",
+    "Fresno",
+  ],
+};
+export const LEVEL__CATEGORY__COMPANY = {
+  categoryType: "activTypeCategoryCompany",
+  title: "Filter by activity type",
+  data: ["Employer", "Training"],
+};
 
-export const INDUSTRIES_LEVELS = {
-  title: "Filter By Industry",
-  categories: "industry",
-  levels: [
+export const COMPANY__INDUSTRIES = {
+  categoryType: "industryCategoryCompany",
+
+  title: "Filter by industry",
+  data: [
     "Finance/Banking/Insurance ",
     "Information technologies",
     "Design/Architecture/Construction",
