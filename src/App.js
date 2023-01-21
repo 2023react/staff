@@ -5,7 +5,9 @@ import {
   createBrowserRouter,
   createRoutesFromElements,
 } from "react-router-dom";
+
 import "./App.scss";
+import JobDetails from "./components/JobDetails/JobDetails";
 import { Layout } from "./components/Layout";
 import RegisterCompany from "./components/login/companyRegister/RegisterCompany";
 import Modal from "./components/login/loginModal/Modal";
@@ -17,6 +19,7 @@ const r = createBrowserRouter(
     <Route path="/" element={<Layout />}>
       <Route index element={<Home />} />
       <Route path="/jobs" element={<Jobs />} />
+      <Route path="/jobs/:id" element={<JobDetails />} />
       <Route path="/companies" element={<Componies />} />
       <Route path="/company/register" element={<RegisterCompany />} />
     </Route>

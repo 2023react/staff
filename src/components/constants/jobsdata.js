@@ -70,6 +70,7 @@ export const jobsData = [
     jobCategory: "Software development",
     jobType: "Full time",
     requiredCandidateLevel: "Junior",
+    employmentterm: "Permanent",
     location: "Yerevan",
     professionalSkills: ["JavaScript", "React.js", "Redux", "TypeScript"],
     softSkills: [
@@ -77,6 +78,13 @@ export const jobsData = [
       "Positive attitude",
       "Teamwork",
     ],
+    jobresponsibilities: [
+      "Perform risk analysis in order to maintain maximum protection of an organization's products",
+      "Conduct assessments to define and analyze possible risks for such products as Sportsbook and online games",
+      "Evaluate and forecast potential losses while determining solutions to minimize or eliminate risks",
+      "Prepare reports for Senior Risk Analyst, Team Leader and Head of Department",
+    ],
+
     requiredqualifications: [
       "Recent graduate or a last year student;",
       "Computer Science degree or related degree;",
@@ -88,7 +96,7 @@ export const jobsData = [
       "you have to have heard something about testing your code;",
     ],
     additionalinformation: [
-      "ull-time position, permanent contract, flexible working hours, hybrid work (office in the center of Yerevan);",
+      "full-time position, permanent contract, flexible working hours, hybrid work (office in the center of Yerevan);",
       "versatile professional environment: bioinformatics, biologists, physicians, and software developers who united to save people’s lives;",
       "frequent performance reviews;",
       "competitive salary and healthcare insurance, on-site catering.",
