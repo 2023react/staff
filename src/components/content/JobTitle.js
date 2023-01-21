@@ -36,8 +36,9 @@ const JobTitle = ({
     width: "18px",
     marginRight: "5px",
   };
+
   return (
-    <Link>
+    <Link to={`/jobs/${companyName}`}>
       <ThemeProvider theme={theme}>
         {" "}
         <div className={styles.jobInfo}>

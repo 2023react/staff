@@ -6,7 +6,9 @@ import {
   createBrowserRouter,
   createRoutesFromElements,
 } from "react-router-dom";
+
 import "./App.scss";
+import JobDetails from "./components/JobDetails/JobDetails";
 import { Layout } from "./components/Layout";
 import Modal from "./components/login/loginModal/Modal";
 import Componies from "./pages/Companies";
@@ -17,6 +19,7 @@ const r = createBrowserRouter(
     <Route path="/" element={<Layout />}>
       <Route index element={<Home />} />
       <Route path="/jobs" element={<Jobs />} />
+      <Route path="/jobs/:id" element={<JobDetails />} />
       <Route path="/companies" element={<Componies />} />
     </Route>
   )
