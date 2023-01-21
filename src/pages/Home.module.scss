@@ -1,66 +1,57 @@
-.main {
-  min-height: 600px;
-}
 .search_section {
   background: linear-gradient(170deg, #46af3a 30%, #407bff) no-repeat;
-  height: 550px;
+  width: 100%;
+  max-height: 544px;
 }
 .text {
-  padding-top: 40px;
+  padding-top: 70px;
 
-  width: 651px;
   text-align: center;
-  margin: 0 auto 10px;
+
   color: #fff;
+  padding-bottom: 25px;
 }
 .text_h1 {
-  font-size: 30px;
-  font-weight: 500;
-  margin-top: 20px;
-  margin-block-start: 0.67em;
+  font-size: 28px;
+  font-weight: 600;
+  padding-bottom: 18px;
 }
 .text_p {
   font-size: 20px;
+  padding: 2px;
 }
-.form {
-  width: 1170px;
-  height: 117px;
-  margin: 0 auto 10px;
-}
+
 .search_clearfix {
-  width: 770px;
-  height: 97px;
+  max-width: 770px;
+  max-height: 97px;
   padding: 10px;
   margin: 0 auto 56px;
 }
-.jobfilter {
-  width: 770px;
-  height: 37px;
 
-  display: block;
-}
 .label {
   display: inline-block;
-  font-weight: 700;
+  font-weight: 500;
   color: #fff;
-  padding-left: 20px;
+  padding-left: 50px;
 }
 .label input {
-  position: absolute;
   height: 100%;
   width: 100%;
-  left: -40%;
-  top: -15%;
+  opacity: 0.6;
+  position: absolute;
+  cursor: pointer;
+  right: 2px;
 }
 .iratio {
   display: inline-block;
   position: relative;
   vertical-align: middle;
-  width: 22px;
-  height: 22px;
+
+  min-width: 22px;
+  min-height: 22px;
 }
 
-.wrapper_2 {
+.wrapper {
   padding-top: 10px;
   padding-right: 65px;
 
@@ -69,11 +60,11 @@
   align-items: center;
 }
 .fields {
-  padding: 1px;
+  padding: 1.5px;
   text-align: center;
 }
 .fields input {
-  height: 50px;
+  height: 55px;
   border: solid 1px #f2f2f2;
   text-align: center;
 }
@@ -85,11 +76,10 @@
   -webkit-appearance: none;
   color: grey;
 }
-/* button {
+.searchbtn {
   height: 55px;
   width: 174px;
-  border: solid 1px #f2f2f2;
-} */
+}
 :active,
 :hover,
 :focus {
