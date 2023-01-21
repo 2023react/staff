@@ -61,41 +61,6 @@ const Navbar = () => {
       </div>
 
       <div className={styles.navbarButtons}>
-<<<<<<< HEAD
-        <ThemeProvider theme={theme}>
-          {LEVEL_CATEGORY.data.map((level, i) => {
-            return (
-              <Button
-                style={{ textTransform: "none", position: "relative" }}
-                color={`student` + i}
-                variant={
-                  specialistLevel.find((item) => item === level)
-                    ? "outlined"
-                    : "contained"
-                }
-                size="small"
-                className={styles.button}
-                key={uuid()}
-                onClick={() => onClickButton(level)}
-              >
-                {[
-                  level,
-                  specialistLevel.find((item) => item === level) ? (
-                    <HighlightOffOutlinedIcon
-                      sx={{
-                        position: "absolute",
-                        width: "14px",
-                        top: "-5px",
-                        right: 0,
-                      }}
-                    />
-                  ) : null,
-                ]}
-              </Button>
-            );
-          })}{" "}
-        </ThemeProvider>
-=======
         {LEVEL_CATEGORY.data.map((level, i) => {
           const isClicked = specialistLevel.find((item) => item === level);
 
@@ -117,7 +82,6 @@ const Navbar = () => {
             </Button>
           );
         })}{" "}
->>>>>>> cab678cfb10f866cdea4390f29782c5317e2b09d
       </div>
     </>
   );
