@@ -1,6 +1,6 @@
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
-import styles from "../components/modules/Home.module.css";
+import styles from "../pages/Home.module.scss";
 import React from "react";
 const arr = [
   {
