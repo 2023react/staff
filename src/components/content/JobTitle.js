@@ -38,7 +38,11 @@ const JobTitle = ({
   };
 
   return (
+ 
     <Link to={`/jobs/${companyName}`}>
+ 
+ 
+ 
       {" "}
       <div className={styles.jobInfo}>
         <img src={photoUrl} alt="" />
