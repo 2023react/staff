@@ -16,7 +16,7 @@ const JobDetailsContent = () => {
     <div className={styles.mainContent}>
       <div className={styles.jobsColections}>
         <div className={styles.row}>
-          <div className={styles.coll}>
+          <div className={styles.name_coloumn}>
             <h2>{jobData.jobName}</h2>
           </div>
 
@@ -27,7 +27,7 @@ const JobDetailsContent = () => {
           </div>
         </div>
         <div className={styles.bord}>
-          <div className={styles.coll2}>
+          <div className={styles.coloumn2}>
             <p>
               <div style={{ position: "relative" }}>
                 <BookmarkIcon
@@ -57,7 +57,7 @@ const JobDetailsContent = () => {
               {jobData.jobCategory}
             </p>
           </div>
-          <div className={styles.coll1}>
+          <div className={styles.coloumn1}>
             <p>
               <div style={{ position: "relative" }}>
                 <BookmarkIcon
@@ -135,15 +135,16 @@ const JobDetailsContent = () => {
               ))}
             </p>
           </div>
-        </div>
-        <div className={styles.inn}>
-          <h3>Soft Skills</h3>
 
-          <p className={styles.softskills_p}>
-            {jobData.softSkills.map((item) => (
-              <span className={styles.softskills}>{item}</span>
-            ))}
-          </p>
+          <div className={styles.inn}>
+            <h3>Soft Skills</h3>
+
+            <p className={styles.softskills_p}>
+              {jobData.softSkills.map((item) => (
+                <span className={styles.softskills}>{item}</span>
+              ))}
+            </p>
+          </div>
         </div>
       </div>
       <div className={styles.single_job_bottom}>
