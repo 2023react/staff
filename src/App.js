@@ -6,28 +6,27 @@ import {
   createRoutesFromElements,
 } from "react-router-dom";
 import "./App.scss";
+import CompanyPage from "./components/company/CompanyPage";
 import { Layout } from "./components/Layout";
 import RegisterCompany from "./components/login/companyRegister/RegisterCompany";
-import Modal from "./components/login/loginModal/Modal";
-import Componies from "./pages/Componies";
+
+import Companies from "./pages/Companies";
 import Home from "./pages/Home";
 import Jobs from "./pages/Jobs";
+
 const r = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Layout />}>
       <Route index element={<Home />} />
       <Route path="/jobs" element={<Jobs />} />
-      <Route path="/companies" element={<Componies />} />
+      <Route path="/companies" element={<Companies />} />
       <Route path="/company/register" element={<RegisterCompany />} />
+      <Route path="/company/:name" element={<CompanyPage />} />
     </Route>
   )
 );
 function App() {
-  const showLogin = useSelector((state) => state.loginSlice.showLogin);
-  const showRegister = useSelector((state) => state.loginSlice.showRegister);
-  const showLoginCompany = useSelector(
-    (state) => state.loginSlice.showComponyLogin
-  );
+  const test = useSelector((state) => state.loginSlice);
 
   return (
     <div className="App">

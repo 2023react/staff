@@ -4,6 +4,7 @@ const initialState = {
   showLogin: false,
   showRegister: false,
   showComponyLogin: false,
+  currentCompany: null,
 };
 
 const loginSlice = createSlice({
@@ -11,6 +12,10 @@ const loginSlice = createSlice({
   initialState,
 
   reducers: {
+    addCurrentCompany(state, action) {
+      state.currentCompany = action.payload.currentCompany;
+    },
+
     openLogin(state) {
       state.showLogin = true;
       state.showRegister = false;
@@ -32,6 +37,11 @@ const loginSlice = createSlice({
   },
 });
 
-export const { openLogin, openRegister, closeLoginModal, openComponyLogin } =
-  loginSlice.actions;
+export const {
+  openLogin,
+  openRegister,
+  closeLoginModal,
+  openComponyLogin,
+  addCurrentCompany,
+} = loginSlice.actions;
 export default loginSlice.reducer;

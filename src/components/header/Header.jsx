@@ -1,64 +1,109 @@
 import React from "react";
-import { useDispatch } from "react-redux";
-import { Link, NavLink } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { NavLink, useLocation } from "react-router-dom";
 import style from "../header/header.module.scss";
-
+import logo from "../../images/logo.png";
+import homeLogo from "../../images/homeLogo.png";
 import {
   openComponyLogin,
   openLogin,
   openRegister,
 } from "../../store/slices/loginSlice";
-
-const setActive = ({ isActive }) => (isActive ? "active-link " : "not-Active");
+import Logo from "../company/Logo";
+import clsx from "clsx";
 
 const Header = () => {
   const dispatch = useDispatch();
+
+  const currentCompany = useSelector(
+    (state) => state.loginSlice.currentCompany
+  );
+  const pathname = useLocation().pathname;
+  const isHomePage = pathname === "/";
 
   const onClickLoginUser = () => dispatch(openLogin());
   const onClickLoginRegiter = () => dispatch(openRegister());
   const openLoginCompany = () => dispatch(openComponyLogin());
 
   return (
-    <header className={style.header}>
-      <div className="container">
-        <div className={style.header__block}>
-          <NavLink to="/" className={style.logo}>
-            <img style={{ width: "130px" }} src="/img/staff.png" alt="image" />
-          </NavLink>
-          <ul className={style.menu}>
-            <NavLink to="/" className={setActive}>
-              <li className={style.item}>Home</li>
-            </NavLink>
-            <NavLink to="/jobs" className={setActive}>
-              <li className={style.item}>Jobs</li>
-            </NavLink>
-            <NavLink to="/companies" className={setActive}>
-              <li className={style.item}>Companies</li>
-            </NavLink>
-          </ul>
-          {/* ------------------ */}
-
-          <div className={`${style.dropdown}`}>
-            <div className={style.dropdown__text}>For Companies</div>
-            <div className={style.dropdown__content}>
-              <div className={style.arrow_up}></div>
-              <div className={style.block__down}>
-                <div className={style.dropdown__button}>
-                  <button onClick={openLoginCompany} className={style.btn}>
-                    Sign In
-                  </button>
-                </div>
-
-                <div className={style.dropdown__button}>
-                  <Link to="/company/register">
-                    <button className={style.btn}> Register</button>
-                  </Link>
-                </div>
+    <header
+      className={`${style.header} ${[isHomePage ? "" : style.whiteHeader]}`}
+    >
+      <div className={style.mainNavbar}>
+        <div className="container">
+          <div className={style.header__block}>
+            <NavLink to="/">
+              <div className={style.logo}>
+                <img
+                  style={{ width: "130px" }}
+                  src={isHomePage ? homeLogo : logo}
+                  alt="logo"
+                />
               </div>
-            </div>
-          </div>
+            </NavLink>
+            <div className={style.mainMenu}>
+              <ul className={style.menu}>
+                <NavLink
+                  to="/jobs"
+                  className={clsx({
+                    activeLink: pathname === "/jobs",
+                    notActive: pathname !== "/jobs" && !isHomePage,
+                  })}
+                >
+                  {" "}
+                  <li className={style.item}>Jobs</li>
+                </NavLink>
+                <NavLink
+                  to="/companies"
+                  className={clsx({
+                    activeLink: pathname === "/companies",
+                    notActive: pathname !== "/companies" && !isHomePage,
+                  })}
+                >
+                  {" "}
+                  <li className={style.item}> Companies</li>{" "}
+                </NavLink>
+                {currentCompany ? (
+                  <NavLink
+                    to={`/company/${currentCompany.companyName}`}
+                    className={style.logOutoBox}
+                  >
+                    {" "}
+                    <li>
+                      {" "}
+                      <Logo
+                        currentCompany={currentCompany}
+                        checkHome={isHomePage}
+                      />
+                    </li>{" "}
+                  </NavLink>
+                ) : (
+                  <li>
+                    <div className={style.dropdown}>
+                      <div className={style.dropdown__text}>For Companies</div>
+                      <div className={style.dropdown__content}>
+                        <div className={style.arrow_up}></div>
+                        <div className={style.block__down}>
+                          <div className={style.dropdown__button}>
+                            <button
+                              onClick={openLoginCompany}
+                              className={style.btn}
+                            >
+                              Sign In
+                            </button>
+                          </div>
 
-          <div className={`${style.dropdown}`}>
+                          <div className={style.dropdown__button}>
+                            <NavLink to="/company/register">
+                              <button className={style.btn}> Register</button>
+                            </NavLink>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+                )}
+                {/* <li><div className={`${style.dropdown}`}>
             <div className={style.dropdown__text}>For job-seekers</div>
             <div className={style.dropdown__content}>
               <div className={style.arrow_up}></div>
@@ -75,6 +120,9 @@ const Header = () => {
                   </button>
                 </div>
               </div>
+            </div>
+          </div></li> */}
+              </ul>
             </div>
           </div>
         </div>

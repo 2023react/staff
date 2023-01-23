@@ -6,15 +6,32 @@ import { useSelector, useDispatch } from "react-redux";
 
 import { deleteFilter, setFilter } from "../../../store/slices/filterSlice";
 
+import {
+  addJobs,
+  deleteJobsByJobCategory,
+  deleteJobsBylevelCategory,
+} from "../../../store/slices/jobsSlice";
+import { collection, getDocs, query, where } from "firebase/firestore";
+import { db } from "../../../firebase";
+
 const CategoryItem = ({ filterData }) => {
-  const dispach = useDispatch();
-  const onChange = (value, e) => {
+  const dispatch = useDispatch();
+  const onChangeBySpecialistLevel = async (value, e) => {
+    e.stopPropagation();
     e.target.checked
-      ? dispach(setFilter({ value, category: filterData.categoryType }))
-      : dispach(deleteFilter({ value, category: filterData.categoryType }));
+      ? dispatch(setFilter({ value, category: filterData.categoryType }))
+      : dispatch(deleteFilter({ value, category: filterData.categoryType }));
+  };
+  const onChangeByJobCategory = async (value, e) => {
+    e.stopPropagation();
+    e.target.checked
+      ? dispatch(setFilter({ value, category: filterData.categoryType }))
+      : dispatch(deleteFilter({ value, category: filterData.categoryType }));
   };
 
-  console.log(useSelector((state) => state.filterSlice.jobCategory));
+  const onChange = filterData.title.includes("job")
+    ? onChangeByJobCategory
+    : onChangeBySpecialistLevel;
 
   return (
     <Title filterTitle={filterData.title}>

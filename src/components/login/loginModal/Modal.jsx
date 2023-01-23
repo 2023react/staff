@@ -8,7 +8,7 @@ import {
 import LoginForm from "../loginForm/LoginForm";
 import style from "../loginModal/modale.module.scss";
 import RegisterForm from "../registerForm/RegisterForm";
-console.log(style);
+
 const Modal = () => {
   const modalRef = useRef();
   const dispatch = useDispatch();

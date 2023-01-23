@@ -3,7 +3,7 @@ import styles from "../sidebars.module.scss";
 const Clear = () => {
   return (
     <div className={styles.clearFilter}>
-      <a href="/en/jobs">Clear filters </a>
+      <a href="#">Clear filters </a>
     </div>
   );
 };

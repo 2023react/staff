@@ -7,7 +7,7 @@ import VerifiedIcon from "@mui/icons-material/Verified";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import { Link } from "react-router-dom";
 
-import { COLORS } from "../constants/styles";
+import { COLORS } from "../../constants/styles";
 const JobTitle = ({
   photoUrl,
   jobName,
@@ -17,7 +17,6 @@ const JobTitle = ({
   ...props
 }) => {
   const customButtonStylesRed = {
-    textTransform: "none",
     "&:hover": {
       color: "white",
       backgroundColor: COLORS.customRed,
@@ -25,7 +24,6 @@ const JobTitle = ({
   };
 
   const customButtonStylesGreen = {
-    textTransform: "none",
     "&:hover": {
       color: "white",
       backgroundColor: COLORS.customGreen,
@@ -86,7 +84,7 @@ const JobTitle = ({
           <BasicButtons
             size="small"
             variant="outlined"
-            sx={{ ...customButtonStylesGreen }}
+            customStyles={customButtonStylesGreen}
           >
             View more
           </BasicButtons>

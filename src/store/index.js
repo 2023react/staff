@@ -1,14 +1,16 @@
 import { configureStore } from "@reduxjs/toolkit";
 import filterSlice from "./slices/filterSlice";
-import dataSlice from "./slices/dataSlice";
+import jobsSlice from "./slices/jobsSlice";
 import loginSlice from "./slices/loginSlice";
 
 const store = configureStore({
   reducer: {
-    staffdata: dataSlice,
+    jobsSlice,
     filterSlice,
     loginSlice,
   },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({ serializableCheck: false }),
 });
 
 export default store;

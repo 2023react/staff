@@ -14,19 +14,10 @@ export const CITIES = [
   "Artik",
   "Arzni",
   "Ashtarak",
-<<<<<<< HEAD
-  "Baghramyan",
-=======
->>>>>>> 8e81429f67107d7edd2829c46f9220c77e911f01
   "Berd",
   "Berlin",
   "Dilijan",
   "Dubai",
-<<<<<<< HEAD
-  "Emmen",
-=======
->>>>>>> 8e81429f67107d7edd2829c46f9220c77e911f01
-  "Fresno",
 ];
 
 export const SPECIALIST_LEVELS = {

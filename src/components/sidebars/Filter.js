@@ -9,7 +9,7 @@ import {
   LEVEL__CATEGORY__COMPANY,
   COMPANY__INDUSTRIES,
   CITIES,
-} from "../constants/category";
+} from "../../constants/category";
 import CategoryItem from "./filter/CategoryItem";
 import { useLocation } from "react-router";
 
@@ -25,7 +25,7 @@ const Filter = () => {
     <div className={styles.filterSidebar}>
       <div className={styles.filterCategories}>
         <Clear />
-        {categoryTypes.map((category, i) => (
+        {categoryTypes.map((category) => (
           <CategoryItem filterData={category} key={uuid()} />
         ))}
       </div>
