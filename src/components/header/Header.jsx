@@ -1,21 +1,28 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, NavLink, useLocation } from "react-router-dom";
-import style from "../header/header.module.scss";
 
+import { NavLink, useLocation } from "react-router-dom";
+import style from "../header/header.module.scss";
 import logo from "../../images/logo.png";
+import homeLogo from "../../images/homeLogo.png";
+
 import {
   openComponyLogin,
   openLogin,
   openRegister,
 } from "../../store/slices/loginSlice";
-import LogedCompany from "../company/logedCompany/LogedCompany";
-const setActive = ({ isActive }) => (isActive ? "active-link " : "not-Active");
+
+import Logo from "../company/Logo";
+import clsx from "clsx";
 
 const Header = () => {
   const dispatch = useDispatch();
 
-  const pathname = useLocation().pathname === "/";
+  const currentCompany = useSelector(
+    (state) => state.loginSlice.currentCompany
+  );
+  const pathname = useLocation().pathname;
+  const isHomePage = pathname === "/";
 
   const onClickLoginUser = () => dispatch(openLogin());
   const onClickLoginRegiter = () => dispatch(openRegister());
@@ -23,85 +30,92 @@ const Header = () => {
   const currentUser = useSelector((state) => state.loginSlice.currentUser);
   return (
     <header
-      className={
-        pathname
-          ? `${style.header} ${style.green}`
-          : `${style.header} ${style.white}`
-      }
+      className={`${style.header} ${[isHomePage ? "" : style.whiteHeader]}`}
     >
-      <div className="container">
-        <div className={style.header__block}>
-          <NavLink to="/" className={style.logo}>
-            {pathname ? (
-              <img
-                style={{ width: "130px" }}
-                src="/img/staff.png"
-                alt="image"
-              />
-            ) : (
-              <img style={{ width: "130px" }} src={logo} alt="image" />
-            )}
-          </NavLink>
-          <ul className={style.menu}>
-            <NavLink to="/jobs" className={style.setActive}>
-              <li
-                className={
-                  pathname
-                    ? `${style.item} ${style.whiteColor}`
-                    : `${style.item} ${style.greenColor}`
-                }
-              >
-                Jobs
-              </li>
-            </NavLink>
-            <NavLink to="/companies" className={style.setActive}>
-              <li
-                className={
-                  pathname
-                    ? `${style.item} ${style.whiteColor}`
-                    : `${style.item} ${style.greenColor}`
-                }
-              >
-                Companies
-              </li>
-            </NavLink>
-          </ul>
-          {/* ------------------ */}
-
-          {currentUser ? (
-            <LogedCompany pathname={pathname} />
-          ) : (
-            <>
-              <div className={`${style.dropdown}`}>
-                <div className={style.dropdown__text}>For Companies</div>
-                <div className={style.dropdown__content}>
-                  <div className={style.arrow_up}></div>
-                  <div className={style.block__down}>
-                    <div className={style.dropdown__button}>
-                      <button onClick={openLoginCompany} className={style.btn}>
-                        Sign In
-                      </button>
-                    </div>
-
-                    <div className={style.dropdown__button}>
-                      <Link to="/company/register">
-                        <button className={style.btn}> Register</button>
-                      </Link>
-                    </div>
-                  </div>
-                </div>
+      <div className={style.mainNavbar}>
+        <div className="container">
+          <div className={style.header__block}>
+            <NavLink to="/">
+              <div className={style.logo}>
+                <img
+                  style={{ width: "130px" }}
+                  src={isHomePage ? homeLogo : logo}
+                  alt="logo"
+                />
               </div>
+            </NavLink>
+            <div className={style.mainMenu}>
+              <ul className={style.menu}>
+                <NavLink
+                  to="/jobs"
+                  className={clsx({
+                    activeLink: pathname === "/jobs",
+                    notActive: pathname !== "/jobs" && !isHomePage,
+                  })}
+                >
+                  {" "}
+                  <li className={style.item}>Jobs</li>
+                </NavLink>
+                <NavLink
+                  to="/companies"
+                  className={clsx({
+                    activeLink: pathname === "/companies",
+                    notActive: pathname !== "/companies" && !isHomePage,
+                  })}
+                >
+                  {" "}
+                  <li className={style.item}> Companies</li>{" "}
+                </NavLink>
+                {currentCompany ? (
+                  <NavLink
+                    to={`/company/${currentCompany.companyName}`}
+                    className={style.logOutoBox}
+                  >
+                    {" "}
+                    <li>
+                      {" "}
+                      <Logo
+                        currentCompany={currentCompany}
+                        checkHome={isHomePage}
+                      />
+                    </li>{" "}
+                  </NavLink>
+                ) : (
+                  <li>
+                    <div className={style.dropdown}>
+                      <div className={style.dropdown__text}>For Companies</div>
+                      <div className={style.dropdown__content}>
+                        <div className={style.arrow_up}></div>
+                        <div className={style.block__down}>
+                          <div className={style.dropdown__button}>
+                            <button
+                              onClick={openLoginCompany}
+                              className={style.btn}
+                            >
+                              Sign In
+                            </button>
+                          </div>
 
-              <div className={`${style.dropdown}`}>
-                <div className={style.dropdown__text}>For job-seekers</div>
-                <div className={style.dropdown__content}>
-                  <div className={style.arrow_up}></div>
-                  <div className={style.block__down}>
-                    <div className={style.dropdown__button}>
-                      <button onClick={onClickLoginUser} className={style.btn}>
-                        Sign In
-                      </button>
+                          <div className={style.dropdown__button}>
+                            <NavLink to="/company/register">
+                              <button className={style.btn}> Register</button>
+                            </NavLink>
+                          </div>
+                        </div>
+                      </div>
                     </div>
+                  </li>
+                )}
+                {/* <li><div className={`${style.dropdown}`}>
+            <div className={style.dropdown__text}>For job-seekers</div>
+            <div className={style.dropdown__content}>
+              <div className={style.arrow_up}></div>
+              <div className={style.block__down}>
+                <div className={style.dropdown__button}>
+                  <button onClick={onClickLoginUser} className={style.btn}>
+                    Sign In
+                  </button>
+                </div>
 
                     <div className={style.dropdown__button}>
                       <button
@@ -114,8 +128,11 @@ const Header = () => {
                   </div>
                 </div>
               </div>
-            </>
-          )}
+            </div>
+          </div></li> */}
+              </ul>
+            </div>
+          </div>
         </div>
       </div>
     </header>

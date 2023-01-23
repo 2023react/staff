@@ -23,8 +23,9 @@
         width: 22px;
         margin-left: 4px;
         cursor: pointer;
-        &:active {
-          background-color: #46af3a;
+        &:checked {
+          border-color: red;
+          background-color: red;
         }
       }
       img {

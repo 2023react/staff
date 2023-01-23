@@ -1,8 +1,5 @@
 import React from "react";
-
-import { ThemeProvider } from "@mui/material/styles";
 import Button from "../../UI/Button";
-
 import { useDispatch, useSelector } from "react-redux";
 import remote from "../../images/remote_job.png";
 import crown from "../../images/crown.svg";
@@ -11,25 +8,30 @@ import HighlightOffOutlinedIcon from "@mui/icons-material/HighlightOffOutlined";
 import { v4 as uuid } from "uuid";
 import { LEVEL_CATEGORY } from "../../constants/category";
 import { deleteFilter, setFilter } from "../../store/slices/filterSlice";
+import { collection, getDocs, query, where } from "firebase/firestore";
+import { db } from "../../firebase";
+import {
+  addJobs,
+  deleteJobsBylevelCategory,
+} from "../../store/slices/jobsSlice";
 
 const Navbar = () => {
   const dispatch = useDispatch();
-  const specialistLevel = useSelector(
+  const specialistLevels = useSelector(
     (state) => state.filterSlice.levelCategory
   );
 
-  const onClickButton = (level) => {
-    specialistLevel.find((item) => item === level)
+  const onClickButton = async (value) => {
+    specialistLevels.find((item) => item === value)
       ? dispatch(
-          deleteFilter({ value: level, category: LEVEL_CATEGORY.categoryType })
+          deleteFilter({ value: value, category: LEVEL_CATEGORY.categoryType })
         )
       : dispatch(
-          setFilter({ value: level, category: LEVEL_CATEGORY.categoryType })
+          setFilter({ value: value, category: LEVEL_CATEGORY.categoryType })
         );
   };
   const customButtonStyle = {
     position: "relative",
-    textTransform: "none",
     minHeight: "40px",
     font: " 12px normal Roboto, sans-serif",
     "&:hover": {
@@ -62,7 +64,7 @@ const Navbar = () => {
 
       <div className={styles.navbarButtons}>
         {LEVEL_CATEGORY.data.map((level, i) => {
-          const isClicked = specialistLevel.find((item) => item === level);
+          const isClicked = specialistLevels.find((item) => item === level);
 
           return (
             <Button
@@ -76,7 +78,10 @@ const Navbar = () => {
               {[
                 level,
                 isClicked ? (
-                  <HighlightOffOutlinedIcon sx={{ ...customIconStyle }} />
+                  <HighlightOffOutlinedIcon
+                    sx={{ ...customIconStyle }}
+                    key={uuid()}
+                  />
                 ) : null,
               ]}
             </Button>

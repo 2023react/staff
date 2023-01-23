@@ -11,7 +11,7 @@ export default function BasicButtons({ children, customStyles, ...props }) {
       <Button
         variant="contained"
         color="customGreen"
-        sx={{ ...customStyles }}
+        sx={{ textTransform: "none", ...customStyles }}
         {...props}
       >
         {children}

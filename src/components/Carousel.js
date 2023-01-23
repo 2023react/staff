@@ -2,6 +2,7 @@ import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import styles from "../pages/Home.module.scss";
 import React from "react";
+import { v4 as uuid } from "uuid";
 const arr = [
   {
     src: "/img/1.png",
@@ -25,7 +26,7 @@ const arr = [
 
 export default function Slider() {
   const prod = arr.map((item) => (
-    <div className="carousel-card">
+    <div className="carousel-card" key={uuid()}>
       <img src={item.src} />
     </div>
   ));

@@ -1,10 +1,15 @@
-import React, { useEffect } from "react";
+import React from "react";
+import JobTitle from "./JobItem";
+
+import { useEffect } from "react";
 import JobItem from "./JobItem";
+
 import Navbar from "./Navbar";
 import styles from "./contents.module.scss";
 import { useLocation } from "react-router";
 import { jobsData } from "../../constants/jobsdata";
 import { v4 as uuid } from "uuid";
+
 import { collection, getDocs, query, where } from "firebase/firestore";
 import { db } from "../../firebase";
 import { useDispatch, useSelector } from "react-redux";
@@ -28,9 +33,6 @@ const MainContent = () => {
 
     const q1 = query(ref, ...levelsType, ...jobsType);
 
-    // const q1 = query(ref, ...levelsType, ...jobsType)
-    // const q1 = query(ref, where("jobName", "in", ["Phyton developer"]));
-
     const fetchData = await getDocs(q1);
     const data = [];
     fetchData.forEach((doc) => {
@@ -48,18 +50,17 @@ const MainContent = () => {
 
   return (
     <div className={styles.mainContent}>
+      {" "}
       <div className={styles.contentHotJobs}>HOT JOBS CAROUSEL</div>
-
       <div className={styles.contentNavbar}>
         {location === "/jobs" ? (
           <Navbar />
         ) : (
           <p className={styles.companiesNavbarSuccessor}>
-            1 - 50 company results from 436 total companies on staff.am
+            1 - 50 company results from 4360 total companies on staff.am
           </p>
         )}
       </div>
-
       <div className={styles.jobsColections}>
         {jobsData.map((job) => {
           return <JobItem {...job} key={uuid()} />;

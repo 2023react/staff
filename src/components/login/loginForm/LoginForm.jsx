@@ -4,11 +4,15 @@ import { useForm } from "react-hook-form";
 import Input from "../input/Input";
 import InputField from "../input/Input";
 import LoginButton from "../../loginButton/LoginButton";
-import { auth } from "../../../firebase";
+import { auth, db } from "../../../firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { Navigate, useNavigate } from "react-router";
 import { useDispatch } from "react-redux";
-import { closeLoginModal } from "../../../store/slices/loginSlice";
+import {
+  addCurrentCompany,
+  closeLoginModal,
+} from "../../../store/slices/loginSlice";
+import { doc, getDoc } from "firebase/firestore";
 
 const LoginForm = () => {
   const navigate = useNavigate();
@@ -29,11 +33,13 @@ const LoginForm = () => {
         data.password
       );
 
+      const currentCompany = await getDoc(doc(db, "companies", res.user.uid));
+
+      dispatch(addCurrentCompany({ currentCompany: currentCompany.data() }));
+
       navigate("/");
       dispatch(closeLoginModal());
-    } catch (error) {
-      console.log(data);
-    }
+    } catch (error) {}
   };
 
   return (

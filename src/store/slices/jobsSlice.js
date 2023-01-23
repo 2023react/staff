@@ -5,7 +5,7 @@ const initialState = {
   companyData: [],
 };
 
-const dataSlice = createSlice({
+const jobsSlice = createSlice({
   name: "dataSlice",
   initialState,
   reducers: {
@@ -15,6 +15,6 @@ const dataSlice = createSlice({
   },
 });
 
-export const { addJobsData } = dataSlice.actions;
+export const { addJobsData } = jobsSlice.actions;
 
-export default dataSlice.reducer;
+export default jobsSlice.reducer;

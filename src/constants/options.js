@@ -18,7 +18,6 @@ export const CITIES = [
   "Berlin",
   "Dilijan",
   "Dubai",
-  "Fresno",
 ];
 
 export const SPECIALIST_LEVELS = {
