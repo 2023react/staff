@@ -7,7 +7,7 @@ import styles from "./Home.module.scss";
 import { useSelector } from "react-redux";
 
 import { v4 as uuid } from "uuid";
-import { JOB__CATEGORY, CITIES } from "../components/constants/category";
+import { JOB__CATEGORY, CITIES } from "../constants/category";
 
 const Home = () => {
   return (

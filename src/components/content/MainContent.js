@@ -46,8 +46,6 @@ const MainContent = () => {
     getData();
   }, [jobCategory, levelCategory]);
 
-  console.log(useSelector((state) => state.filterSlice.searchJobs));
-
   return (
     <div className={styles.mainContent}>
       {" "}

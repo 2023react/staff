@@ -23,8 +23,8 @@ import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { doc, getDoc, setDoc, Timestamp } from "firebase/firestore";
 import { useNavigate } from "react-router";
-import { addCurrentCompany } from "../../../store/slices/loginSlice";
 import { useDispatch } from "react-redux";
+import { changeCurrentUser } from "../../../store/slices/loginSlice";
 
 const RegisterCompany = () => {
   const navigate = useNavigate();
@@ -91,7 +91,7 @@ const RegisterCompany = () => {
       const currentCompany = await getDoc(doc(db, "companies", res.user.uid));
 
       setImage(data.image[0].name);
-      dispatch(addCurrentCompany({ currentCompany: currentCompany.data() }));
+      dispatch(changeCurrentUser({ currentCompany: currentCompany.data() }));
       navigate("/");
     } catch (error) {
       console.log(error);

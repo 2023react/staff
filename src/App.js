@@ -46,6 +46,7 @@ const r = createBrowserRouter(
 );
 function App() {
   const dispatch = useDispatch();
+  console.log(useSelector((state) => state.jobsSlice.jobsData));
 
   useEffect(() => {
     const a = onAuthStateChanged(auth, (user) => {

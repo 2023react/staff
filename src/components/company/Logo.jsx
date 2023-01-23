@@ -3,7 +3,7 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
 import { auth } from "../../firebase";
-import { addCurrentCompany } from "../../store/slices/loginSlice";
+import { changeCurrentUser } from "../../store/slices/loginSlice";
 import LogOutButton from "../../UI/Button";
 import styles from "./companyPage.module.scss";
 const Logo = ({ currentCompany, checkHome }) => {
@@ -22,7 +22,7 @@ const Logo = ({ currentCompany, checkHome }) => {
   const navigate = useNavigate();
   const onLogOut = (e) => {
     e.preventDefault();
-    dispatch(addCurrentCompany({ currentCompany: null }));
+    dispatch(changeCurrentUser({ currentCompany: null }));
     signOut(auth);
     navigate("/");
   };

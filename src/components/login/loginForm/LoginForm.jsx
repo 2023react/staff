@@ -9,7 +9,7 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { Navigate, useNavigate } from "react-router";
 import { useDispatch } from "react-redux";
 import {
-  addCurrentCompany,
+  changeCurrentUser,
   closeLoginModal,
 } from "../../../store/slices/loginSlice";
 import { doc, getDoc } from "firebase/firestore";
@@ -35,7 +35,7 @@ const LoginForm = () => {
 
       const currentCompany = await getDoc(doc(db, "companies", res.user.uid));
 
-      dispatch(addCurrentCompany({ currentCompany: currentCompany.data() }));
+      dispatch(changeCurrentUser({ currentCompany: currentCompany.data() }));
 
       navigate("/");
       dispatch(closeLoginModal());
