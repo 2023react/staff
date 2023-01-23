@@ -1,4 +1,6 @@
-import { useSelector } from "react-redux";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+
 import {
   Route,
   RouterProvider,
@@ -9,20 +11,39 @@ import "./App.scss";
 import { Layout } from "./components/Layout";
 import RegisterCompany from "./components/login/companyRegister/RegisterCompany";
 import Modal from "./components/login/loginModal/Modal";
-import Componies from "./pages/Componies";
+import Companies from "./pages/Companies";
 import Home from "./pages/Home";
 import Jobs from "./pages/Jobs";
+
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "./firebase";
+import { changeCurrentUser } from "./store/slices/loginSlice";
+import CompanyPage from "./components/company/CompanyPage";
+
 const r = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Layout />}>
       <Route index element={<Home />} />
       <Route path="/jobs" element={<Jobs />} />
-      <Route path="/companies" element={<Componies />} />
+      <Route path="/companies" element={<Companies />} />
       <Route path="/company/register" element={<RegisterCompany />} />
+      <Route path="/companyPage" element={<CompanyPage />} />
     </Route>
   )
 );
 function App() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const a = onAuthStateChanged(auth, (user) => {
+      dispatch(changeCurrentUser(user));
+    });
+
+    return () => {
+      a();
+    };
+  }, [auth]);
+
   const showLogin = useSelector((state) => state.loginSlice.showLogin);
   const showRegister = useSelector((state) => state.loginSlice.showRegister);
   const showLoginCompany = useSelector(

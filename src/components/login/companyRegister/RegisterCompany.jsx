@@ -59,11 +59,9 @@ const RegisterCompany = () => {
       );
 
       const storageRef = ref(storage, data.CompanyName);
-      console.log("nerqev");
       await uploadBytesResumable(storageRef, data.image[0]).then(() => {
         getDownloadURL(storageRef).then(async (downloadURL) => {
           try {
-            console.log(res);
             await updateProfile(res.user, {
               displayName: data.CompanyName,
               photoURL: downloadURL,
@@ -84,7 +82,6 @@ const RegisterCompany = () => {
           }
         });
       });
-      console.log(data);
       setImage(data.image[0].name);
       navigate("/");
     } catch (error) {

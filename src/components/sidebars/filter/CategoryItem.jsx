@@ -14,8 +14,6 @@ const CategoryItem = ({ filterData }) => {
       : dispach(deleteFilter({ value, category: filterData.categoryType }));
   };
 
-  console.log(useSelector((state) => state.filterSlice.jobCategory));
-
   return (
     <Title filterTitle={filterData.title}>
       {filterData.data.map((level) => (

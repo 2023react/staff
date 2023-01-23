@@ -31,7 +31,6 @@ const LoginForm = () => {
 
       navigate("/");
       dispatch(closeLoginModal());
-      console.log(res.user);
     } catch (error) {
       console.log(data);
     }
