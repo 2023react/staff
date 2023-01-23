@@ -8,7 +8,11 @@ import InputField from "../input/Input";
 import LoginButton from "../../loginButton/LoginButton";
 import Select from "../../select/Select";
 
-import { CITIES, INDUSTRIES_LEVELS, COUNTRIES } from "../../constants/options";
+import {
+  CITIES,
+  INDUSTRIES_LEVELS,
+  COUNTRIES,
+} from "../../../constants/options";
 
 import PhoneInput from "react-phone-number-input";
 import "react-phone-number-input/style.css";

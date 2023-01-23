@@ -3,12 +3,12 @@ import JobItem from "./JobItem";
 import Navbar from "./Navbar";
 import styles from "./contents.module.scss";
 import { useLocation } from "react-router";
-import { jobsData } from "../constants/jobsdata";
+import { jobsData } from "../../constants/jobsdata";
 import { v4 as uuid } from "uuid";
 import { collection, getDocs, query, where } from "firebase/firestore";
 import { db } from "../../firebase";
 import { useDispatch, useSelector } from "react-redux";
-import { addJobsData } from "../../store/slices/dataSlice";
+import { addJobsData } from "../../store/slices/jobsSlice";
 const MainContent = () => {
   const location = useLocation().pathname;
 

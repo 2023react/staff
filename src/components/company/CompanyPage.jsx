@@ -3,7 +3,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { db } from "../../firebase";
 import { v4 as uuid } from "uuid";
-import { jobsData } from "../constants/jobsdata";
+import { jobsData } from "../../constants/jobsdata";
 
 const CompanyPage = () => {
   const currentUser = useSelector((state) => state.loginSlice.currentUser);

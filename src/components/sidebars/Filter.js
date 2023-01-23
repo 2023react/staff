@@ -9,7 +9,7 @@ import {
   LEVEL__CATEGORY__COMPANY,
   COMPANY__INDUSTRIES,
   CITIES,
-} from "../constants/category";
+} from "../../constants/category";
 import CategoryItem from "./filter/CategoryItem";
 import { useLocation } from "react-router";
 

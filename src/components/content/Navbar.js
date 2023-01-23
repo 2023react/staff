@@ -9,7 +9,7 @@ import crown from "../../images/crown.svg";
 import styles from "./contents.module.scss";
 import HighlightOffOutlinedIcon from "@mui/icons-material/HighlightOffOutlined";
 import { v4 as uuid } from "uuid";
-import { LEVEL_CATEGORY } from "../constants/category";
+import { LEVEL_CATEGORY } from "../../constants/category";
 import { deleteFilter, setFilter } from "../../store/slices/filterSlice";
 
 const Navbar = () => {

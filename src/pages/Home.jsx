@@ -5,7 +5,7 @@ import { margin } from "@mui/system";
 import Slider from "../components/Carousel";
 import styles from "./Home.module.scss";
 import { useSelector } from "react-redux";
-import { JOB__CATEGORY, CITIES } from "../components/constants/category";
+import { JOB__CATEGORY, CITIES } from "../constants/category";
 
 const Home = () => {
   return (
