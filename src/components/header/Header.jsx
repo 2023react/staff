@@ -1,14 +1,17 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
+
 import { NavLink, useLocation } from "react-router-dom";
 import style from "../header/header.module.scss";
 import logo from "../../images/logo.png";
 import homeLogo from "../../images/homeLogo.png";
+
 import {
   openComponyLogin,
   openLogin,
   openRegister,
 } from "../../store/slices/loginSlice";
+
 import Logo from "../company/Logo";
 import clsx from "clsx";
 
@@ -24,7 +27,7 @@ const Header = () => {
   const onClickLoginUser = () => dispatch(openLogin());
   const onClickLoginRegiter = () => dispatch(openRegister());
   const openLoginCompany = () => dispatch(openComponyLogin());
-
+  const currentUser = useSelector((state) => state.loginSlice.currentUser);
   return (
     <header
       className={`${style.header} ${[isHomePage ? "" : style.whiteHeader]}`}
@@ -114,10 +117,15 @@ const Header = () => {
                   </button>
                 </div>
 
-                <div className={style.dropdown__button}>
-                  <button onClick={onClickLoginRegiter} className={style.btn}>
-                    Register
-                  </button>
+                    <div className={style.dropdown__button}>
+                      <button
+                        onClick={onClickLoginRegiter}
+                        className={style.btn}
+                      >
+                        Register
+                      </button>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>

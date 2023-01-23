@@ -7,8 +7,14 @@ import VerifiedIcon from "@mui/icons-material/Verified";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import { Link } from "react-router-dom";
 
+<<<<<<<< HEAD:src/components/content/CompanyItem.jsx
 import { COLORS } from "../../constants/styles";
 const JobTitle = ({
+========
+import { COLORS } from "../constants/styles";
+
+const JobItem = ({
+>>>>>>>> 5482210881d27a46e18146e1eec22372f9ce9f37:src/components/content/JobItem.js
   photoUrl,
   jobName,
   companyName,
@@ -34,8 +40,13 @@ const JobTitle = ({
     width: "18px",
     marginRight: "5px",
   };
+
   return (
-    <Link>
+ 
+    <Link to={`/jobs/${companyName}`}>
+ 
+ 
+ 
       {" "}
       <div className={styles.jobInfo}>
         <img src={photoUrl} alt="" />
@@ -94,4 +105,4 @@ const JobTitle = ({
   );
 };
 
-export default JobTitle;
+export default JobItem;

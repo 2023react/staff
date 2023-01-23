@@ -1,0 +1,50 @@
+.block{
+   display: flex;
+   align-items: center;
+
+   gap: 30px;
+   .logoBlock{
+    display: flex;
+    align-items: center;
+     gap: 8px;
+     cursor: pointer;
+ img{
+    width: 40px;
+    height: 40px;
+    border-radius:50%;
+    object-fit: cover;
+    border: 1px solid 46af3a;
+ }
+ p{
+    font-size: 18px;
+
+    font-weight: 700;
+    
+}
+ 
+
+   }
+
+   .btnBlock{
+      span{
+         font-size: 18px;
+         font-weight: 700;
+         cursor: pointer;
+      }
+   }
+
+
+}
+
+
+.whiteColor{
+   color: white;
+}
+
+.blackColor{
+   color:rgba(0,0,0,.5);
+   &:hover{
+      color: #46af3a!important;
+   } 
+}
+

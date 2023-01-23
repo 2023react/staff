@@ -29,16 +29,12 @@ const CategoryItem = ({ filterData }) => {
       : dispatch(deleteFilter({ value, category: filterData.categoryType }));
   };
 
-  const onChange = filterData.title.includes("job")
-    ? onChangeByJobCategory
-    : onChangeBySpecialistLevel;
-
   return (
     <Title filterTitle={filterData.title}>
       {filterData.data.map((level) => (
         <Checkbox
           categoryType={filterData.categoryType}
-          onChange={onChange}
+          onChange={"onChange"}
           name={level.trim()}
           countJobs="9"
           key={uuid()}

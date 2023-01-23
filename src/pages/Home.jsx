@@ -24,20 +24,14 @@ const Home = () => {
             <div className={styles.jobfilter}>
               <label className={styles.label}>
                 <div className={styles.iratio}>
-                  <input type="radio" />
+                  <input type="radio" name="job" />
                 </div>
                 JOBS
               </label>
 
               <label className={styles.label}>
                 <div className={styles.iratio}>
-                  <input type="radio" />
-                </div>
-                TRAININGS
-              </label>
-              <label className={styles.label}>
-                <div className={styles.iratio}>
-                  <input type="radio" />
+                  <input type="radio" name="job" />
                 </div>
                 COMPANIES
               </label>

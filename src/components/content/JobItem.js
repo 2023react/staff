@@ -8,7 +8,8 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import { Link } from "react-router-dom";
 
 import { COLORS } from "../../constants/styles";
-const JobTitle = ({
+
+const JobItem = ({
   photoUrl,
   jobName,
   companyName,
@@ -34,8 +35,9 @@ const JobTitle = ({
     width: "18px",
     marginRight: "5px",
   };
+
   return (
-    <Link>
+    <Link to={`/jobs/${companyName}`}>
       {" "}
       <div className={styles.jobInfo}>
         <img src={photoUrl} alt="" />
@@ -94,4 +96,4 @@ const JobTitle = ({
   );
 };
 
-export default JobTitle;
+export default JobItem;

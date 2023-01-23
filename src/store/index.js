@@ -1,4 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
+
+import { getDefaultMiddleware } from "@reduxjs/toolkit";
+
 import filterSlice from "./slices/filterSlice";
 import jobsSlice from "./slices/jobsSlice";
 import loginSlice from "./slices/loginSlice";
