@@ -7,11 +7,15 @@ import {
   createBrowserRouter,
   createRoutesFromElements,
 } from "react-router-dom";
+
 import "./App.scss";
+import JobDetails from "./components/JobDetails/JobDetails";
 import { Layout } from "./components/Layout";
 import RegisterCompany from "./components/login/companyRegister/RegisterCompany";
 import Modal from "./components/login/loginModal/Modal";
+
 import Companies from "./pages/Companies";
+
 import Home from "./pages/Home";
 import Jobs from "./pages/Jobs";
 
@@ -25,7 +29,11 @@ const r = createBrowserRouter(
     <Route path="/" element={<Layout />}>
       <Route index element={<Home />} />
       <Route path="/jobs" element={<Jobs />} />
+
       <Route path="/companies" element={<Companies />} />
+
+      <Route path="/jobs/:id" element={<JobDetails />} />
+
       <Route path="/company/register" element={<RegisterCompany />} />
       <Route path="/companyPage" element={<CompanyPage />} />
     </Route>

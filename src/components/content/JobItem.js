@@ -37,8 +37,13 @@ const JobItem = ({
     width: "18px",
     marginRight: "5px",
   };
+
   return (
-    <Link>
+ 
+    <Link to={`/jobs/${companyName}`}>
+ 
+ 
+ 
       {" "}
       <div className={styles.jobInfo}>
         <img src={photoUrl} alt="" />
