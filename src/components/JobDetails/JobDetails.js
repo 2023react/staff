@@ -1,7 +1,7 @@
 import React from "react";
 import JobDetailsContent from "./JobDetailsContent";
 import styles from "./Jobdetails.module.scss";
-import { jobsData } from "../constants/jobsdata";
+import { jobsData } from "../../constants/jobsdata";
 const jobData = jobsData[3];
 const JobDetails = () => {
   return (

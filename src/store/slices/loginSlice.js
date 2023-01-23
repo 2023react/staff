@@ -13,6 +13,9 @@ const loginSlice = createSlice({
   initialState,
 
   reducers: {
+    addCurrentCompany(state, action) {
+      state.currentCompany = action.payload.currentCompany;
+    },
     changeCurrentUser(state, action) {
       state.currentUser = action.payload;
     },
@@ -46,6 +49,9 @@ export const {
   openRegister,
   closeLoginModal,
   openComponyLogin,
+
+  addCurrentCompany,
+
   changeCurrentUser,
   onClickSignUp,
 } = loginSlice.actions;

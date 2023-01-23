@@ -3,7 +3,7 @@ import React from "react";
 import styles from "./Jobdetails.module.scss";
 import BookmarkIcon from "@mui/icons-material/Bookmark";
 
-import { jobsData } from "../constants/jobsdata";
+import { jobsData } from "../../constants/jobsdata";
 import { useParams } from "react-router";
 
 console.log(jobsData[3]);

@@ -1,29 +1,17 @@
 import { createSlice } from "@reduxjs/toolkit/dist";
 const initialState = {
-  jobsColections: [],
+  jobsData: [],
+  companyData: [],
 };
 const jobsSlice = createSlice({
-  name: "jobs",
+  name: "jobsSlice",
   initialState,
   reducers: {
-    addJobs(state, action) {
-      state.jobsColections = action.payload.jobs;
-    },
-
-    deleteJobsBylevelCategory(state, action) {
-      state.jobsColections = state.jobsColections.filter(
-        (job) => job.requiredCandidateLevel !== action.payload.value
-      );
-    },
-    deleteJobsByJobCategory(state, action) {
-      state.jobsColections = state.jobsColections.filter(
-        (job) => job.jobCategory !== action.payload.value
-      );
+    addJobsData(state, action) {
+      state.jobsData = action.payload;
     },
   },
 });
-
-export const { addJobs, deleteJobsByJobCategory, deleteJobsBylevelCategory } =
-  jobsSlice.actions;
+export const { addJobsData } = jobsSlice.actions;
 
 export default jobsSlice.reducer;
