@@ -16,17 +16,15 @@ import "react-phone-number-input/style.css";
 import { auth, db, storage } from "../../../firebase";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 
-import {
-  getStorage,
-  ref,
-  uploadBytesResumable,
-  getDownloadURL,
-} from "firebase/storage";
-import { doc, setDoc } from "firebase/firestore";
+import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import { doc, getDoc, setDoc, Timestamp } from "firebase/firestore";
 import { useNavigate } from "react-router";
+import { addCurrentCompany } from "../../../store/slices/loginSlice";
+import { useDispatch } from "react-redux";
 
 const RegisterCompany = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch;
   const [image, setImage] = useState("");
   const [img, setImg] = useState(null);
   const {
@@ -57,8 +55,9 @@ const RegisterCompany = () => {
         data.email,
         data.password
       );
+      console.log(res);
+      const storageRef = ref(storage, res.user.uid);
 
-      const storageRef = ref(storage, data.CompanyName);
       await uploadBytesResumable(storageRef, data.image[0]).then(() => {
         getDownloadURL(storageRef).then(async (downloadURL) => {
           try {
@@ -66,6 +65,7 @@ const RegisterCompany = () => {
               displayName: data.CompanyName,
               photoURL: downloadURL,
             });
+
             await setDoc(doc(db, "companies", res.user.uid), {
               uid: res.user.uid,
               companyName: data.CompanyName,
@@ -76,13 +76,18 @@ const RegisterCompany = () => {
               industry: data.industry,
               phone: data.phoneInput,
               photoURL: downloadURL,
+              date: Timestamp.now(),
             });
           } catch (err) {
             console.log(err);
           }
         });
       });
+
+      const currentCompany = await getDoc(doc(db, "companies", res.user.uid));
+
       setImage(data.image[0].name);
+      dispatch(addCurrentCompany({ currentCompany: currentCompany.data() }));
       navigate("/");
     } catch (error) {
       console.log(error);

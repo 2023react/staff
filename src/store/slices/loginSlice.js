@@ -5,6 +5,7 @@ const initialState = {
   showLogin: false,
   showRegister: false,
   showComponyLogin: false,
+  currentCompany: null,
 };
 
 const loginSlice = createSlice({

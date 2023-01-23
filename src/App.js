@@ -9,26 +9,31 @@ import {
 } from "react-router-dom";
 
 import "./App.scss";
-import JobDetails from "./components/JobDetails/JobDetails";
-import { Layout } from "./components/Layout";
+
+import CompanyPage from "./components/company/CompanyPage";
+
 import RegisterCompany from "./components/login/companyRegister/RegisterCompany";
-import Modal from "./components/login/loginModal/Modal";
 
 import Companies from "./pages/Companies";
-
 import Home from "./pages/Home";
 import Jobs from "./pages/Jobs";
+
+import JobDetails from "./components/JobDetails/JobDetails";
+import { Layout } from "./components/Layout";
+
+import Modal from "./components/login/loginModal/Modal";
 
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./firebase";
 import { changeCurrentUser } from "./store/slices/loginSlice";
-import CompanyPage from "./components/company/CompanyPage";
 
 const r = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Layout />}>
       <Route index element={<Home />} />
       <Route path="/jobs" element={<Jobs />} />
+
+      <Route path="/company/:name" element={<CompanyPage />} />
 
       <Route path="/companies" element={<Companies />} />
 
