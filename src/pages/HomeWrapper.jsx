@@ -15,6 +15,7 @@ import {
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import MenuItem from "@mui/material/MenuItem";
+import { Link } from "react-router-dom";
 
 export function Wrapper() {
   return (
@@ -51,9 +52,11 @@ export function Wrapper() {
       </div>
 
       <div className={styles.fields}>
-        <Button className={styles.searchbtn} variant="contained">
-          <SearchIcon />
-        </Button>
+        <Link to="/jobs">
+          <Button className={styles.searchbtn} variant="contained">
+            <SearchIcon />
+          </Button>
+        </Link>
       </div>
     </div>
   );
@@ -81,9 +84,11 @@ export function Wrapper1() {
       </div>
 
       <div className={styles.fields}>
-        <Button className={styles.searchbtn} variant="contained">
-          <SearchIcon />
-        </Button>
+        <Link to="/companies">
+          <Button className={styles.searchbtn} variant="contained">
+            <SearchIcon />
+          </Button>
+        </Link>
       </div>
     </div>
   );
