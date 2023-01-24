@@ -6,7 +6,7 @@ import { auth } from "../../firebase";
 import ImageAvatars from "../../UI/Avatar";
 import { changeCurrentUser } from "../../store/slices/loginSlice";
 import LogOutButton from "../../UI/Button";
-import styles from "./companyPage.module.scss";
+import styles from "./logo.module.scss";
 const Logo = ({ checkHome }) => {
   const currentUser = useSelector((state) => state.loginSlice.currentUser);
 
