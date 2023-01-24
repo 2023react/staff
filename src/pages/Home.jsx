@@ -16,6 +16,7 @@ import { useState } from "react";
 
 const Home = () => {
   const [toggle, setToggle] = useState(true);
+
   const clickCompany = () => {
     setToggle(false);
   };
@@ -38,7 +39,12 @@ const Home = () => {
             <div className={styles.jobfilter}>
               <label className={styles.label}>
                 <div className={styles.iratio}>
-                  <input type="radio" name="job" onClick={clickJob} />
+                  <input
+                    type="radio"
+                    name="job"
+                    onClick={clickJob}
+                    defaultChecked="ckeched"
+                  />
                 </div>
                 JOBS
               </label>
