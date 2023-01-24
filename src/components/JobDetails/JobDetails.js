@@ -5,7 +5,7 @@ import styles from "./Jobdetails.module.scss";
 import { jobsData } from "../../constants/jobsdata";
 import BasicButtons from "../../UI/Button";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-import { COLORS } from "../constants/styles";
+import { COLORS } from "../../constants/styles";
 
 const jobData = jobsData[3];
 const JobDetails = () => {
