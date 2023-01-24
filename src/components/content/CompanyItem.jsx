@@ -7,7 +7,7 @@ import VerifiedIcon from "@mui/icons-material/Verified";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import { Link } from "react-router-dom";
 
-import { COLORS } from "../constants/styles";
+import { COLORS } from "../../constants/styles";
 
 const JobItem = ({
   photoUrl,

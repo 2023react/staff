@@ -1,18 +1,19 @@
 import React from "react";
 import style from "../loginForm/loginForm.module.scss";
 import { useForm } from "react-hook-form";
-import Input from "../input/Input";
+
 import InputField from "../input/Input";
-import LoginButton from "../../loginButton/LoginButton";
+
 import { auth, db } from "../../../firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { Navigate, useNavigate } from "react-router";
+import { useNavigate } from "react-router";
 import { useDispatch } from "react-redux";
 import {
   changeCurrentUser,
   closeLoginModal,
 } from "../../../store/slices/loginSlice";
 import { doc, getDoc } from "firebase/firestore";
+import SignInButton from "../../../UI/Button";
 
 const LoginForm = () => {
   const navigate = useNavigate();
@@ -70,7 +71,7 @@ const LoginForm = () => {
           Forgot Password?
         </a>
 
-        <LoginButton name="Sign In" />
+        <SignInButton type="submit"> Sign In </SignInButton>
 
         <div className={style.text}>
           Don't have an account yet?

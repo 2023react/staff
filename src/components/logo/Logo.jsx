@@ -3,11 +3,16 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 import { auth } from "../../firebase";
+
+import ImageAvatars from "../../UI/Avatar";
+
 import { changeCurrentUser } from "../../store/slices/loginSlice";
+
 import LogOutButton from "../../UI/Button";
 import styles from "./companyPage.module.scss";
 const Logo = ({ checkHome }) => {
   const currentUser = useSelector((state) => state.loginSlice.currentUser);
+
   const logOutButtonStyles = {
     width: "50px",
     color: checkHome ? "#fff" : "rgba(0, 0, 0, 0.5)",
@@ -28,9 +33,12 @@ const Logo = ({ checkHome }) => {
   };
   return (
     <div className={styles.logoBox}>
-      <img src={currentUser.photoURL} alt="logo" />
+      <ImageAvatars
+        companyName={currentUser.displayName}
+        photoURL={currentUser.photoURL}
+      />
+
       <div className={styles.logOutBtn}>
-        {" "}
         <h3
           className={`${styles.title} ${[
             !checkHome ? "" : styles.whiteTitle,

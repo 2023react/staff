@@ -1,17 +1,49 @@
-.mainContent {
-  background-color: white;
-  position: relative;
-  max-width: 1000px;
-  margin-top: 15px;
-  padding: 50px;
-  margin-left: 65px;
-  .jobsColections {
-    box-sizing: border-box;
-    width: 100%;
-    min-height: 1550px;
-    padding-left: 15px;
-    padding-right: 1px;
+.companyNavbar {
+  background-color: #fff;
+
+  display: flex;
+  flex-direction: column;
+  .companyInfo {
     position: relative;
+    display: flex;
+    border: 1px solid #ddd;
+    background-color: #fff;
+    padding: 10px 0;
+    margin-bottom: 10px;
+    justify-content: space-around;
+    // align-items: center;
+    .titleActiveJobs {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      justify-content: flex-end;
+    }
+    .companyInfoBlock {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      padding: 15px 0 15px 150px;
+
+      .titleList {
+        display: flex;
+        flex-direction: column;
+      }
+      .companyName {
+        display: flex;
+      }
+    }
+
+    .followBtn {
+    }
+    .companyPhoto {
+      top: -70px;
+      z-index: 1;
+      position: absolute;
+      left: 20px;
+      border: 3px solid #fff;
+      background: #fff;
+      box-shadow: 0 0 2px 2px hsl(0deg 0% 63% / 23%);
+    }
   }
 }
 
@@ -225,8 +257,6 @@ ul {
   padding-top: 1px;
   padding-left: 200px;
   box-shadow: 0 0 2px 2px hsl(0deg 0% 63% / 23%);
-  display: flex;
-  flex-direction: row;
 }
 .company_title {
   color: #333;
@@ -235,17 +265,4 @@ ul {
 }
 .company_title_txt {
   font-size: 16px;
-}
-.jobInfoButton {
-  align-self: center;
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
-  width: 40%;
-  color: #333;
-
-  margin-bottom: 40px;
-  button {
-    margin-left: 10px;
-  }
 }

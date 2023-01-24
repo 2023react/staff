@@ -8,12 +8,6 @@ import HighlightOffOutlinedIcon from "@mui/icons-material/HighlightOffOutlined";
 import { v4 as uuid } from "uuid";
 import { LEVEL_CATEGORY } from "../../constants/category";
 import { deleteFilter, setFilter } from "../../store/slices/filterSlice";
-import { collection, getDocs, query, where } from "firebase/firestore";
-import { db } from "../../firebase";
-import {
-  addJobs,
-  deleteJobsBylevelCategory,
-} from "../../store/slices/jobsSlice";
 
 const Navbar = () => {
   const dispatch = useDispatch();

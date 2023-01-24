@@ -1,11 +1,6 @@
 import React, { useEffect, useState } from "react";
-
 import style from "../companyRegister/registerCompany.module.scss";
-
 import { Controller, useForm } from "react-hook-form";
-
-import InputField from "../input/Input";
-import LoginButton from "../../loginButton/LoginButton";
 import Select from "../../select/Select";
 
 import {
@@ -16,14 +11,16 @@ import {
 
 import PhoneInput from "react-phone-number-input";
 import "react-phone-number-input/style.css";
-
 import { auth, db, storage } from "../../../firebase";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
-
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { doc, getDoc, setDoc, Timestamp } from "firebase/firestore";
 import { useNavigate } from "react-router";
 import { useDispatch } from "react-redux";
+
+import RegisterButton from "../../../UI/Button";
+import InputField from "../input/Input";
+
 import { changeCurrentUser } from "../../../store/slices/loginSlice";
 
 const RegisterCompany = () => {
@@ -88,10 +85,7 @@ const RegisterCompany = () => {
         });
       });
 
-      const currentCompany = await getDoc(doc(db, "companies", res.user.uid));
-
       setImage(data.image[0].name);
-      // dispatch(changeCurrentUser({ currentCompany: currentCompany.data() }));
       navigate("/");
     } catch (error) {
       console.log(error);
@@ -225,7 +219,7 @@ const RegisterCompany = () => {
             />
           </div>
 
-          <LoginButton name="Register" />
+          <RegisterButton type="submit">Register</RegisterButton>
         </div>
       </form>
     </div>

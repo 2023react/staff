@@ -1,7 +1,6 @@
 .search_section {
   background: linear-gradient(170deg, #46af3a 30%, #407bff) no-repeat;
   width: 100%;
-  max-height: 544px;
 }
 .text {
   padding-top: 70px;
@@ -22,17 +21,18 @@
 }
 
 .search_clearfix {
-  max-width: 770px;
-  max-height: 97px;
-  padding: 10px;
-  margin: 0 auto 56px;
+  display: flex;
+  justify-content: center;
+
+  padding-top: 15px;
 }
 
 .label {
   display: inline-block;
   font-weight: 500;
   color: #fff;
-  padding-left: 50px;
+  padding-left: 5px;
+  padding-right: 50px;
 }
 .label input {
   height: 100%;
@@ -40,7 +40,7 @@
   opacity: 0.6;
   position: absolute;
   cursor: pointer;
-  right: 2px;
+  right: 4px;
 }
 .iratio {
   display: inline-block;
@@ -52,8 +52,7 @@
 }
 
 .wrapper {
-  padding-top: 10px;
-  padding-right: 65px;
+  padding-top: 15px;
 
   display: flex;
   justify-content: center;
@@ -61,7 +60,6 @@
 }
 .fields {
   padding: 1.5px;
-  text-align: center;
 }
 .fields input {
   height: 55px;
@@ -70,7 +68,7 @@
 }
 .fields select {
   height: 55px;
-  width: 174px;
+  width: 172px;
   border: solid 1px #f2f2f2;
   text-align: center;
   -webkit-appearance: none;
@@ -78,7 +76,7 @@
 }
 .searchbtn {
   height: 55px;
-  width: 174px;
+  width: 172px;
 }
 :active,
 :hover,
@@ -92,4 +90,15 @@
   font-weight: 500;
   margin: 55px 0 40px;
   text-transform: uppercase;
+}
+
+@media only screen and (max-width: 800px) {
+  .wrapper {
+    display: flex;
+    flex-direction: column;
+  }
+  .label {
+    display: inline-block;
+    padding-left: 40px;
+  }
 }

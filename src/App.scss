@@ -6,6 +6,10 @@
 body {
   font-family: "Roboto", sans-serif !important;
 }
+.App {
+  display: flex;
+  flex-direction: column;
+}
 button {
   background: none;
   border: none;
