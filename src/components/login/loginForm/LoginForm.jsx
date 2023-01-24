@@ -35,9 +35,7 @@ const LoginForm = () => {
       );
 
       const currentCompany = await getDoc(doc(db, "companies", res.user.uid));
-
-      dispatch(changeCurrentUser({ currentCompany: currentCompany.data() }));
-
+      // dispatch(changeCurrentUser({ currentCompany: currentCompany.data() }));
       navigate("/");
       dispatch(closeLoginModal());
       document.body.style.overflow = "visible ";

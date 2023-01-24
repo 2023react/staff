@@ -5,6 +5,10 @@ import {
   RouterProvider,
   createBrowserRouter,
   createRoutesFromElements,
+  useNavigate,
+  Routes,
+  BrowserRouter,
+  Navigate,
 } from "react-router-dom";
 import "./App.scss";
 import CompanyPage from "./components/company/CompanyPage";
@@ -16,7 +20,8 @@ import JobDetails from "./components/JobDetails/JobDetails";
 import { Layout } from "./components/Layout";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./firebase";
-import { changeCurrentUser } from "./store/slices/loginSlice";
+import loginSlice, { changeCurrentUser } from "./store/slices/loginSlice";
+import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
 
 const r = createBrowserRouter(
   createRoutesFromElements(
@@ -26,23 +31,34 @@ const r = createBrowserRouter(
       <Route path="/company/:name" element={<CompanyPage />} />
       <Route path="/companies" element={<Companies />} />
       <Route path="/jobs/:id" element={<JobDetails />} />
-      <Route path="/company/register" element={<RegisterCompany />} />
+
+      <Route
+        path="/company/register"
+        element={
+          <ProtectedRoute>
+            <RegisterCompany />
+          </ProtectedRoute>
+        }
+      />
       <Route path="/companyPage" element={<CompanyPage />} />
     </Route>
   )
 );
 function App() {
   const dispatch = useDispatch();
-
   useEffect(() => {
-    const a = onAuthStateChanged(auth, (user) => {
-      dispatch(changeCurrentUser(user));
+    onAuthStateChanged(auth, (currentUser) => {
+      dispatch(changeCurrentUser(currentUser));
     });
+  }, []);
 
-    return () => {
-      a();
-    };
-  }, [auth]);
+  const showLogin = useSelector((state) => state.loginSlice.showLogin);
+  const showRegister = useSelector((state) => state.loginSlice.showRegister);
+  const showLoginCompany = useSelector(
+    (state) => state.loginSlice.showComponyLogin
+  );
+
+  const currentUser = useSelector((state) => state.loginSlice.currentUser);
 
   return (
     <div className="App">

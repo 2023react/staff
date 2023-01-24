@@ -86,7 +86,6 @@ const RegisterCompany = () => {
       });
 
       setImage(data.image[0].name);
-
       navigate("/");
     } catch (error) {
       console.log(error);
