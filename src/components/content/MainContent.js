@@ -45,8 +45,6 @@ const MainContent = () => {
     getData();
   }, [jobCategory, levelCategory]);
 
-  console.log(useSelector((state) => state.jobsSlice.jobsData));
-
   return (
     <div className={styles.mainContent}>
       {" "}

@@ -1,9 +1,33 @@
 import React from "react";
 import JobDetailsContent from "./JobDetailsContent";
 import styles from "./Jobdetails.module.scss";
+
 import { jobsData } from "../../constants/jobsdata";
+import BasicButtons from "../../UI/Button";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import { COLORS } from "../../constants/styles";
+
 const jobData = jobsData[3];
 const JobDetails = () => {
+  const customButtonStylesRed = {
+    textTransform: "none",
+    "&:hover": {
+      color: "white",
+      backgroundColor: COLORS.customRed,
+    },
+  };
+  const heartIconStyles = {
+    width: "18px",
+    marginRight: "5px",
+  };
+  const customButtonStylesGreen = {
+    textTransform: "none",
+    "&:hover": {
+      color: "white",
+      backgroundColor: COLORS.customGreen,
+    },
+  };
+
   return (
     <div className="jobs">
       <div className="container">
@@ -21,12 +45,26 @@ const JobDetails = () => {
                 <div className={styles.company_title}>
                   <h1>{jobData.companyName}</h1>
                 </div>
-                {/* <div className={styles.company_title_txt}>
-                  <p>Industry: Information technologies</p>
+                <div className={styles.jobInfoButton}>
+                  <BasicButtons
+                    size="small"
+                    color="customRed"
+                    variant="outlined"
+                    customStyles={customButtonStylesRed}
+                  >
+                    <FavoriteBorderIcon
+                      sx={{ ...heartIconStyles }}
+                    ></FavoriteBorderIcon>
+                    Follow
+                  </BasicButtons>
+                  <BasicButtons
+                    size="small"
+                    variant="outlined"
+                    sx={{ ...customButtonStylesGreen }}
+                  >
+                    Save this Job
+                  </BasicButtons>
                 </div>
-                <div className={styles.xxx}>
-                  <p>23 active jobs</p>
-                </div> */}
               </div>
             </div>
           </div>
