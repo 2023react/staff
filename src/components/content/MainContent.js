@@ -1,10 +1,4 @@
-<<<<<<< HEAD
 import React, { useCallback } from "react";
-import JobTitle from "./JobItem";
-
-=======
-import React from "react";
->>>>>>> 2ed254b7655d23bd095cf88f6bd91bda85354c00
 import { useEffect } from "react";
 import JobItem from "./JobItem";
 import Navbar from "./Navbar";
@@ -12,19 +6,8 @@ import styles from "./contents.module.scss";
 import { useLocation } from "react-router";
 import { jobsData } from "../../constants/jobsdata";
 import { v4 as uuid } from "uuid";
-<<<<<<< HEAD
 
-import {
-  collection,
-  getDocs,
-  orderBy,
-  query,
-  startAt,
-  where,
-} from "firebase/firestore";
-=======
 import { collection, getDocs, query, where } from "firebase/firestore";
->>>>>>> 2ed254b7655d23bd095cf88f6bd91bda85354c00
 import { db } from "../../firebase";
 import { useDispatch, useSelector } from "react-redux";
 import { addJobsData } from "../../store/slices/jobsSlice";

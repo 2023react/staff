@@ -11,9 +11,7 @@ import ImageAvatars from "../../UI/Avatar";
 import CompanyNavbar from "./navbars/CompanyNavbar";
 import styles from "./company.module.scss";
 const CompanyPage = () => {
-  const { companyName, photoURL } = useSelector(
-    (state) => state.loginSlice.currentCompany
-  );
+  const currentUser = useSelector((state) => state.loginSlice.currentUser);
 
   const onAddJob = async () => {
     await setDoc(doc(db, "jobs", uuid()), {
@@ -28,9 +26,11 @@ const CompanyPage = () => {
         <div className={styles.company}>
           <CompanyNavbar />
           <div style={{ backgroundColor: "green", margin: "14px" }}>
-            <h2>{companyName}</h2>
-            <ImageAvatars companyName={companyName} photoURL={photoURL} />
-            <img src={photoURL} alt="" />
+            <h2>{currentUser?.displayName}</h2>
+            <ImageAvatars
+              companyName={currentUser?.displayName}
+              photoURL={currentUser.photoURL}
+            />
             CompanyPage <BasicButtons onClick={onAddJob}>ADD</BasicButtons>
           </div>
         </div>
