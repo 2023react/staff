@@ -6,7 +6,8 @@ const initialState = {
 };
 
 const jobsSlice = createSlice({
-  name: "dataSlice",
+  name: "jobsSlice",
+
   initialState,
   reducers: {
     addJobsData(state, action) {

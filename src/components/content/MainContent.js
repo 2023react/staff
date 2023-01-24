@@ -1,19 +1,16 @@
 import React from "react";
-import JobTitle from "./JobItem";
-
 import { useEffect } from "react";
 import JobItem from "./JobItem";
-
 import Navbar from "./Navbar";
 import styles from "./contents.module.scss";
 import { useLocation } from "react-router";
 import { jobsData } from "../../constants/jobsdata";
 import { v4 as uuid } from "uuid";
-
 import { collection, getDocs, query, where } from "firebase/firestore";
 import { db } from "../../firebase";
 import { useDispatch, useSelector } from "react-redux";
 import { addJobsData } from "../../store/slices/jobsSlice";
+
 const MainContent = () => {
   const location = useLocation().pathname;
 
@@ -26,7 +23,9 @@ const MainContent = () => {
   const getData = async () => {
     const ref = collection(db, "jobs");
 
-    const levelsType = levelCategory.map((item) => where("level", "==", item));
+    const levelsType = levelCategory.map((item) =>
+      where("requiredCandidateLevel", "==", item)
+    );
     const jobsType = jobCategory.map((item) =>
       where("jobCategory", "==", item)
     );

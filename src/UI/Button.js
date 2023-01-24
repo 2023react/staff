@@ -7,15 +7,13 @@ import { ThemeProvider } from "@emotion/react";
 
 export default function BasicButtons({ children, customStyles, ...props }) {
   return (
-    <ThemeProvider theme={theme}>
-      <Button
-        variant="contained"
-        color="customGreen"
-        sx={{ textTransform: "none", ...customStyles }}
-        {...props}
-      >
-        {children}
-      </Button>
-    </ThemeProvider>
+    <Button
+      variant="contained"
+      color="customGreen"
+      sx={{ textTransform: "none", ...customStyles }}
+      {...props}
+    >
+      {children}
+    </Button>
   );
 }

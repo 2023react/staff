@@ -3,23 +3,10 @@ import Title from "./Title";
 import { v4 as uuid } from "uuid";
 import Checkbox from "./Checkbox";
 import { useSelector, useDispatch } from "react-redux";
-
 import { deleteFilter, setFilter } from "../../../store/slices/filterSlice";
 
 const CategoryItem = ({ filterData }) => {
   const dispatch = useDispatch();
-  // const onChangeBySpecialistLevel = async (value, e) => {
-  //   e.stopPropagation();
-  //   e.target.checked
-  //     ? dispatch(setFilter({ value, category: filterData.categoryType }))
-  //     : dispatch(deleteFilter({ value, category: filterData.categoryType }));
-  // };
-  // const onChangeByJobCategory = async (value, e) => {
-  //   e.stopPropagation();
-  //   e.target.checked
-  //     ? dispatch(setFilter({ value, category: filterData.categoryType }))
-  //     : dispatch(deleteFilter({ value, category: filterData.categoryType }));
-  // };
 
   const onChange = (value, e) => {
     e.target.checked

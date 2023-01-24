@@ -1,6 +1,11 @@
+.shadow {
+  box-shadow: 0 0.2rem 0.7rem rgba(0, 0, 0, 0.1) !important;
+  width: 100vw;
+}
 .header {
   background-color: #46af3a;
   padding: 17px 0;
+
   .mainNavbar {
     .header__block {
       width: 100%;
@@ -24,8 +29,8 @@
           .logOutoBox {
             &:hover {
               background-color: transparent;
-              transform: scale(1.01);
-              transition: ease-in-out 0.8s;
+              transform: scale(1.005);
+              transition: ease-in-out 0.4s;
             }
           }
           a {

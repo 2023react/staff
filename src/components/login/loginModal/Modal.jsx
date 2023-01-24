@@ -72,8 +72,6 @@ const Modal = () => {
           </div>
         )}
 
-        {/* <RegisterForm /> */}
-
         <LoginForm />
       </div>
     </div>
