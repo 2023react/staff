@@ -3,12 +3,8 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
 import { auth } from "../../firebase";
-
-import { addCurrentCompany } from "../../store/slices/loginSlice";
 import ImageAvatars from "../../UI/Avatar";
-
 import { changeCurrentUser } from "../../store/slices/loginSlice";
-
 import LogOutButton from "../../UI/Button";
 import styles from "./Logo.module.scss";
 const Logo = ({ currentCompany, checkHome }) => {
