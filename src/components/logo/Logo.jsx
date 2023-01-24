@@ -4,8 +4,9 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
 import { auth } from "../../firebase";
 import { addCurrentCompany } from "../../store/slices/loginSlice";
+import ImageAvatars from "../../UI/Avatar";
 import LogOutButton from "../../UI/Button";
-import styles from "./companyPage.module.scss";
+import styles from "./Logo.module.scss";
 const Logo = ({ currentCompany, checkHome }) => {
   const { companyName, photoURL } = currentCompany;
   const logOutButtonStyles = {
@@ -28,7 +29,8 @@ const Logo = ({ currentCompany, checkHome }) => {
   };
   return (
     <div className={styles.logoBox}>
-      <img src={photoURL} alt="logo" />
+      <ImageAvatars companyName={companyName} photoURL={photoURL} />
+
       <div className={styles.logOutBtn}>
         {" "}
         <h3

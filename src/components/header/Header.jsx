@@ -12,7 +12,7 @@ import {
   openRegister,
 } from "../../store/slices/loginSlice";
 
-import Logo from "../company/Logo";
+import Logo from "../logo/Logo";
 import clsx from "clsx";
 
 const Header = () => {

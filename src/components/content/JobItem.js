@@ -3,11 +3,12 @@ import styles from "./contents.module.scss";
 import BasicButtons from "../../UI/Button";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
-import VerifiedIcon from "@mui/icons-material/Verified";
-import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+
 import { Link } from "react-router-dom";
 
 import { COLORS } from "../../constants/styles";
+import BassicVerifiedIcon from "../../UI/VerifiedIcon";
+import HeartIcon from "../../UI/HeartIcon";
 
 const JobItem = ({
   photoUrl,
@@ -45,10 +46,7 @@ const JobItem = ({
           <h4> {jobName}</h4>
 
           <div className={styles.jobInfoTitle}>
-            <VerifiedIcon
-              color="customGreen"
-              sx={{ ...iconWidth }}
-            ></VerifiedIcon>
+            <BassicVerifiedIcon customStyles={iconWidth}></BassicVerifiedIcon>
             <span>{companyName}</span>
           </div>
         </div>
@@ -78,9 +76,7 @@ const JobItem = ({
             variant="outlined"
             customStyles={customButtonStylesRed}
           >
-            <FavoriteBorderIcon
-              sx={{ ...heartIconStyles }}
-            ></FavoriteBorderIcon>
+            <HeartIcon customStyles={heartIconStyles} />
             Follow
           </BasicButtons>
           <BasicButtons

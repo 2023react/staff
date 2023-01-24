@@ -1,9 +1,9 @@
 import React from "react";
 import style from "../registerForm/register.module.scss";
 import { useForm } from "react-hook-form";
-import Input from "../input/Input";
+
 import InputField from "../input/Input";
-import LoginButton from "../../loginButton/LoginButton";
+import RegisterButtons from "../../../UI/Button";
 
 const RegisterForm = () => {
   const {
@@ -87,7 +87,7 @@ const RegisterForm = () => {
             />
           </div>
 
-          <LoginButton name="Register" />
+          <RegisterButtons type="submit">Register </RegisterButtons>
         </div>
       </form>
     </div>

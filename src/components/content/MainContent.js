@@ -23,7 +23,9 @@ const MainContent = () => {
   const getData = async () => {
     const ref = collection(db, "jobs");
 
-    const levelsType = levelCategory.map((item) => where("level", "==", item));
+    const levelsType = levelCategory.map((item) =>
+      where("requiredCandidateLevel", "==", item)
+    );
     const jobsType = jobCategory.map((item) =>
       where("jobCategory", "==", item)
     );
@@ -43,7 +45,7 @@ const MainContent = () => {
     getData();
   }, [jobCategory, levelCategory]);
 
-  console.log(useSelector((state) => state.filterSlice.searchJobs));
+  console.log(useSelector((state) => state.jobsSlice.jobsData));
 
   return (
     <div className={styles.mainContent}>
