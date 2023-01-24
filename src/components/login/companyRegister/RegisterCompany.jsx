@@ -8,7 +8,11 @@ import InputField from "../input/Input";
 import LoginButton from "../../loginButton/LoginButton";
 import Select from "../../select/Select";
 
-import { CITIES, INDUSTRIES_LEVELS, COUNTRIES } from "../../constants/options";
+import {
+  CITIES,
+  INDUSTRIES_LEVELS,
+  COUNTRIES,
+} from "../../../constants/options";
 
 import PhoneInput from "react-phone-number-input";
 import "react-phone-number-input/style.css";
@@ -16,17 +20,15 @@ import "react-phone-number-input/style.css";
 import { auth, db, storage } from "../../../firebase";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 
-import {
-  getStorage,
-  ref,
-  uploadBytesResumable,
-  getDownloadURL,
-} from "firebase/storage";
-import { doc, setDoc } from "firebase/firestore";
+import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import { doc, getDoc, setDoc, Timestamp } from "firebase/firestore";
 import { useNavigate } from "react-router";
+import { useDispatch } from "react-redux";
+import { changeCurrentUser } from "../../../store/slices/loginSlice";
 
 const RegisterCompany = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch;
   const [image, setImage] = useState("");
   const [img, setImg] = useState(null);
   const {
@@ -57,17 +59,17 @@ const RegisterCompany = () => {
         data.email,
         data.password
       );
+      console.log(res);
+      const storageRef = ref(storage, res.user.uid);
 
-      const storageRef = ref(storage, data.CompanyName);
-      console.log("nerqev");
       await uploadBytesResumable(storageRef, data.image[0]).then(() => {
         getDownloadURL(storageRef).then(async (downloadURL) => {
           try {
-            console.log(res);
             await updateProfile(res.user, {
               displayName: data.CompanyName,
               photoURL: downloadURL,
             });
+
             await setDoc(doc(db, "companies", res.user.uid), {
               uid: res.user.uid,
               companyName: data.CompanyName,
@@ -78,14 +80,18 @@ const RegisterCompany = () => {
               industry: data.industry,
               phone: data.phoneInput,
               photoURL: downloadURL,
+              date: Timestamp.now(),
             });
           } catch (err) {
             console.log(err);
           }
         });
       });
-      console.log(data);
+
+      const currentCompany = await getDoc(doc(db, "companies", res.user.uid));
+
       setImage(data.image[0].name);
+      dispatch(changeCurrentUser({ currentCompany: currentCompany.data() }));
       navigate("/");
     } catch (error) {
       console.log(error);

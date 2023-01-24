@@ -3,8 +3,9 @@ import MainContent from "../components/content/MainContent";
 import MainSidebar from "../components/sidebars/MainSidebar.js";
 import "../styles.scss";
 import "../App.scss";
-import { theme } from "../components/constants/styles";
+
 import { ThemeProvider } from "@emotion/react";
+import { theme } from "../constants/styles";
 const Jobs = () => {
   return (
     <ThemeProvider theme={theme}>

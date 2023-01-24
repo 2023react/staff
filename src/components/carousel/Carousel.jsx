@@ -2,7 +2,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { jobsData } from "../constants/jobsdata";
 // Import Swiper styles
 import "swiper/css";
-import JobTitle from "./JobTitle";
+import JobTitle from "../content/JobItem";
 
 export default () => {
   return (

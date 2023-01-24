@@ -7,8 +7,14 @@ import VerifiedIcon from "@mui/icons-material/Verified";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import { Link } from "react-router-dom";
 
-import { COLORS } from "../constants/styles";
+<<<<<<<< HEAD:src/components/content/CompanyItem.jsx
+import { COLORS } from "../../constants/styles";
 const JobTitle = ({
+========
+import { COLORS } from "../constants/styles";
+
+const JobItem = ({
+>>>>>>>> 5482210881d27a46e18146e1eec22372f9ce9f37:src/components/content/JobItem.js
   photoUrl,
   jobName,
   companyName,
@@ -17,7 +23,6 @@ const JobTitle = ({
   ...props
 }) => {
   const customButtonStylesRed = {
-    textTransform: "none",
     "&:hover": {
       color: "white",
       backgroundColor: COLORS.customRed,
@@ -25,7 +30,6 @@ const JobTitle = ({
   };
 
   const customButtonStylesGreen = {
-    textTransform: "none",
     "&:hover": {
       color: "white",
       backgroundColor: COLORS.customGreen,
@@ -91,7 +95,7 @@ const JobTitle = ({
           <BasicButtons
             size="small"
             variant="outlined"
-            sx={{ ...customButtonStylesGreen }}
+            customStyles={customButtonStylesGreen}
           >
             View more
           </BasicButtons>
@@ -101,4 +105,4 @@ const JobTitle = ({
   );
 };
 
-export default JobTitle;
+export default JobItem;

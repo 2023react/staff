@@ -1,9 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
+  currentUser: null,
   showLogin: false,
   showRegister: false,
   showComponyLogin: false,
+  currentCompany: null,
 };
 
 const loginSlice = createSlice({
@@ -11,6 +13,13 @@ const loginSlice = createSlice({
   initialState,
 
   reducers: {
+    changeCurrentUser(state, action) {
+      state.currentUser = action.payload;
+    },
+    onClickSignUp(state) {
+      state.currentUser = null;
+    },
+
     openLogin(state) {
       state.showLogin = true;
       state.showRegister = false;
@@ -32,6 +41,12 @@ const loginSlice = createSlice({
   },
 });
 
-export const { openLogin, openRegister, closeLoginModal, openComponyLogin } =
-  loginSlice.actions;
+export const {
+  openLogin,
+  openRegister,
+  closeLoginModal,
+  openComponyLogin,
+  changeCurrentUser,
+  onClickSignUp,
+} = loginSlice.actions;
 export default loginSlice.reducer;
