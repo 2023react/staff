@@ -18,9 +18,9 @@ import clsx from "clsx";
 const Header = () => {
   const dispatch = useDispatch();
 
-  const currentCompany = useSelector(
-    (state) => state.loginSlice.currentCompany
-  );
+  // const currentCompany = useSelector(
+  //   (state) => state.loginSlice.currentCompany
+  // );
   const pathname = useLocation().pathname;
   const isHomePage = pathname === "/";
 
@@ -28,6 +28,7 @@ const Header = () => {
   const onClickLoginRegiter = () => dispatch(openRegister());
   const openLoginCompany = () => dispatch(openComponyLogin());
   const currentUser = useSelector((state) => state.loginSlice.currentUser);
+
   return (
     <header
       className={`${style.header} ${[isHomePage ? "" : style.whiteHeader]}`}
@@ -66,16 +67,16 @@ const Header = () => {
                   {" "}
                   <li className={style.item}> Companies</li>{" "}
                 </NavLink>
-                {currentCompany ? (
+                {currentUser ? (
                   <NavLink
-                    to={`/company/${currentCompany.companyName}`}
+                    to={`/company/${currentUser.displayName}`}
                     className={style.logOutoBox}
                   >
                     {" "}
                     <li>
                       {" "}
                       <Logo
-                        currentCompany={currentCompany}
+                        currentCompany={currentUser}
                         checkHome={isHomePage}
                       />
                     </li>{" "}

@@ -91,7 +91,7 @@ const RegisterCompany = () => {
       const currentCompany = await getDoc(doc(db, "companies", res.user.uid));
 
       setImage(data.image[0].name);
-      dispatch(changeCurrentUser({ currentCompany: currentCompany.data() }));
+      // dispatch(changeCurrentUser({ currentCompany: currentCompany.data() }));
       navigate("/");
     } catch (error) {
       console.log(error);

@@ -1,13 +1,13 @@
 import { signOut } from "firebase/auth";
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 import { auth } from "../../firebase";
 import { changeCurrentUser } from "../../store/slices/loginSlice";
 import LogOutButton from "../../UI/Button";
 import styles from "./companyPage.module.scss";
-const Logo = ({ currentCompany, checkHome }) => {
-  const { companyName, photoURL } = currentCompany;
+const Logo = ({ checkHome }) => {
+  const currentUser = useSelector((state) => state.loginSlice.currentUser);
   const logOutButtonStyles = {
     width: "50px",
     color: checkHome ? "#fff" : "rgba(0, 0, 0, 0.5)",
@@ -22,13 +22,13 @@ const Logo = ({ currentCompany, checkHome }) => {
   const navigate = useNavigate();
   const onLogOut = (e) => {
     e.preventDefault();
-    dispatch(changeCurrentUser({ currentCompany: null }));
+    dispatch(changeCurrentUser(null));
     signOut(auth);
     navigate("/");
   };
   return (
     <div className={styles.logoBox}>
-      <img src={photoURL} alt="logo" />
+      <img src={currentUser.photoURL} alt="logo" />
       <div className={styles.logOutBtn}>
         {" "}
         <h3
@@ -36,7 +36,7 @@ const Logo = ({ currentCompany, checkHome }) => {
             !checkHome ? "" : styles.whiteTitle,
           ]}  `}
         >
-          {companyName}
+          {currentUser?.displayName}
         </h3>
         <LogOutButton
           size="small"
