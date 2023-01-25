@@ -6,7 +6,6 @@ import BookmarkIcon from "@mui/icons-material/Bookmark";
 import { jobsData } from "../../constants/jobsdata";
 import { useParams } from "react-router";
 
-console.log(jobsData[3]);
 const jobData = jobsData[3];
 
 const JobDetailsContent = () => {
