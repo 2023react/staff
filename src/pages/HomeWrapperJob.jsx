@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import Button from "@mui/material/Button";
 import SearchIcon from "@mui/icons-material/Search";
 import { margin } from "@mui/system";
 import Slider from "../components/Carousel";
 import styles from "./Home.module.scss";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import { v4 as uuid } from "uuid";
 import {
@@ -16,8 +16,30 @@ import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import MenuItem from "@mui/material/MenuItem";
 import { Link } from "react-router-dom";
+import {
+  deleteFilter,
+  emptyFilter,
+  setFilter,
+} from "../store/slices/filterSlice";
 
-export function Wrapper() {
+export function WrapperJob() {
+  const dispatch = useDispatch();
+  const category = useSelector((state) => state.filterSlice.jobCategory);
+  const value = String(category);
+
+  const onClickButton = async (value) => {
+    if (category.length > 0) {
+      dispatch(emptyFilter({ category: JOB__CATEGORY.categoryType }));
+    }
+    category.find((item) => item === value)
+      ? dispatch(
+          deleteFilter({ value: value, category: JOB__CATEGORY.categoryType })
+        )
+      : dispatch(
+          setFilter({ value: value, category: JOB__CATEGORY.categoryType })
+        );
+  };
+
   return (
     <div className={styles.wrapper}>
       <div className={styles.fields}>
@@ -27,7 +49,7 @@ export function Wrapper() {
       </div>
       <div className={styles.fields}>
         <div className={styles.categories}>
-          <select>
+          <select value={value} onChange={(e) => onClickButton(e.target.value)}>
             <option value>All Categories</option>
 
             {JOB__CATEGORY.data.map((item) => (
@@ -53,38 +75,6 @@ export function Wrapper() {
 
       <div className={styles.fields}>
         <Link to="/jobs">
-          <Button className={styles.searchbtn} variant="contained">
-            <SearchIcon />
-          </Button>
-        </Link>
-      </div>
-    </div>
-  );
-}
-export function Wrapper1() {
-  return (
-    <div className={styles.wrapper}>
-      <div className={styles.fields}>
-        <div className={styles.keyword}>
-          <input type="text" placeholder="All Keywords" />
-        </div>
-      </div>
-      <div className={styles.fields}>
-        <div className={styles.categories}>
-          <select>
-            <option value>All Industries</option>
-
-            {COMPANY__INDUSTRIES.data.map((item) => (
-              <option value={item} key={uuid()}>
-                {item}
-              </option>
-            ))}
-          </select>
-        </div>
-      </div>
-
-      <div className={styles.fields}>
-        <Link to="/companies">
           <Button className={styles.searchbtn} variant="contained">
             <SearchIcon />
           </Button>
