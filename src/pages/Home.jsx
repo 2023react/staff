@@ -14,6 +14,7 @@ import MenuItem from "@mui/material/MenuItem";
 import { WrapperJob } from "./HomeWrapperJob";
 import { useState } from "react";
 import { WrapperCompany } from "./HomeWrapperCompany";
+import { SwiperComponent } from "../components/swiper/Swiper";
 
 const Home = () => {
   const [toggle, setToggle] = useState(true);
@@ -35,7 +36,7 @@ const Home = () => {
           </p>
           <p className={styles.text_p}>Explore all our options now.</p>
         </div>
-        <form className={styles.form}>
+        <form>
           <div className={styles.search_clearfix}>
             <div className={styles.jobfilter}>
               <label className={styles.label}>
@@ -67,7 +68,12 @@ const Home = () => {
         <div>
           <Slider />
         </div>
+      </div>
+      <div>
         <h2 className={styles.hotjobs}>HOT JOBS</h2>
+      </div>
+      <div>
+        <SwiperComponent />
       </div>
     </div>
   );
