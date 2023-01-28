@@ -9,7 +9,7 @@ import { Pagination, Autoplay } from "swiper";
 import Avatar from "@mui/material/Avatar";
 import LocalFireDepartmentIcon from "@mui/icons-material/LocalFireDepartment";
 import BasicButtons from "../../UI/Button";
-
+import { v4 as uuid } from "uuid";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import { COLORS } from "../../constants/styles";
 
@@ -58,7 +58,7 @@ export const SwiperComponent = () => {
     >
       {jobsData.map((item) => (
         <div>
-          <SwiperSlide className={styles.swiper}>
+          <SwiperSlide className={styles.swiper} key={uuid()}>
             <div className={styles.swiper_info}>
               <div className={styles.imageBlog}>
                 <img className={styles.image} src={item.photoUrl} />
@@ -73,7 +73,6 @@ export const SwiperComponent = () => {
                 </div>
                 <div className={styles.nameInfo}>
                   <h2>{item.jobName}</h2>
-                  {/* <span>{item.companyName}</span> */}
                 </div>
                 <span>{item.companyName}</span>
               </div>

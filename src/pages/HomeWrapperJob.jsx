@@ -31,13 +31,8 @@ export function WrapperJob() {
     if (category.length > 0) {
       dispatch(emptyFilter({ category: JOB__CATEGORY.categoryType }));
     }
-    category.find((item) => item === value)
-      ? dispatch(
-          deleteFilter({ value: value, category: JOB__CATEGORY.categoryType })
-        )
-      : dispatch(
-          setFilter({ value: value, category: JOB__CATEGORY.categoryType })
-        );
+
+    dispatch(setFilter({ value: value, category: JOB__CATEGORY.categoryType }));
   };
 
   return (

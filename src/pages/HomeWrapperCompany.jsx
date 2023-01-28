@@ -25,19 +25,13 @@ export function WrapperCompany() {
     if (industry.length > 0) {
       dispatch(emptyFilter({ category: COMPANY__INDUSTRIES.categoryType }));
     }
-    industry.find((item) => item === value)
-      ? dispatch(
-          deleteFilter({
-            value: value,
-            category: COMPANY__INDUSTRIES.categoryType,
-          })
-        )
-      : dispatch(
-          setFilter({
-            value: value,
-            category: COMPANY__INDUSTRIES.categoryType,
-          })
-        );
+
+    dispatch(
+      setFilter({
+        value: value,
+        category: COMPANY__INDUSTRIES.categoryType,
+      })
+    );
   };
 
   return (
