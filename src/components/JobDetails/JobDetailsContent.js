@@ -6,10 +6,14 @@ import BookmarkIcon from "@mui/icons-material/Bookmark";
 import { jobsData } from "../../constants/jobsdata";
 import { useParams } from "react-router";
 
-console.log(jobsData[3]);
-const jobData = jobsData[3];
+import { useSelector } from "react-redux";
+
+// console.log(jobsData[3]);
+// const jobData = jobsData[3];
 
 const JobDetailsContent = () => {
+  const jobData = useSelector((state) => state.newJobSlice);
+
   const { id } = useParams();
   console.log(id);
   return (
@@ -17,110 +21,100 @@ const JobDetailsContent = () => {
       <div className={styles.jobsColections}>
         <div className={styles.row}>
           <div className={styles.name_coloumn}>
-            <h2>{jobData.jobName}</h2>
+            <h2>{jobData.allData.jobName}name</h2>
           </div>
 
-          <div className={styles.btn}>
+          {/* <div className={styles.btn}>
             <button className={styles.box1}>Apply Online</button>
             <button className={styles.box2}>Send CV</button>
-            <p className={styles.p}>{jobData.deadline}</p>
-          </div>
+            <p className={styles.p}>{jobData.allData.date}</p>
+          </div> */}
         </div>
         <div className={styles.bord}>
-          <div className={styles.coloumn2}>
-            <p>
-              <div style={{ position: "relative" }}>
-                <BookmarkIcon
-                  color="success"
-                  sx={{
-                    fontSize: 20,
-                    position: "absolute",
-                    left: -20,
-                  }}
-                />
-              </div>
-              <span className={styles.span}>Employment term:</span>
-              permanent
-            </p>
-            <p>
-              <div style={{ position: "relative" }}>
-                <BookmarkIcon
-                  color="success"
-                  sx={{
-                    fontSize: 20,
-                    position: "absolute",
-                    left: -20,
-                  }}
-                />
-              </div>
-              <span className={styles.span}>Category: </span>
-              {jobData.jobCategory}
-            </p>
+          <div className={styles.coloumn}>
+            <div className={styles.columns__block}>
+              <BookmarkIcon
+                color="success"
+                sx={{
+                  fontSize: 20,
+                }}
+              />
+              <span className={styles.text}>
+                Employment term:<span>permanent</span>
+              </span>
+            </div>
+
+            <div className={styles.columns__block}>
+              <BookmarkIcon
+                color="success"
+                sx={{
+                  fontSize: 20,
+                }}
+              />
+              <span className={styles.text}>
+                Category: <span>{jobData.allData.category}</span>
+              </span>
+            </div>
           </div>
-          <div className={styles.coloumn1}>
-            <p>
-              <div style={{ position: "relative" }}>
-                <BookmarkIcon
-                  color="success"
-                  sx={{
-                    fontSize: 20,
-                    position: "absolute",
-                    left: -20,
-                  }}
-                />
-              </div>
-              <span className={styles.span}>Job type:</span>
-              {jobData.jobType}
-            </p>
-            <p>
-              <div style={{ position: "relative" }}>
-                <BookmarkIcon
-                  color="success"
-                  sx={{
-                    fontSize: 20,
-                    position: "absolute",
-                    left: -20,
-                  }}
-                />
-              </div>
-              <span className={styles.span}>Location:</span>
-              {jobData.location}
-            </p>
+
+          <div className={styles.coloumn}>
+            <div className={styles.columns__block}>
+              <BookmarkIcon
+                color="success"
+                sx={{
+                  fontSize: 20,
+                }}
+              />
+              <span className={styles.text}>
+                Job type:<span>Full Time</span>
+              </span>
+            </div>
+
+            <div className={styles.columns__block}>
+              <BookmarkIcon
+                color="success"
+                sx={{
+                  fontSize: 20,
+                }}
+              />
+              <span className={styles.text}>
+                Location: <span>{jobData.allData.location}</span>
+              </span>
+            </div>
           </div>
         </div>
+
         <div className={styles.joblist}>
           <h3>Job description</h3>
-          <p></p>
-          <p className={styles.desk}>{jobData.JobDescription}</p>
-          <p></p>
+          <div className={styles.desk}>{jobData.description}</div>
+
           <h3>Job responsibility</h3>
-          <p></p>
-          <ul>
-            {jobData.jobresponsibilities.map((item) => (
+          {jobData.responsibilities}
+          {/* {jobData.responsibilities.map((item) => (
               <li style={{ textAlign: "justify" }}>{item}</li>
-            ))}
-          </ul>
-          <p></p>
+            ))} */}
+
           <h3>Required qualifications</h3>
-          <p></p>
-          <ul>
-            {jobData.requiredqualifications.map((item) => (
+
+          <div>
+            {jobData.qualifications}
+            {/* {jobData.qualifications.map((item) => (
               <li style={{ textAlign: "justify" }}>{item}</li>
-            ))}
-          </ul>
-          <p></p>
+            ))} */}
+          </div>
+
           <h3>
             Required candidate level:
-            <span style={{ fontWeight: "500px" }}>
-              {jobData.requiredCandidateLevel}
-            </span>
+            <span className={styles.levelSpan}>{jobData.allData.level}</span>
           </h3>
+
           <h3>Additional information</h3>
-          <ul>
-            {jobData.additionalinformation.map((item) => (
+          <div className={styles.test}>
+            {jobData.additionalInformation}
+            {/* {jobData.additionalInformation.map((item) => (
               <li style={{ textAlign: "justify" }}>{item}</li>
-            ))}
-          </ul>
+            ))} */}
+          </div>
           <p className={styles.oddinfo}>
             Please clearly mention that you have heard of this job opportunity
             on staff.am.{" "}
@@ -129,21 +123,21 @@ const JobDetailsContent = () => {
         <div className={styles.joblist_skills}>
           <div className={styles.inn}>
             <h3>Professional skills</h3>
-            <p className={styles.softskills_p}>
+            {/* <p className={styles.softskills_p}>
               {jobData.professionalSkills.map((item) => (
                 <span className={styles.softskills}>{item}</span>
               ))}
-            </p>
+            </p> */}
           </div>
 
           <div className={styles.inn}>
             <h3>Soft Skills</h3>
 
-            <p className={styles.softskills_p}>
+            {/* <p className={styles.softskills_p}>
               {jobData.softSkills.map((item) => (
                 <span className={styles.softskills}>{item}</span>
               ))}
-            </p>
+            </p> */}
           </div>
         </div>
       </div>

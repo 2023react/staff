@@ -14,27 +14,26 @@ import { addJobsData } from "../../store/slices/jobsSlice";
 
 const MainContent = () => {
   const location = useLocation().pathname;
-
   const dispatch = useDispatch();
-
   const levelCategory = useSelector((state) => state.filterSlice.levelCategory);
   const jobCategory = useSelector((state) => state.filterSlice.jobCategory);
   const searchValue = useSelector((state) => state.filterSlice.searchJobs);
 
   const getData = useCallback(async () => {
     const ref = collection(db, "jobs");
-
+    console.log(searchValue);
     const levelsType = levelCategory.map((item) =>
       where("requiredCandidateLevel", "==", item)
     );
     const jobsType = jobCategory.map((item) =>
       where("jobCategory", "==", item)
     );
-    const searchType = searchValue.map((item) =>
-      where("jobName", "array-contains-any", [item])
-    );
 
-    const q1 = query(ref, ...levelsType, ...jobsType, ...searchType);
+    let searchFilter = query(ref);
+    if (searchValue.length !== 0) {
+      searchFilter = query(ref, where("jobName", "==", searchValue));
+    }
+    const q1 = query(ref, ...levelsType, ...jobsType, searchFilter);
     const fetchData = await getDocs(q1);
 
     const data = [];
@@ -47,7 +46,7 @@ const MainContent = () => {
 
   useEffect(() => {
     getData();
-  }, [getData]);
+  }, [getData, searchValue]);
 
   return (
     <div className={styles.mainContent}>

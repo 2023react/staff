@@ -1,10 +1,15 @@
 import React from "react";
+import { useRef } from "react";
 import style from "../select/select.module.scss";
-const Select = ({ register, name, errors, options }) => {
+const Select = ({ register, name, errors, options, addstyles }) => {
+  const ref = useRef();
+  console.log(ref.current);
   return (
-    <div className={style.select__block}>
+    <div className={addstyles ? style.addBlock : style.select__block}>
       <select
-        className={style.select}
+        defaultValue="hayer"
+        ref={ref}
+        className={`${addstyles ? style.addSelect : style.select} `}
         {...register(name, {
           required: `Invalid ${name}`,
         })}
@@ -17,7 +22,9 @@ const Select = ({ register, name, errors, options }) => {
         ))}
       </select>
 
-      <span>{errors && errors[name] && <p>{errors[name].message}</p>}</span>
+      <span className={style.error}>
+        {errors && errors[name] ? <p>{errors[name].message}</p> : null}{" "}
+      </span>
     </div>
   );
 };
