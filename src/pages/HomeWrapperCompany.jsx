@@ -42,23 +42,16 @@ export function WrapperCompany() {
 
   return (
     <div className={styles.wrapper}>
-      <div className={styles.fields}>
-        <div className={styles.keyword}>
-          <input type="text" placeholder="All Keywords" />
-        </div>
-      </div>
-      <div className={styles.fields}>
-        <div className={styles.categories}>
-          <select value={value} onChange={(e) => onClickButton(e.target.value)}>
-            <option value>All Industries</option>
+      <div className={styles.fields_company}>
+        <select value={value} onChange={(e) => onClickButton(e.target.value)}>
+          <option value>All Industries</option>
 
-            {COMPANY__INDUSTRIES.data.map((item) => (
-              <option value={item} key={uuid()}>
-                {item}
-              </option>
-            ))}
-          </select>
-        </div>
+          {COMPANY__INDUSTRIES.data.map((item) => (
+            <option value={item} key={uuid()}>
+              {item}
+            </option>
+          ))}
+        </select>
       </div>
 
       <div className={styles.fields}>

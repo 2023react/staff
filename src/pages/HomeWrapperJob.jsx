@@ -43,22 +43,15 @@ export function WrapperJob() {
   return (
     <div className={styles.wrapper}>
       <div className={styles.fields}>
-        <div className={styles.keyword}>
-          <input type="text" placeholder="All Keywords" />
-        </div>
-      </div>
-      <div className={styles.fields}>
-        <div className={styles.categories}>
-          <select value={value} onChange={(e) => onClickButton(e.target.value)}>
-            <option value>All Categories</option>
+        <select value={value} onChange={(e) => onClickButton(e.target.value)}>
+          <option value>All Categories</option>
 
-            {JOB__CATEGORY.data.map((item) => (
-              <option value={item} key={uuid()}>
-                {item}
-              </option>
-            ))}
-          </select>
-        </div>
+          {JOB__CATEGORY.data.map((item) => (
+            <option value={item} key={uuid()}>
+              {item}
+            </option>
+          ))}
+        </select>
       </div>
       <div className={styles.fields}>
         <div className={styles.city}>
