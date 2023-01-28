@@ -8,8 +8,7 @@ import { useParams } from "react-router";
 
 import { useSelector } from "react-redux";
 
-// console.log(jobsData[3]);
-// const jobData = jobsData[3];
+const jobData = jobsData[3];
 
 const JobDetailsContent = () => {
   const jobData = useSelector((state) => state.newJobSlice);

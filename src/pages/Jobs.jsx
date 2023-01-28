@@ -6,7 +6,19 @@ import "../App.scss";
 
 import { ThemeProvider } from "@emotion/react";
 import { theme } from "../constants/styles";
+import { useSearchParams } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { useEffect } from "react";
 const Jobs = () => {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const jobCategory = useSelector((state) => state.filterSlice.jobCategory);
+  useEffect(() => {
+    if (jobCategory) {
+      let path = jobCategory.map((i) => i);
+      setSearchParams({ filter: path });
+    }
+  }, [jobCategory]);
+
   return (
     <div className="outContiner">
       <div className="container">

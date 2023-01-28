@@ -29,8 +29,14 @@ const filterSlice = createSlice({
         (item) => item !== action.payload.value
       );
     },
+    emptyFilter(state, action) {
+      const category = action.payload.category;
+
+      state[category] = [];
+    },
   },
 });
 
-export const { deleteFilter, setFilter, changeSearchJob } = filterSlice.actions;
+export const { deleteFilter, setFilter, changeSearchJob, emptyFilter } =
+  filterSlice.actions;
 export default filterSlice.reducer;

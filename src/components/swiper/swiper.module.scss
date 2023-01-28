@@ -1,0 +1,61 @@
+.mySwiper {
+  width: 67%;
+}
+
+.swiper {
+  background-color: white;
+  border: 1px solid rgb(225, 220, 220);
+  min-height: 400px;
+}
+
+.swiper_info {
+  padding: 10px;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  height: 150px;
+
+  .avatar {
+    position: absolute;
+    right: 20px;
+    top: 5px;
+  }
+}
+
+.name {
+  word-wrap: break-word;
+  width: 50%;
+
+  span {
+    color: #46af3a;
+  }
+}
+.nameInfo {
+  min-height: 100px;
+  padding-top: 30px;
+}
+.imageBlog {
+  display: block;
+}
+
+.text {
+  padding: 20px;
+  word-wrap: break-word;
+  min-height: 180px;
+}
+.pagination_padding {
+  margin-bottom: 50px;
+}
+.image {
+  max-width: 70%;
+
+  border: 1px solid rgb(225, 220, 220);
+}
+.jobInfoButton {
+  display: block;
+  text-align: center;
+  margin: 5px;
+  button {
+    margin: 5px;
+  }
+}

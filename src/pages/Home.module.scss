@@ -25,6 +25,10 @@
   justify-content: center;
 
   padding-top: 15px;
+
+  .jobfilter {
+    display: block;
+  }
 }
 
 .label {
@@ -60,15 +64,22 @@
 }
 .fields {
   padding: 1.5px;
+  font-size: 16px;
 }
-.fields input {
-  height: 55px;
-  border: solid 1px #f2f2f2;
-  text-align: center;
-}
+
 .fields select {
   height: 55px;
-  width: 172px;
+  width: 200px;
+  font-size: 16px;
+  border: solid 1px #f2f2f2;
+  text-align: center;
+  -webkit-appearance: none;
+  color: grey;
+}
+.fields_company select {
+  height: 55px;
+  width: 400px;
+  font-size: 16px;
   border: solid 1px #f2f2f2;
   text-align: center;
   -webkit-appearance: none;
@@ -100,5 +111,12 @@
   .label {
     display: inline-block;
     padding-left: 40px;
+  }
+  .searchbtn {
+    height: 55px;
+    width: 200px;
+  }
+  .fields_company select {
+    width: 200px;
   }
 }
