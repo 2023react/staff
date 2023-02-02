@@ -18,8 +18,10 @@ import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./firebase";
 import loginSlice, { changeCurrentUser } from "./store/slices/loginSlice";
 import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
-import AddNewWork from "./components/textEditor/TextEditor";
 import JobDetailsContent from "./components/JobDetails/JobDetailsContent";
+import JobDetailsNewWork from "./components/JobDetails/JobDetailsNewWork";
+
+import AddNewWork from "./components/addNewWork/AddNewWork";
 
 const r = createBrowserRouter(
   createRoutesFromElements(
@@ -29,7 +31,6 @@ const r = createBrowserRouter(
       <Route path="/company/:name" element={<CompanyPage />} />
       <Route path="/companies" element={<Companies />} />
       <Route path="/jobs/:id" element={<JobDetails />} />
-      {/* <Route path="/addJob" element={<AddNewWork />} /> */}
       <Route
         path="/company/register"
         element={
@@ -39,8 +40,15 @@ const r = createBrowserRouter(
         }
       />
       <Route path="/companyPage" element={<CompanyPage />} />
+      <Route path="/addNewWork" element={<AddNewWork />} />
 
-      <Route path="/jobInfo" element={<JobDetails />} />
+      <Route path="/addNewWork/:id" element={<AddNewWork />} />
+
+      <Route path="/jobInfo" element={<JobDetailsNewWork />} />
+
+      <Route path="/jobInfo/:id" element={<JobDetailsNewWork />} />
+
+      <Route path="/jobInfoToCompany/:id" element={<JobDetailsNewWork />} />
     </Route>
   )
 );
@@ -51,6 +59,10 @@ function App() {
       dispatch(changeCurrentUser(currentUser));
     });
   }, [dispatch]);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  });
 
   return (
     <div className="App">

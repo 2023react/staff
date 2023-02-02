@@ -1,10 +1,10 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import style from "./addNewWork.module.scss";
 
 import TextEditor from "../textEditor/TextEditor";
 import parse from "html-react-parser";
 
-import { Controller, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 
 import {
   addAllData,
@@ -12,6 +12,7 @@ import {
   addInfo,
   addqual,
   addRespos,
+  changeJobSlice,
 } from "../../store/slices/newJobSlice";
 
 import { useRef } from "react";
@@ -22,13 +23,23 @@ import Select from "../select/Select";
 import TextField from "@mui/material/TextField";
 
 import { INDUSTRIES_LEVELS } from "../../constants/options";
-import { useNavigate } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import BasicButtons from "../../UI/Button";
 import InputField from "../login/input/Input";
 
 const AddNewWork = () => {
+  const params = useParams();
+  const id = params.id;
+  const dispatch = useDispatch();
   const navigate = useNavigate();
-  const a = useSelector((state) => state.newJobSlice);
+  const selectEditor = useSelector((state) => state.newJobSlice);
+
+  const [editorData, setEditorData] = useState({
+    description: selectEditor.description,
+    responsibilities: selectEditor.responsibilities,
+    qualifications: selectEditor.qualifications,
+    additionalInformation: selectEditor.additionalInformation,
+  });
 
   const {
     register,
@@ -40,21 +51,29 @@ const AddNewWork = () => {
     mode: "all",
   });
 
-  const dispatch = useDispatch();
-  const refDescription = useRef();
-  const refResponsibilities = useRef();
-  const refQualifications = useRef();
-  const additionalInformation = useRef();
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   const onSubmit = (data) => {
     reset();
-    dispatch(addDecr(parse(`${refDescription.current}`)));
-    dispatch(addRespos(parse(`${refResponsibilities.current}`)));
-    dispatch(addqual(parse(`${refQualifications.current}`)));
-    dispatch(addInfo(parse(`${additionalInformation.current}`)));
+    dispatch(
+      changeJobSlice({
+        description: editorData.description,
+        responsibilities: editorData.responsibilities,
+        qualifications: editorData.qualifications,
+        additionalInformation: editorData.additionalInformation,
+        category: data.category,
+        date: data.date,
+        industry: data.industry,
+        jobName: data.jobName,
+        level: data.level,
+        location: data.location,
+        JobType: data.JobType,
+      })
+    );
 
-    dispatch(addAllData(data));
-    navigate("/jobInfo");
+    id ? navigate(`/jobInfoToCompany/${id}`) : navigate(`/jobInfo`);
   };
 
   return (
@@ -64,6 +83,7 @@ const AddNewWork = () => {
           <div className={style.item}>
             <h3>Job Name</h3>
             <TextField
+              defaultValue={selectEditor.jobName}
               sx={{ width: "100%" }}
               name="jobName"
               color="success"
@@ -104,6 +124,7 @@ const AddNewWork = () => {
             <h3>Job Idustry</h3>
             <Select
               addstyles={true}
+              value={selectEditor.industry}
               name="industry"
               register={register}
               errors={errors}
@@ -115,6 +136,7 @@ const AddNewWork = () => {
             <h3>Job Type</h3>
             <Select
               addstyles={true}
+              value={selectEditor.JobType}
               name="JobType"
               register={register}
               errors={errors}
@@ -126,6 +148,7 @@ const AddNewWork = () => {
             <h3>Job Category</h3>
             <Select
               addstyles={true}
+              value={selectEditor.category}
               name="category"
               register={register}
               errors={errors}
@@ -138,6 +161,7 @@ const AddNewWork = () => {
             <Select
               addstyles={true}
               name="location"
+              value={selectEditor.location}
               register={register}
               errors={errors}
               options={INDUSTRIES_LEVELS}
@@ -149,6 +173,7 @@ const AddNewWork = () => {
             <Select
               addstyles={true}
               name="level"
+              value={selectEditor.level}
               register={register}
               errors={errors}
               options={INDUSTRIES_LEVELS}
@@ -158,6 +183,7 @@ const AddNewWork = () => {
           <div className={style.item}>
             <h3>Deadline</h3>
             <InputField
+              defaultValue={selectEditor.date}
               type="date"
               register={register}
               name="date"
@@ -167,25 +193,56 @@ const AddNewWork = () => {
 
           <div className={style.itemEditor}>
             <h3>Job description</h3>
-            <TextEditor html={refDescription} />
+            <TextEditor
+              value={editorData.description}
+              onChange={(editorState) => {
+                setEditorData({
+                  ...editorData,
+                  description: editorState,
+                });
+              }}
+            />
           </div>
 
           <div className={style.itemEditor}>
             <h3>Job Responsibilities</h3>
-            <TextEditor html={refResponsibilities} />
+            <TextEditor
+              onChange={(editorState) => {
+                setEditorData({
+                  ...editorData,
+                  responsibilities: editorState,
+                });
+              }}
+              value={editorData.responsibilities}
+            />
           </div>
 
           <div className={style.itemEditor}>
             <h3>Job Qualifications</h3>
-            <TextEditor html={refQualifications} />
+            <TextEditor
+              value={editorData.qualifications}
+              onChange={(editorState) => {
+                setEditorData({
+                  ...editorData,
+                  qualifications: editorState,
+                });
+              }}
+            />
           </div>
 
           <div className={style.itemEditor}>
             <h3>Additional information</h3>
-            <TextEditor html={additionalInformation} />
+            <TextEditor
+              value={editorData.additionalInformation}
+              onChange={(editorState) => {
+                setEditorData({
+                  ...editorData,
+                  additionalInformation: editorState,
+                });
+              }}
+            />
           </div>
-          {/* <TextEditor html={refResponsibilities} />
-      <TextEditor html={refQualifications} /> */}
+
           <BasicButtons type="submit">Save</BasicButtons>
         </form>
       </div>

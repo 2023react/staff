@@ -1,15 +1,17 @@
 import React from "react";
 
 import styles from "./CompanyNavbar.module.scss";
-import { jobsData } from "../../../constants/jobsdata";
+
 import BassicVerifiedIcon from "../../../UI/VerifiedIcon";
 import FollowButton from "../../../UI/Button";
 import HeartIcon from "../../../UI/HeartIcon";
 import { COLORS } from "../../../constants/styles";
 import ImageAvatars from "../../../UI/Avatar";
+import { useSelector } from "react-redux";
+import { currentSelector } from "../../../store/slices/loginSlice";
 
-const jobData = jobsData[3];
 const CompanyNavbar = ({ photoCoverUrl }) => {
+  const currentUser = useSelector(currentSelector);
   const verifiedIconStyles = { width: "25px" };
   const heartIconStyles = {
     width: "18px",
@@ -31,13 +33,13 @@ const CompanyNavbar = ({ photoCoverUrl }) => {
       <div className={styles.companyInfo}>
         <div className={styles.companyPhoto}>
           <ImageAvatars
-            photoURL={jobData.photoUrl}
+            photoURL={currentUser?.photoURL}
             customStyles={avatarCustomStyles}
           />
         </div>
         <div className={styles.companyInfoBlock}>
           <div className={styles.companyName}>
-            <h1>companyName</h1>
+            <h1>{currentUser?.displayName}</h1>
             <BassicVerifiedIcon
               customStyles={verifiedIconStyles}
             ></BassicVerifiedIcon>

@@ -11,6 +11,7 @@ const InputField = ({
   border,
   imageContent,
   img,
+  defaultValue,
 }) => {
   const hasType = type === "file" ? { display: "none" } : null;
 
@@ -22,6 +23,7 @@ const InputField = ({
     <div className={style.inputBlock}>
       <input
         style={hasType}
+        defaultValue={defaultValue}
         type={type}
         id={type}
         ref={fileInputRef}

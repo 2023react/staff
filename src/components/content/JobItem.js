@@ -11,12 +11,10 @@ import BassicVerifiedIcon from "../../UI/VerifiedIcon";
 import HeartIcon from "../../UI/HeartIcon";
 
 const JobItem = ({
-  photoUrl,
-  jobName,
-  companyName,
-  location,
-  deadline,
-  ...props
+  // photoUrl,
+  id,
+  item,
+  toCompany,
 }) => {
   const customButtonStylesRed = {
     "&:hover": {
@@ -38,26 +36,24 @@ const JobItem = ({
   };
 
   return (
-    <Link to={`/jobs/${companyName}`}>
-      {" "}
+    <Link to={!toCompany ? `/jobs/${id}` : `/jobInfoToCompany/${id}?current`}>
       <div className={styles.jobInfo}>
-        <img src={photoUrl} alt="" />
+        <img src={item.img} alt="img" />
         <div className={styles.jobInfoTitleBlocks}>
-          <h4> {jobName}</h4>
+          <h4> {item.jobName}</h4>
 
           <div className={styles.jobInfoTitle}>
             <BassicVerifiedIcon customStyles={iconWidth}></BassicVerifiedIcon>
-            <span>{companyName}</span>
+            <span>{item.companyName}</span>
           </div>
         </div>
         <div className={styles.jobInfoTitleBlocks}>
           <div className={styles.jobInfoTitle}>
-            {" "}
             <CalendarMonthIcon
               color="customGreen"
               sx={{ ...iconWidth }}
             ></CalendarMonthIcon>
-            <span>{deadline}</span>
+            <span>{item.date}</span>
           </div>
           <div className={styles.jobInfoTitle}>
             <LocationOnIcon
@@ -65,7 +61,7 @@ const JobItem = ({
               sx={{ ...iconWidth }}
             ></LocationOnIcon>
 
-            <span>{location}</span>
+            <span>{item.location}</span>
           </div>
         </div>
 
