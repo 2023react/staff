@@ -5,11 +5,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { changeSearchJob } from "../store/slices/filterSlice";
 
 export default function SearchTextField() {
-  const value = useSelector((state) => state.filterSlice.searchJobs);
-  const dispatch = useDispatch();
-  const onChange = (e) => {
-    dispatch(changeSearchJob(e.target.value));
-  };
+  // const value = useSelector((state) => state.filterSlice.searchJobs);
+  // const dispatch = useDispatch();
+  // const onChange = (e) => {
+  //   dispatch(changeSearchJob(e.target.value));
+  // };
 
   return (
     <Box
@@ -28,11 +28,9 @@ export default function SearchTextField() {
         color="customGreen"
         label="Search"
         variant="outlined"
-        value={value}
-        onChange={onChange}
-        InputLabelProps={{
-          shrink: true,
-        }}
+        placeholder="All keywords"
+        value={"value"}
+        onChange={"onChange"}
       />
     </Box>
   );

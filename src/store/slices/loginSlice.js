@@ -40,6 +40,8 @@ const loginSlice = createSlice({
   },
 });
 
+export const currentSelector = (state) => state.loginSlice.currentUser;
+
 export const {
   openLogin,
   openRegister,

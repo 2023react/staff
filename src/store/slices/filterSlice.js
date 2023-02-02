@@ -6,8 +6,7 @@ const initialState = {
   activTypeCategoryCompany: [],
   industryCategoryCompany: [],
   jobCities: [],
-  searchJobs: [],
-  searchCompany: "",
+  searchJobs: "",
 };
 
 const filterSlice = createSlice({
@@ -16,7 +15,7 @@ const filterSlice = createSlice({
 
   reducers: {
     changeSearchJob(state, action) {
-      state.searchJobs[0] = action.payload;
+      state.searchJobs = action.payload;
     },
 
     setFilter(state, action) {
@@ -30,8 +29,14 @@ const filterSlice = createSlice({
         (item) => item !== action.payload.value
       );
     },
+    emptyFilter(state, action) {
+      const category = action.payload.category;
+
+      state[category] = [];
+    },
   },
 });
 
-export const { deleteFilter, setFilter, changeSearchJob } = filterSlice.actions;
+export const { deleteFilter, setFilter, changeSearchJob, emptyFilter } =
+  filterSlice.actions;
 export default filterSlice.reducer;

@@ -1,44 +1,136 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useEffect, useCallback } from "react";
 
 import styles from "./Jobdetails.module.scss";
+
 import BookmarkIcon from "@mui/icons-material/Bookmark";
 
-import { jobsData } from "../../constants/jobsdata";
-import { useParams } from "react-router";
+import { useLocation, useNavigate, useParams } from "react-router";
 
+import { v4 as uuid } from "uuid";
+
+import parse from "html-react-parser";
+
+import { useDispatch, useSelector } from "react-redux";
+
+import { doc, setDoc, getDoc, updateDoc } from "firebase/firestore";
 import { db } from "../../firebase";
+import BasicButtons from "../../UI/Button";
+import { useState } from "react";
+import {
+  activeDataSelector,
+  changeJobSlice,
+} from "../../store/slices/newJobSlice";
 import draftToHtml from "draftjs-to-html";
+import { currentSelector } from "../../store/slices/loginSlice";
 
-const JobDetailsContent = () => {
+const JobDetailsNewWork = () => {
+  const location = useLocation();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const params = useParams();
+  const id = params.id;
+  const pathName = location.pathname;
+
   const [jobData, setJobData] = useState([]);
+  const [loading, setLoading] = useState(false);
 
-  const { id } = useParams();
+  const currentUser = useSelector(currentSelector);
+  const activeData = useSelector(activeDataSelector);
+
+  console.log(activeData);
 
   const getData = useCallback(async () => {
-    const docRef = doc(db, "jobs", id);
-    const docSnap = await getDoc(docRef);
-    setJobData(docSnap.data());
-  }, [id]);
+    if (pathName === `/jobInfo` || pathName === `/jobInfoToCompany/${id}`) {
+      setJobData(activeData);
+      setLoading(true);
+    }
+    if (
+      pathName === `/jobInfoToCompany/${id}` &&
+      location.search === "?current"
+    ) {
+      const docRef = doc(db, "jobs", id);
+      const docSnap = await getDoc(docRef);
+      setJobData(docSnap.data());
+      setLoading(true);
+    }
+  }, [activeData, id, location.search, pathName]);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   useEffect(() => {
     getData();
   }, [getData]);
 
+  const onAddJob = async () => {
+    try {
+      const document = doc(db, "jobs", id);
+      await updateDoc(document, {
+        ...jobData,
+      });
+    } catch (error) {
+      try {
+        console.log(jobData);
+        await setDoc(doc(db, "jobs", uuid()), {
+          ...jobData,
+          companyName: currentUser.displayName,
+          id: uuid(),
+          img: currentUser.photoURL,
+        });
+
+        dispatch(
+          changeJobSlice({
+            description: null,
+            responsibilities: null,
+            qualifications: null,
+            additionalInformation: null,
+            category: null,
+            date: null,
+            industry: null,
+            jobName: null,
+            level: null,
+            location: null,
+            JobType: null,
+          })
+        );
+      } catch (error) {
+        console.log("pls again");
+      }
+    }
+
+    navigate("/companyPage");
+  };
+
+  const onClickEdit = () => {
+    dispatch(
+      changeJobSlice({
+        description: jobData.description,
+        responsibilities: jobData.responsibilities,
+        qualifications: jobData.qualifications,
+        additionalInformation: jobData.additionalInformation,
+        category: jobData.category,
+        date: jobData.date,
+        industry: jobData.industry,
+        jobName: jobData.jobName,
+        level: jobData.level,
+        location: jobData.location,
+        JobType: jobData.JobType,
+      })
+    );
+    id ? navigate(`/addNewWork/${id}`) : navigate("/addNewWork");
+  };
+
   return (
     <>
-      {jobData.id && (
+      {loading && (
         <div className={styles.mainContent}>
           <div className={styles.jobsColections}>
             <div className={styles.row}>
               <div className={styles.name_coloumn}>
                 <h2>{jobData.jobName}</h2>
               </div>
-
-              {/* <div className={styles.btn}>
-         <button className={styles.box1}>Apply Online</button>
-         <button className={styles.box2}>Send CV</button>
-         <p className={styles.p}>{jobData.allData.date}</p>
-       </div> */}
             </div>
             <div className={styles.bord}>
               <div className={styles.coloumn}>
@@ -102,18 +194,10 @@ const JobDetailsContent = () => {
 
               <h3>Job responsibility</h3>
               {parse(`${draftToHtml(jobData.responsibilities)}`)}
-              {/* {jobData.responsibilities.map((item) => (
-           <li style={{ textAlign: "justify" }}>{item}</li>
-         ))} */}
 
               <h3>Required qualifications</h3>
 
-              <div>
-                {parse(`${draftToHtml(jobData.qualifications)}`)}
-                {/* {jobData.qualifications.map((item) => (
-           <li style={{ textAlign: "justify" }}>{item}</li>
-         ))} */}
-              </div>
+              <div>{parse(`${draftToHtml(jobData.qualifications)}`)}</div>
 
               <h3>
                 Required candidate level:
@@ -123,41 +207,38 @@ const JobDetailsContent = () => {
               <h3>Additional information</h3>
               <div className={styles.test}>
                 {parse(`${draftToHtml(jobData.additionalInformation)}`)}
-                {/* {jobData.additionalInformation.map((item) => (
-           <li style={{ textAlign: "justify" }}>{item}</li>
-         ))} */}
               </div>
               <p className={styles.oddinfo}>
                 Please clearly mention that you have heard of this job
                 opportunity on staff.am.{" "}
               </p>
             </div>
+
             <div className={styles.joblist_skills}>
               <div className={styles.inn}>
                 <h3>Professional skills</h3>
-                {/* <p className={styles.softskills_p}>
-           {jobData.professionalSkills.map((item) => (
-             <span className={styles.softskills}>{item}</span>
-           ))}
-         </p> */}
               </div>
 
               <div className={styles.inn}>
                 <h3>Soft Skills</h3>
-
-                {/* <p className={styles.softskills_p}>
-           {jobData.softSkills.map((item) => (
-             <span className={styles.softskills}>{item}</span>
-           ))}
-         </p> */}
               </div>
             </div>
           </div>
-          <div className={styles.single_job_bottom}></div>
+          <div className={styles.apply_btns_block}>
+            <BasicButtons onClick={onClickEdit} className={styles.btn}>
+              Edit
+            </BasicButtons>
+
+            {(pathName === `/jobInfo` || location.search !== "?current") && (
+              <BasicButtons onClick={onAddJob} className={styles.btn}>
+                Add
+              </BasicButtons>
+            )}
+          </div>
         </div>
       )}
     </>
   );
 };
 
-export default JobDetailsContent;
+export default JobDetailsNewWork;

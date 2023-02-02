@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
+<<<<<<< HEAD
 import { v4 as uuid } from "uuid";
 import CompanyNavbar from "./navbars/CompanyNavbar";
 import AlertDialogSlide from "../../UI/Dialog";
@@ -13,14 +14,60 @@ import {
 } from "../../store/slices/dataControlRTKQ";
 import BasicButtons from "../../UI/Button";
 import LinearColor from "../../UI/Progress";
+=======
+import BasicButtons from "../../UI/Button";
+
+import { db } from "../../firebase";
+
+import { v4 as uuid } from "uuid";
+
+import CompanyNavbar from "./navbars/CompanyNavbar";
+
+import styles from "./company.module.scss";
+import { useEffect, useCallback } from "react";
+
+import { collection, query, where, getDocs } from "firebase/firestore";
+import { useState } from "react";
+import JobItem from "../content/JobItem";
+import { useNavigate } from "react-router";
+
+>>>>>>> 46e265ba4a584560c0f860085056295302500cb0
 const CompanyPage = () => {
+  const navigate = useNavigate();
   const currentUser = useSelector((state) => state.loginSlice.currentUser);
+<<<<<<< HEAD
   const { data, isLoading } = useGetDataQuery({ id: currentUser.uid });
   const currentInfo = useSelector((state) => state.companyInfoSlice);
   const [open, setOpen] = useState(false);
   const [update, setUpdate] = useState();
   const handleClose = () => {
     setOpen(false);
+=======
+
+  const [jobs, setJobs] = useState([]);
+
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        const q = query(
+          collection(db, "jobs"),
+          where("companyName", "==", currentUser.displayName)
+        );
+        const querySnapshot = await getDocs(q);
+        const data = [];
+        querySnapshot.forEach((doc) => {
+          data.push({ item: doc.data(), id: doc.id });
+        });
+        setJobs(data);
+      } catch (error) {}
+    };
+
+    getData();
+  }, [currentUser?.displayName]);
+
+  const onClickAdd = () => {
+    navigate("/addNewWork");
+>>>>>>> 46e265ba4a584560c0f860085056295302500cb0
   };
   const [updateData] = useUpdateDataMutation();
   const handleClick = async () => {
@@ -36,6 +83,7 @@ const CompanyPage = () => {
     <div className={styles.outContiner}>
       <div className="container">
         <div className={styles.company}>
+<<<<<<< HEAD
           <div>
             <CompanyNavbar user={currentUser} />
           </div>
@@ -86,6 +134,22 @@ const CompanyPage = () => {
               />
             </AlertDialogSlide>
           </div>
+=======
+          <CompanyNavbar />
+          {/* <div style={{ backgroundColor: "green", margin: "14px" }}>
+            <h2>{currentUser?.displayName}</h2>
+            <ImageAvatars
+              companyName={currentUser?.displayName}
+              photoURL={currentUser?.photoURL}
+            />
+          </div> */}
+          <BasicButtons onClick={onClickAdd} className={styles.btn}>
+            Add New Work
+          </BasicButtons>
+          {jobs.map((j) => (
+            <JobItem item={j.item} id={j.id} key={uuid()} toCompany />
+          ))}
+>>>>>>> 46e265ba4a584560c0f860085056295302500cb0
         </div>
       </div>
     </div>

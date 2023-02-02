@@ -5,14 +5,14 @@ import { jobsData } from "../../../constants/jobsdata";
 import BassicVerifiedIcon from "../../../UI/VerifiedIcon";
 import FollowButton from "../../../UI/Button";
 import HeartIcon from "../../../UI/HeartIcon";
-
 import ImageAvatars from "../../../UI/Avatar";
 import ClockIcon from "../../../UI/ClockIcon";
 import HistorIcon from "../../../UI/HistoryIcon";
 import { Link } from "react-router-dom";
-
-const jobData = jobsData[3];
-const CompanyNavbar = ({ user }) => {
+import { useSelector } from "react-redux";
+import { currentSelector } from "../../../store/slices/loginSlice";
+const CompanyNavbar = ({ photoCoverUrl }) => {
+  const currentUser = useSelector(currentSelector);
   const verifiedIconStyles = { width: "25px" };
   const avatarCustomStyles = { width: 140, height: 140 };
   return (
@@ -27,13 +27,13 @@ const CompanyNavbar = ({ user }) => {
       <div className={styles.companyInfo}>
         <div className={styles.companyPhoto}>
           <ImageAvatars
-            photoURL={jobData.photoUrl}
+            photoURL={currentUser?.photoURL}
             customStyles={avatarCustomStyles}
           />
         </div>
         <div className={styles.companyInfoBlock}>
           <div className={styles.companyName}>
-            <h1>{user.displayName}</h1>
+            <h1>{currentUser?.displayName}</h1>
             <BassicVerifiedIcon
               customStyles={verifiedIconStyles}
             ></BassicVerifiedIcon>

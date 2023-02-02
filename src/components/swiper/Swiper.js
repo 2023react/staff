@@ -10,8 +10,10 @@ import LocalFireDepartmentIcon from "@mui/icons-material/LocalFireDepartment";
 import BasicButtons from "../../UI/Button";
 import { v4 as uuid } from "uuid";
 import HeartIcon from "../../UI/HeartIcon";
+import { useSelector } from "react-redux";
 
-export const SwiperComponent = ({ jobData }) => {
+export const SwiperComponent = () => {
+  const jobData = useSelector((state) => state.jobsSlice.jobsData);
   return (
     <Swiper
       breakpoints={{

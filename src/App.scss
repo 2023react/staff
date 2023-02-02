@@ -67,3 +67,35 @@ a {
     color: #333 !important;
   }
 }
+
+.wrapper-class {
+  padding: 1rem;
+  border: 1px solid #ccc;
+}
+.editor-class {
+  background-color: rgb(244, 241, 241);
+  padding: 1rem;
+  border: 1px solid #ccc;
+}
+.toolbar-class {
+  border: 1px solid #ccc;
+  gap: 10px;
+}
+
+
+
+.demo-option-custom{
+display: none  !important;
+}
+.demo-popup-custom{
+  display: none !important;
+}
+
+.demo-width{
+  img{
+    width: 100% !important;
+    height: 100% !important;
+  }
+ width: 35px !important;
+ height: 35px !important;
+}

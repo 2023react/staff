@@ -6,9 +6,13 @@ import { jobsData } from "../../constants/jobsdata";
 import BasicButtons from "../../UI/Button";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import { COLORS } from "../../constants/styles";
+import { useEffect } from "react";
 
 const jobData = jobsData[3];
 const JobDetails = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   const customButtonStylesRed = {
     textTransform: "none",
     "&:hover": {

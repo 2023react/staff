@@ -4,7 +4,28 @@ import MainSidebar from "../components/sidebars/MainSidebar";
 import "../styles.scss";
 import "../App.scss";
 
+import { theme } from "../constants/styles";
+import { ThemeProvider } from "@emotion/react";
+
+import AddNewWork from "../components/addNewWork/AddNewWork";
+
+import { useSearchParams } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { useEffect } from "react";
+
 const Jobs = () => {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const industry = useSelector(
+    (state) => state.filterSlice.industryCategoryCompany
+  );
+
+  useEffect(() => {
+    if (industry) {
+      let path = industry.map((i) => i);
+      setSearchParams({ filter: path });
+    }
+  }, [industry]);
+
   return (
     <div className="outContiner">
       <div className="container">

@@ -4,7 +4,7 @@ import JobItem from "./JobItem";
 import Navbar from "./Navbar";
 import styles from "./contents.module.scss";
 import { useLocation } from "react-router";
-import { jobsData } from "../../constants/jobsdata";
+// import { jobsData } from "../../constants/jobsdata";
 import { v4 as uuid } from "uuid";
 import {
   useAddJobsMutation,
@@ -26,7 +26,6 @@ const MainContent = () => {
   };
 
   const location = useLocation().pathname;
-
   const dispatch = useDispatch();
   const jobData = useSelector((state) => state.jobsSlice.jobsData);
   const levelCategory = useSelector((state) => state.filterSlice.levelCategory);
@@ -53,6 +52,32 @@ const MainContent = () => {
     deleteJob("f2604580-8c76-497e-a6e1-15a34a3c9b5c").unwrap();
   };
   dispatch(addJobsData(data));
+
+  // const getData = useCallback(async () => {
+  //   const ref = collection(db, "jobs");
+  //   const levelsType = levelCategory.map((item) =>
+  //     where("requiredCandidateLevel", "==", item)
+  //   );
+  //   const jobsType = jobCategory.map((item) =>
+  //     where("jobCategory", "==", item)
+  //   );
+
+  //   const q1 = query(ref, ...levelsType, ...jobsType);
+  //   const fetchData = await getDocs(q1);
+
+  //   const data = [];
+  //   fetchData.forEach((doc) => {
+  //     data.push({ item: doc.data(), id: doc.id });
+  //   });
+
+  //   dispatch(addJobsData(data));
+  // }, [dispatch, jobCategory, levelCategory]);
+
+  // useEffect(() => {
+  //   getData();
+  // }, [getData, searchValue]);
+
+  // const jobData = useSelector((state) => state.jobsSlice?.jobsData);
 
   return (
     <div className={styles.mainContent}>
