@@ -5,6 +5,9 @@ import "../styles.scss";
 import "../App.scss";
 import { theme } from "../constants/styles";
 import { ThemeProvider } from "@emotion/react";
+
+import AddNewWork from "../components/addNewWork/AddNewWork";
+
 import { useSearchParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useEffect } from "react";

@@ -47,9 +47,10 @@
   .jobsColections {
     box-sizing: border-box;
     width: 100%;
-
     padding: 15px;
     position: relative;
+  }
+}
     .jobInfo {
       background-color: white;
       margin-top: 10px;
@@ -63,8 +64,6 @@
       box-sizing: border-box;
       display: flex;
       flex-direction: row;
-      align-items: flex-start;
-      justify-content: start;
 
       &:hover {
         background-color: rgb(245, 241, 241);
@@ -106,5 +105,5 @@
         object-fit: cover;
       }
     }
-  }
-}
+
+
