@@ -14,27 +14,23 @@ import "react-phone-number-input/style.css";
 import { auth, db, storage } from "../../../firebase";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
-import { doc, getDoc, setDoc, Timestamp } from "firebase/firestore";
+import { doc, setDoc, Timestamp } from "firebase/firestore";
 import { useNavigate } from "react-router";
-import { useDispatch } from "react-redux";
 
 import RegisterButton from "../../../UI/Button";
 import InputField from "../input/Input";
 
-import { changeCurrentUser } from "../../../store/slices/loginSlice";
-
 const RegisterCompany = () => {
   const navigate = useNavigate();
-  const dispatch = useDispatch;
+
   const [image, setImage] = useState("");
   const [img, setImg] = useState(null);
   const {
     register,
-    formState: { errors, isValid },
+    formState: { errors },
     handleSubmit,
     control,
     watch,
-    reset,
   } = useForm({
     mode: "onBlur",
   });
@@ -56,7 +52,7 @@ const RegisterCompany = () => {
         data.email,
         data.password
       );
-      console.log(res);
+
       const storageRef = ref(storage, res.user.uid);
 
       await uploadBytesResumable(storageRef, data.image[0]).then(() => {

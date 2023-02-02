@@ -4,15 +4,12 @@ import { useForm } from "react-hook-form";
 
 import InputField from "../input/Input";
 
-import { auth, db } from "../../../firebase";
+import { auth } from "../../../firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from "react-router";
 import { useDispatch } from "react-redux";
-import {
-  changeCurrentUser,
-  closeLoginModal,
-} from "../../../store/slices/loginSlice";
-import { doc, getDoc } from "firebase/firestore";
+import { closeLoginModal } from "../../../store/slices/loginSlice";
+
 import SignInButton from "../../../UI/Button";
 
 const LoginForm = () => {
@@ -20,7 +17,7 @@ const LoginForm = () => {
   const dispatch = useDispatch();
   const {
     register,
-    formState: { errors, isValid },
+    formState: { errors },
     handleSubmit,
   } = useForm({
     mode: "onBlur",
@@ -28,17 +25,11 @@ const LoginForm = () => {
 
   const onSubmit = async (data) => {
     try {
-      const res = await signInWithEmailAndPassword(
-        auth,
-        data.email,
-        data.password
-      );
+      await signInWithEmailAndPassword(auth, data.email, data.password);
 
-      const currentCompany = await getDoc(doc(db, "companies", res.user.uid));
-      // dispatch(changeCurrentUser({ currentCompany: currentCompany.data() }));
       navigate("/");
       dispatch(closeLoginModal());
-      document.body.style.overflow = "visible ";
+      document.body.style.overflow = "visible "; //is it correct?
     } catch (error) {}
   };
 
@@ -71,7 +62,10 @@ const LoginForm = () => {
           Forgot Password?
         </a>
 
-        <SignInButton type="submit"> Sign In </SignInButton>
+        <SignInButton type="submit" variant="solid">
+          {" "}
+          Sign In{" "}
+        </SignInButton>
 
         <div className={style.text}>
           Don't have an account yet?

@@ -6,7 +6,6 @@ import LocationOnIcon from "@mui/icons-material/LocationOn";
 
 import { Link } from "react-router-dom";
 
-import { COLORS } from "../../constants/styles";
 import BassicVerifiedIcon from "../../UI/VerifiedIcon";
 import HeartIcon from "../../UI/HeartIcon";
 
@@ -18,24 +17,7 @@ const JobItem = ({
   deadline,
   ...props
 }) => {
-  const customButtonStylesRed = {
-    "&:hover": {
-      color: "white",
-      backgroundColor: COLORS.customRed,
-    },
-  };
-
-  const customButtonStylesGreen = {
-    "&:hover": {
-      color: "white",
-      backgroundColor: COLORS.customGreen,
-    },
-  };
   const iconWidth = { width: "15px" };
-  const heartIconStyles = {
-    width: "18px",
-    marginRight: "5px",
-  };
 
   return (
     <Link to={`/jobs/${companyName}`}>
@@ -70,20 +52,11 @@ const JobItem = ({
         </div>
 
         <div className={styles.jobInfoButton}>
-          <BasicButtons
-            size="small"
-            color="customRed"
-            variant="outlined"
-            customStyles={customButtonStylesRed}
-          >
-            <HeartIcon customStyles={heartIconStyles} />
+          <BasicButtons size="small" variant="Follow">
+            <HeartIcon />
             Follow
           </BasicButtons>
-          <BasicButtons
-            size="small"
-            variant="outlined"
-            customStyles={customButtonStylesGreen}
-          >
+          <BasicButtons size="small" variant="ViewMore">
             View more
           </BasicButtons>
         </div>

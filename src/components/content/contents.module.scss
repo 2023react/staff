@@ -1,55 +1,40 @@
 .mainContent {
   background-color: #fff;
   margin-top: 15px;
-
+  .selectLimit {
+    display: flex;
+    justify-content: flex-end;
+  }
   .contentHotJobs {
     background-color: #fff;
+    padding: 15px;
+    width: 100%;
   }
   .contentNavbar {
+    display: flex;
+    flex-direction: column;
     background-color: #fff;
     font-size: 14px;
-  }
-  .navbarCheckboxes {
-    display: flex;
     padding: 15px;
-    .navbarCheckbox {
+    gap: 15px;
+    .navbarCheckboxes {
       display: flex;
-      align-items: center;
-      color: #46af3a;
-      cursor: pointer;
-      input {
-        border: 1px solid #46af3a;
-        height: 22px;
-        width: 22px;
-        margin-left: 4px;
-        cursor: pointer;
-        &:checked {
-          border-color: red;
-          background-color: red;
-        }
-      }
-      img {
-        background-color: white;
-        padding: 5px;
-        width: 40px;
-        object-fit: cover;
-        cursor: pointer;
-      }
-    }
-  }
-  .navbarButtons {
-    display: flex;
-    justify-content: start;
 
-    gap: 5px;
-    padding: 15px;
+      align-items: center;
+    }
+    .navbarButtons {
+      display: flex;
+      justify-content: start;
+
+      gap: 5px;
+    }
   }
   .jobsColections {
     box-sizing: border-box;
     width: 100%;
 
     padding: 15px;
-    position: relative;
+
     .jobInfo {
       background-color: white;
       margin-top: 10px;

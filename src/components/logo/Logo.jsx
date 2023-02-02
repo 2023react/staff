@@ -7,19 +7,10 @@ import ImageAvatars from "../../UI/Avatar";
 import { changeCurrentUser } from "../../store/slices/loginSlice";
 import LogOutButton from "../../UI/Button";
 import styles from "./logo.module.scss";
-const Logo = ({ checkHome }) => {
+
+const Logo = ({ isHomePage }) => {
   const currentUser = useSelector((state) => state.loginSlice.currentUser);
 
-  const logOutButtonStyles = {
-    width: "50px",
-    color: checkHome ? "#fff" : "rgba(0, 0, 0, 0.5)",
-    fontWeight: "700",
-    backgroundColor: "transparent",
-    "&:hover": {
-      backgroundColor: "transparent",
-      color: "#333",
-    },
-  };
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const onLogOut = (e) => {
@@ -31,6 +22,7 @@ const Logo = ({ checkHome }) => {
   return (
     <div className={styles.logoBox}>
       <ImageAvatars
+        variant="Avatar"
         companyName={currentUser.displayName}
         photoURL={currentUser.photoURL}
       />
@@ -38,7 +30,7 @@ const Logo = ({ checkHome }) => {
       <div className={styles.logOutBtn}>
         <h3
           className={`${styles.title} ${[
-            !checkHome ? "" : styles.whiteTitle,
+            !isHomePage ? "" : styles.whiteTitle,
           ]}  `}
         >
           {currentUser?.displayName}
@@ -46,7 +38,7 @@ const Logo = ({ checkHome }) => {
         <LogOutButton
           size="small"
           onClick={(e) => onLogOut(e)}
-          customStyles={logOutButtonStyles}
+          variant={isHomePage ? "HomeBtn" : "LogOut"}
         >
           LogOut{" "}
         </LogOutButton>

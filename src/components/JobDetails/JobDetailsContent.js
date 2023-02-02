@@ -5,6 +5,7 @@ import BookmarkIcon from "@mui/icons-material/Bookmark";
 
 import { jobsData } from "../../constants/jobsdata";
 import { useParams } from "react-router";
+import JobItem from "../content/JobItem";
 
 console.log(jobsData[3]);
 const jobData = jobsData[3];
@@ -19,7 +20,10 @@ const JobDetailsContent = () => {
           <div className={styles.name_coloumn}>
             <h2>{jobData.jobName}</h2>
           </div>
-
+          <div>
+            {" "}
+            <JobItem {...jobsData[3]} />
+          </div>
           <div className={styles.btn}>
             <button className={styles.box1}>Apply Online</button>
             <button className={styles.box2}>Send CV</button>

@@ -1,14 +1,10 @@
 import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import {
   Route,
   RouterProvider,
   createBrowserRouter,
   createRoutesFromElements,
-  useNavigate,
-  Routes,
-  BrowserRouter,
-  Navigate,
 } from "react-router-dom";
 import "./App.scss";
 import CompanyPage from "./components/company/CompanyPage";
@@ -20,9 +16,9 @@ import JobDetails from "./components/JobDetails/JobDetails";
 import { Layout } from "./components/Layout";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./firebase";
-import loginSlice, { changeCurrentUser } from "./store/slices/loginSlice";
+import { changeCurrentUser } from "./store/slices/loginSlice";
 import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
-
+import "./styles.scss";
 const r = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Layout />}>
@@ -40,7 +36,6 @@ const r = createBrowserRouter(
           </ProtectedRoute>
         }
       />
-      <Route path="/companyPage" element={<CompanyPage />} />
     </Route>
   )
 );
@@ -50,15 +45,7 @@ function App() {
     onAuthStateChanged(auth, (currentUser) => {
       dispatch(changeCurrentUser(currentUser));
     });
-  }, []);
-
-  const showLogin = useSelector((state) => state.loginSlice.showLogin);
-  const showRegister = useSelector((state) => state.loginSlice.showRegister);
-  const showLoginCompany = useSelector(
-    (state) => state.loginSlice.showComponyLogin
-  );
-
-  const currentUser = useSelector((state) => state.loginSlice.currentUser);
+  }, [dispatch]);
 
   return (
     <div className="App">
