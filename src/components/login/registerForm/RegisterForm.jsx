@@ -1,5 +1,5 @@
 import React from "react";
-import style from "../registerForm/register.module.scss";
+import style from "./register.module.scss";
 import { useForm } from "react-hook-form";
 
 import InputField from "../input/Input";
@@ -8,7 +8,7 @@ import RegisterButtons from "../../../UI/Button";
 const RegisterForm = () => {
   const {
     register,
-    formState: { errors, isValid },
+    formState: { errors },
     handleSubmit,
   } = useForm({
     mode: "onBlur",
@@ -16,7 +16,6 @@ const RegisterForm = () => {
 
   const onSubmit = async (data) => {
     try {
-      console.log(data);
     } catch (error) {}
   };
 
@@ -87,7 +86,9 @@ const RegisterForm = () => {
             />
           </div>
 
-          <RegisterButtons type="submit">Register </RegisterButtons>
+          <RegisterButtons type="submit" variant="solid">
+            Register{" "}
+          </RegisterButtons>
         </div>
       </form>
     </div>

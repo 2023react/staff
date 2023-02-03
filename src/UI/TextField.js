@@ -25,8 +25,7 @@ export default function SearchTextField() {
       <TextField
         fullWidth
         size="small"
-        color="success"
-        id="outlined-basic"
+        color="customGreen"
         label="Search"
         variant="outlined"
         placeholder="All keywords"

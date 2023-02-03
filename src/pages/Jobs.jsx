@@ -3,6 +3,8 @@ import MainContent from "../components/content/MainContent";
 import MainSidebar from "../components/sidebars/MainSidebar";
 import "../styles.scss";
 import "../App.scss";
+import { useTheme } from "@emotion/react";
+import JobItem from "../components/content/JobItem";
 
 import { ThemeProvider } from "@emotion/react";
 import { theme } from "../constants/styles";

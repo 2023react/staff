@@ -13,8 +13,7 @@ export default function ImageAvatars({
       <Avatar
         alt={companyName}
         src={photoURL}
-        variant="rounded"
-        sx={{ width: 56, height: 56, ...customStyles }}
+        sx={{ ...customStyles }}
         {...props}
       />
     </Stack>

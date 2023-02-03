@@ -6,9 +6,6 @@ import SearchTextField from "../../UI/TextField";
 import styles from "./sidebars.module.scss";
 const Search = () => {
   const location = useLocation().pathname;
-  const customButtonStyle = {
-    borderRadius: "0",
-  };
 
   let titleText =
     location === "/companies"
@@ -23,7 +20,7 @@ const Search = () => {
         <SearchTextField />
 
         <div className={styles.searchButton}>
-          <Button size="small" customStyles={{ ...customButtonStyle }}>
+          <Button size="small" variant="solid">
             Search
           </Button>
         </div>

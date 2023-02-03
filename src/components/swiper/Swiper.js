@@ -4,35 +4,16 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 import styles from "./swiper.module.scss";
-import { jobsData } from "../../constants/jobsdata";
 import { Pagination, Autoplay } from "swiper";
 import Avatar from "@mui/material/Avatar";
 import LocalFireDepartmentIcon from "@mui/icons-material/LocalFireDepartment";
 import BasicButtons from "../../UI/Button";
 import { v4 as uuid } from "uuid";
-import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-import { COLORS } from "../../constants/styles";
+import HeartIcon from "../../UI/HeartIcon";
+import { useSelector } from "react-redux";
 
 export const SwiperComponent = () => {
-  const customButtonStylesRed = {
-    textTransform: "none",
-    "&:hover": {
-      color: "white",
-      backgroundColor: COLORS.customRed,
-    },
-  };
-  const heartIconStyles = {
-    width: "18px",
-    marginRight: "5px",
-  };
-  const customButtonStylesGreen = {
-    textTransform: "none",
-    "&:hover": {
-      color: "white",
-      backgroundColor: COLORS.customGreen,
-    },
-  };
-
+  const jobData = useSelector((state) => state.jobsSlice.jobsData);
   return (
     <Swiper
       breakpoints={{
@@ -44,7 +25,6 @@ export const SwiperComponent = () => {
       slidesPerView={3}
       spaceBetween={50}
       loop={true}
-      // loopFillGroupWithBlank={false}
       pagination={{
         clickable: true,
         el: ".swiper-pagination",
@@ -56,12 +36,12 @@ export const SwiperComponent = () => {
       modules={[Pagination, Autoplay]}
       className={styles.mySwiper}
     >
-      {jobsData.map((item) => (
+      {jobData.map((item) => (
         <div>
           <SwiperSlide className={styles.swiper} key={uuid()}>
             <div className={styles.swiper_info}>
               <div className={styles.imageBlog}>
-                <img className={styles.image} src={item.photoUrl} />
+                <img className={styles.image} src={item.item.photoUrl} />
               </div>
               <div className={styles.name}>
                 <div className={styles.avatar}>
@@ -72,31 +52,20 @@ export const SwiperComponent = () => {
                   </Avatar>
                 </div>
                 <div className={styles.nameInfo}>
-                  <h2>{item.jobName}</h2>
+                  <h2>{item.item.jobName}</h2>
                 </div>
-                <span>{item.companyName}</span>
+                <span>{item.item.companyName}</span>
               </div>
             </div>
             <div className={styles.text}>
-              <p>{item.jobDescription}</p>
+              <p>{item.item.jobDescription}</p>
             </div>
             <div className={styles.jobInfoButton}>
-              <BasicButtons
-                size="small"
-                color="customRed"
-                variant="outlined"
-                customStyles={customButtonStylesRed}
-              >
-                <FavoriteBorderIcon
-                  sx={{ ...heartIconStyles }}
-                ></FavoriteBorderIcon>
+              <BasicButtons size="small" variant="Follow">
+                <HeartIcon />
                 Follow
               </BasicButtons>
-              <BasicButtons
-                size="small"
-                variant="outlined"
-                sx={{ ...customButtonStylesGreen }}
-              >
+              <BasicButtons size="small" variant="ViewMore">
                 View more
               </BasicButtons>
             </div>

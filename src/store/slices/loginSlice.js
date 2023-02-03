@@ -5,7 +5,6 @@ const initialState = {
   showLogin: false,
   showRegister: false,
   showComponyLogin: false,
-  currentCompany: null,
 };
 
 const loginSlice = createSlice({
@@ -13,9 +12,6 @@ const loginSlice = createSlice({
   initialState,
 
   reducers: {
-    addCurrentCompany(state, action) {
-      state.currentCompany = action.payload.currentCompany;
-    },
     changeCurrentUser(state, action) {
       state.currentUser = action.payload;
     },

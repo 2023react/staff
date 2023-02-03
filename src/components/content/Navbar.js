@@ -8,6 +8,8 @@ import HighlightOffOutlinedIcon from "@mui/icons-material/HighlightOffOutlined";
 import { v4 as uuid } from "uuid";
 import { LEVEL_CATEGORY } from "../../constants/category";
 import { deleteFilter, setFilter } from "../../store/slices/filterSlice";
+import CheckboxLabels from "../../UI/Checkbox";
+import ImageAvatars from "../../UI/Avatar";
 
 const Navbar = () => {
   const dispatch = useDispatch();
@@ -44,16 +46,16 @@ const Navbar = () => {
   return (
     <>
       <div className={styles.navbarCheckboxes}>
-        <label className={styles.navbarCheckbox}>
-          <img src={remote} alt="" />
-          <span>Remote Jobs </span>
-          <input type="checkbox" />
-        </label>
-        <label className={styles.navbarCheckbox}>
-          <img src={crown} alt="" />
-          <span>Featured jobs</span>
-          <input type="checkbox" />
-        </label>
+        <CheckboxLabels
+          lable="Remote Jobs"
+          labelPlacement="start"
+          color="success"
+        >
+          <ImageAvatars photoURL={remote} variant="CheckBoxAvatar" />
+        </CheckboxLabels>
+        <CheckboxLabels lable="Featured jobs" labelPlacement="start">
+          <ImageAvatars photoURL={crown} variant="CheckBoxAvatar" />
+        </CheckboxLabels>
       </div>
 
       <div className={styles.navbarButtons}>

@@ -2,12 +2,36 @@ import * as React from "react";
 import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
-import styles from "../components/content//contents.module.scss";
-export default function CheckboxLabels({ label, ...props }) {
+import { COLORS } from "../constants/styles";
+
+export default function CheckboxLabels({ lable, children }) {
   return (
-    <FormGroup {...props}>
-      <FormControlLabel control={<Checkbox defaultChecked />} label={label} />
-      <span>rrrr</span>
+    <FormGroup>
+      <FormControlLabel
+        sx={{
+          padding: 0,
+          margin: 0,
+        }}
+        control={
+          <>
+            {" "}
+            {children}
+            <span>{lable}</span>
+            <Checkbox
+              defaultChecked
+              size="medium"
+              sx={{
+                color: COLORS.customGreen,
+
+                "&.Mui-checked": {
+                  color: COLORS.customGreen,
+                },
+              }}
+            />
+          </>
+        }
+        label=""
+      />
     </FormGroup>
   );
 }

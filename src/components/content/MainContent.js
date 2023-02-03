@@ -1,55 +1,89 @@
-import React, { useCallback } from "react";
-import { useEffect } from "react";
+import React, { useCallback, useEffect, useState } from "react";
+
 import JobItem from "./JobItem";
 import Navbar from "./Navbar";
 import styles from "./contents.module.scss";
 import { useLocation } from "react-router";
-// import { jobsData } from "../../constants/jobsdata";
 import { v4 as uuid } from "uuid";
+import {
+  useAddJobsMutation,
+  useDeleteJobsMutation,
+  useGetFiltredDataQuery,
+} from "../../store/slices/dataControlRTKQ";
+import { where } from "firebase/firestore";
 
-import { collection, getDocs, query, where } from "firebase/firestore";
-import { db } from "../../firebase";
 import { useDispatch, useSelector } from "react-redux";
 import { addJobsData } from "../../store/slices/jobsSlice";
+import Selectlimit from "../../UI/Selectlimit";
+import LinearColor from "../../UI/Progress";
 
 const MainContent = () => {
+  const [limit, setLimit] = useState();
+  const handleChange = (e) => {
+    setLimit(e.target.value);
+  };
   const location = useLocation().pathname;
   const dispatch = useDispatch();
+  const jobData = useSelector((state) => state.jobsSlice.jobsData);
   const levelCategory = useSelector((state) => state.filterSlice.levelCategory);
   const jobCategory = useSelector((state) => state.filterSlice.jobCategory);
-  const searchValue = useSelector((state) => state.filterSlice.searchJobs);
 
-  const getData = useCallback(async () => {
-    const ref = collection(db, "jobs");
-    const levelsType = levelCategory.map((item) =>
-      where("requiredCandidateLevel", "==", item)
-    );
-    const jobsType = jobCategory.map((item) =>
-      where("jobCategory", "==", item)
-    );
+  const levelsType = levelCategory.map((item) =>
+    where("requiredCandidateLevel", "==", item)
+  );
+  const jobsType = jobCategory.map((item) => where("jobCategory", "==", item));
 
-    const q1 = query(ref, ...levelsType, ...jobsType);
-    const fetchData = await getDocs(q1);
+  const filterHints = [...jobsType, ...levelsType];
+  const { data, isLoading } = useGetFiltredDataQuery({
+    limits: limit,
+    filterHints,
+  });
+  const [addJob, { isSuccess }] = useAddJobsMutation();
+  const [deleteJob, { isError }] = useDeleteJobsMutation();
 
-    const data = [];
-    fetchData.forEach((doc) => {
-      data.push({ item: doc.data(), id: doc.id });
-    });
+  const handleAddJob = async (job) => {
+    addJob({ job }).unwrap();
+  };
+  const handleDeleteJob = async (job) => {
+    deleteJob("f2604580-8c76-497e-a6e1-15a34a3c9b5c").unwrap();
+  };
+  dispatch(addJobsData(data));
 
-    dispatch(addJobsData(data));
-  }, [dispatch, jobCategory, levelCategory]);
+  // const getData = useCallback(async () => {
+  //   const ref = collection(db, "jobs");
+  //   const levelsType = levelCategory.map((item) =>
+  //     where("requiredCandidateLevel", "==", item)
+  //   );
+  //   const jobsType = jobCategory.map((item) =>
+  //     where("jobCategory", "==", item)
+  //   );
 
-  useEffect(() => {
-    getData();
-  }, [getData, searchValue]);
+  //   const q1 = query(ref, ...levelsType, ...jobsType);
+  //   const fetchData = await getDocs(q1);
 
-  const jobData = useSelector((state) => state.jobsSlice?.jobsData);
+  //   const data = [];
+  //   fetchData.forEach((doc) => {
+  //     data.push({ item: doc.data(), id: doc.id });
+  //   });
+
+  //   dispatch(addJobsData(data));
+  // }, [dispatch, jobCategory, levelCategory]);
+
+  // useEffect(() => {
+  //   getData();
+  // }, [getData]);
+
+  // const jobData = useSelector((state) => state.jobsSlice?.jobsData);
 
   return (
     <div className={styles.mainContent}>
-      {" "}
-      <div className={styles.contentHotJobs}>HOT JOBS CAROUSEL</div>
+      <div className={styles.contentHotJobs}>Hot job</div>
       <div className={styles.contentNavbar}>
+        {" "}
+        <div className={styles.selectLimit}>
+          {" "}
+          <Selectlimit limit={limit} handleChange={handleChange} />
+        </div>
         {location === "/jobs" ? (
           <Navbar />
         ) : (
@@ -58,10 +92,15 @@ const MainContent = () => {
           </p>
         )}
       </div>
+
       <div className={styles.jobsColections}>
-        {jobData.map((obj) => {
-          return <JobItem item={obj.item} id={obj.id} key={uuid()} />;
-        })}
+        {isLoading ? (
+          <LinearColor />
+        ) : (
+          data.map((job) => {
+            return <JobItem item={job?.item} id={job?.id} key={uuid()} />;
+          })
+        )}
       </div>
     </div>
   );
