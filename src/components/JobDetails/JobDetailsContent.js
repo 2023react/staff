@@ -2,12 +2,11 @@ import React, { useCallback, useEffect, useState } from "react";
 
 import styles from "./Jobdetails.module.scss";
 import BookmarkIcon from "@mui/icons-material/Bookmark";
-
-import { jobsData } from "../../constants/jobsdata";
 import { useParams } from "react-router";
-
 import { db } from "../../firebase";
 import draftToHtml from "draftjs-to-html";
+import parse from "html-react-parser";
+import { doc, getDoc } from "firebase/firestore";
 
 const JobDetailsContent = () => {
   const [jobData, setJobData] = useState([]);

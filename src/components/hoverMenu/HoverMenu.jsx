@@ -8,6 +8,7 @@ const HoverMenu = ({
   onClickMenuItemTwo,
   isModal,
   isHomePage,
+  lable,
 }) => {
   return (
     <div className={style.dropdown}>
@@ -16,7 +17,7 @@ const HoverMenu = ({
           isHomePage ? style.dropdown__text__home : style.dropdown__text
         }
       >
-        For Companies
+        {lable}
       </div>
       <div className={style.dropdown__content}>
         <div className={style.arrow_up}></div>

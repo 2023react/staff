@@ -1,10 +1,9 @@
-import React, { useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 
 import JobItem from "./JobItem";
 import Navbar from "./Navbar";
 import styles from "./contents.module.scss";
 import { useLocation } from "react-router";
-// import { jobsData } from "../../constants/jobsdata";
 import { v4 as uuid } from "uuid";
 import {
   useAddJobsMutation,
@@ -17,14 +16,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { addJobsData } from "../../store/slices/jobsSlice";
 import Selectlimit from "../../UI/Selectlimit";
 import LinearColor from "../../UI/Progress";
-import { SwiperComponent } from "../swiper/Swiper";
 
 const MainContent = () => {
   const [limit, setLimit] = useState();
   const handleChange = (e) => {
     setLimit(e.target.value);
   };
-
   const location = useLocation().pathname;
   const dispatch = useDispatch();
   const jobData = useSelector((state) => state.jobsSlice.jobsData);
@@ -45,7 +42,6 @@ const MainContent = () => {
   const [deleteJob, { isError }] = useDeleteJobsMutation();
 
   const handleAddJob = async (job) => {
-    console.log(job);
     addJob({ job }).unwrap();
   };
   const handleDeleteJob = async (job) => {
@@ -75,15 +71,13 @@ const MainContent = () => {
 
   // useEffect(() => {
   //   getData();
-  // }, [getData, searchValue]);
+  // }, [getData]);
 
   // const jobData = useSelector((state) => state.jobsSlice?.jobsData);
 
   return (
     <div className={styles.mainContent}>
-      <div className={styles.contentHotJobs}>
-        <SwiperComponent jobData={jobData} />
-      </div>
+      <div className={styles.contentHotJobs}>Hot job</div>
       <div className={styles.contentNavbar}>
         {" "}
         <div className={styles.selectLimit}>
@@ -103,8 +97,8 @@ const MainContent = () => {
         {isLoading ? (
           <LinearColor />
         ) : (
-          jobData.map((job) => {
-            return <JobItem {...job} key={uuid()} />;
+          data.map((job) => {
+            return <JobItem item={job?.item} id={job?.id} key={uuid()} />;
           })
         )}
       </div>

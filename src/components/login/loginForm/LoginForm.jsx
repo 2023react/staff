@@ -29,7 +29,6 @@ const LoginForm = () => {
 
       navigate("/");
       dispatch(closeLoginModal());
-      document.body.style.overflow = "visible "; //is it correct?
     } catch (error) {}
   };
 

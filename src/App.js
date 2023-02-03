@@ -18,10 +18,9 @@ import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./firebase";
 import { changeCurrentUser } from "./store/slices/loginSlice";
 import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
-import JobDetailsContent from "./components/JobDetails/JobDetailsContent";
 import JobDetailsNewWork from "./components/JobDetails/JobDetailsNewWork";
-
 import AddNewWork from "./components/addNewWork/AddNewWork";
+import UserPage from "./components/user/UserPage";
 
 const r = createBrowserRouter(
   createRoutesFromElements(
@@ -29,6 +28,7 @@ const r = createBrowserRouter(
       <Route index element={<Home />} />
       <Route path="/jobs" element={<Jobs />} />
       <Route path="/company/:name" element={<CompanyPage />} />
+      <Route path="/user" element={<UserPage />} />
       <Route path="/companies" element={<Companies />} />
       <Route path="/jobs/:id" element={<JobDetails />} />
       <Route
@@ -56,6 +56,7 @@ function App() {
   const dispatch = useDispatch();
   useEffect(() => {
     onAuthStateChanged(auth, (currentUser) => {
+      console.log(currentUser);
       dispatch(changeCurrentUser(currentUser));
     });
   }, [dispatch]);

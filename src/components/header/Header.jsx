@@ -21,11 +21,9 @@ const Header = () => {
   const dispatch = useDispatch();
   const pathname = useLocation().pathname;
   const isHomePage = pathname === "/";
-  const navigate = useNavigate();
   const onClickLoginUser = () => dispatch(openLogin());
   const onClickLoginRegiter = () => {
     dispatch(openRegister());
-    navigate("/");
   };
   const openLoginCompany = () => dispatch(openComponyLogin());
   const currentUser = useSelector((state) => state.loginSlice.currentUser);
@@ -79,25 +77,31 @@ const Header = () => {
                     </li>{" "}
                   </NavLink>
                 ) : (
-                  <li className={style.item}>
-                    <HoverMenu
-                      onClickMenuItemOne={openLoginCompany}
-                      lableMenuItemOne="Sign In"
-                      lableMenuItemTwo="Register"
-                      isHomePage={isHomePage}
-                    ></HoverMenu>
-                  </li>
+                  <>
+                    <li className={style.item}>
+                      <HoverMenu
+                        lable=" For Companies"
+                        onClickMenuItemOne={openLoginCompany}
+                        lableMenuItemOne="Sign In"
+                        lableMenuItemTwo="Register"
+                        isHomePage={isHomePage}
+                      ></HoverMenu>
+                    </li>
+                    <li className={style.item}>
+                      <HoverMenu
+                        lable=" For Job-seekers"
+                        onClickMenuItemOne={onClickLoginUser}
+                        onClickMenuItemTwo={onClickLoginRegiter}
+                        lableMenuItemOne="Sign In"
+                        lableMenuItemTwo="Register"
+                        isModal={true}
+                        isHomePage={isHomePage}
+                      ></HoverMenu>
+                    </li>{" "}
+                  </>
                 )}
-                <li className={style.item}>
-                  <HoverMenu
-                    onClickMenuItemOne={onClickLoginUser}
-                    onClickMenuItemTwo={onClickLoginRegiter}
-                    lableMenuItemOne="Sign In"
-                    lableMenuItemTwo="Register"
-                    isModal={true}
-                    isHomePage={isHomePage}
-                  ></HoverMenu>
-                </li>{" "}
+
+                <NavLink to="/user">User page</NavLink>
               </ul>
             </div>
           </div>

@@ -6,10 +6,6 @@ import "../App.scss";
 import { useTheme } from "@emotion/react";
 import JobItem from "../components/content/JobItem";
 
-<<<<<<< HEAD
-const Jobs = () => {
-  const theme = useTheme();
-=======
 import { ThemeProvider } from "@emotion/react";
 import { theme } from "../constants/styles";
 import { useSearchParams } from "react-router-dom";
@@ -24,7 +20,6 @@ const Jobs = () => {
       setSearchParams({ filter: path });
     }
   }, [jobCategory]);
->>>>>>> 46e265ba4a584560c0f860085056295302500cb0
 
   return (
     <div className="outContiner">

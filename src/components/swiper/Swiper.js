@@ -41,7 +41,7 @@ export const SwiperComponent = () => {
           <SwiperSlide className={styles.swiper} key={uuid()}>
             <div className={styles.swiper_info}>
               <div className={styles.imageBlog}>
-                <img className={styles.image} src={item.photoUrl} />
+                <img className={styles.image} src={item.item.photoUrl} />
               </div>
               <div className={styles.name}>
                 <div className={styles.avatar}>
@@ -52,13 +52,13 @@ export const SwiperComponent = () => {
                   </Avatar>
                 </div>
                 <div className={styles.nameInfo}>
-                  <h2>{item.jobName}</h2>
+                  <h2>{item.item.jobName}</h2>
                 </div>
-                <span>{item.companyName}</span>
+                <span>{item.item.companyName}</span>
               </div>
             </div>
             <div className={styles.text}>
-              <p>{item.jobDescription}</p>
+              <p>{item.item.jobDescription}</p>
             </div>
             <div className={styles.jobInfoButton}>
               <BasicButtons size="small" variant="Follow">

@@ -35,7 +35,7 @@ export const dataApi = createApi({
 
           const data = [];
           fetchData.forEach((doc) => {
-            data.push(doc.data());
+            data.push({ item: doc.data(), id: doc.id });
           });
 
           return { data };

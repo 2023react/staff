@@ -1,27 +1,26 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { v4 as uuid } from "uuid";
-import CompanyNavbar from "./navbars/CompanyNavbar";
+
 import AlertDialogSlide from "../../UI/Dialog";
-import styles from "./company.module.scss";
-import CompanyInfo from "./Accordion/AboutUs";
-import AddActionButtons from "./Accordion/AddIcon";
-import EditorComponent from "./Editor/Editor";
+import styles from "./user.module.scss";
+
+import AddActionButtons from "./accordion/AddIcon";
+import EditorComponent from "./editor/Editor";
 import {
   useGetDataQuery,
   useUpdateDataMutation,
 } from "../../store/slices/dataControlRTKQ";
 import BasicButtons from "../../UI/Button";
 import LinearColor from "../../UI/Progress";
-import { db } from "../../firebase";
 import { useEffect, useCallback } from "react";
-import { collection, query, where, getDocs } from "firebase/firestore";
-import JobItem from "../content/JobItem";
-import { useNavigate } from "react-router";
+import UserNavbar from "./navbars/UserNavbar";
+import { RESUME } from "../../constants/userdata";
+import ResumeItem from "./accordion/ResumeItem";
 
-const CompanyPage = () => {
-  const navigate = useNavigate();
+const UserPage = () => {
   const currentUser = useSelector((state) => state.loginSlice.currentUser);
+
   console.log(currentUser);
   const { data, isLoading } = useGetDataQuery({ id: currentUser.uid });
   const currentInfo = useSelector((state) => state.companyInfoSlice);
@@ -30,31 +29,6 @@ const CompanyPage = () => {
 
   const handleClose = () => {
     setOpen(false);
-  };
-
-  const [jobs, setJobs] = useState([]);
-
-  useEffect(() => {
-    const getData = async () => {
-      try {
-        const q = query(
-          collection(db, "jobs"),
-          where("companyName", "==", currentUser.displayName)
-        );
-        const querySnapshot = await getDocs(q);
-        const data = [];
-        querySnapshot.forEach((doc) => {
-          data.push({ item: doc.data(), id: doc.id });
-        });
-        setJobs(data);
-      } catch (error) {}
-    };
-
-    getData();
-  }, [currentUser?.displayName]);
-
-  const onClickAdd = () => {
-    navigate("/addNewWork");
   };
   const [updateData] = useUpdateDataMutation();
   const handleClick = async () => {
@@ -69,22 +43,21 @@ const CompanyPage = () => {
   return (
     <div className={styles.outContiner}>
       <div className="container">
-        <div className={styles.company}>
+        <div className={styles.user}>
           <div>
-            <CompanyNavbar user={currentUser} />
+            <UserNavbar user={currentUser} />
           </div>
-          <div className={styles.companyInfo}>
+          <div className={styles.userInfo}>
             {isLoading ? (
               <LinearColor />
             ) : (
-              data.map((p) => {
+              RESUME.map((p) => {
                 return (
-                  <CompanyInfo
+                  <ResumeItem
                     title={p.title}
-                    text={p.text}
+                    lable={p.lable}
                     key={uuid()}
                     onClick={(currentData) => {
-                      setUpdate({ ...currentData });
                       setOpen(true);
                     }}
                   />
@@ -120,17 +93,10 @@ const CompanyPage = () => {
               />
             </AlertDialogSlide>
           </div>
-
-          <BasicButtons onClick={onClickAdd} className={styles.btn}>
-            Add New Work
-          </BasicButtons>
-          {jobs.map((j) => (
-            <JobItem item={j.item} id={j.id} key={uuid()} toCompany />
-          ))}
         </div>
       </div>
     </div>
   );
 };
 
-export default CompanyPage;
+export default UserPage;

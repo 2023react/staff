@@ -4090,8 +4090,6 @@ cjs-module-lexer@^1.0.0:
   resolved "https://registry.yarnpkg.com/cjs-module-lexer/-/cjs-module-lexer-1.2.2.tgz#9f84ba3244a512f3a54e5277e8eef4c489864e40"
   integrity sha512-cOU9usZw8/dXIXKtwa8pM0OTJQuJkxMN6w30csNRUerHfeQ5R6U3kkU/FtJeIf3M202OHfY2U8ccInBG7/xogA==
 
-<<<<<<< HEAD
-=======
 ckeditor5@^36.0.0:
   version "36.0.0"
   resolved "https://registry.yarnpkg.com/ckeditor5/-/ckeditor5-36.0.0.tgz#7076aadfc3644829962d88900d5a9febf273979a"
@@ -4110,7 +4108,6 @@ ckeditor5@^36.0.0:
     "@ckeditor/ckeditor5-utils" "^36.0.0"
     "@ckeditor/ckeditor5-widget" "^36.0.0"
 
->>>>>>> 46e265ba4a584560c0f860085056295302500cb0
 classnames@^2.2.6, classnames@^2.3.1:
   version "2.3.2"
   resolved "https://registry.yarnpkg.com/classnames/-/classnames-2.3.2.tgz#351d813bf0137fcc6a76a16b88208d2560a0d924"
@@ -4808,16 +4805,6 @@ dom-serializer@^2.0.0:
     domhandler "^5.0.2"
     entities "^4.2.0"
 
-<<<<<<< HEAD
-=======
-dom7@^4.0.4:
-  version "4.0.4"
-  resolved "https://registry.yarnpkg.com/dom7/-/dom7-4.0.4.tgz#8b68c5d8e5e2ed0fddb1cb93e433bc9060c8f3fb"
-  integrity sha512-DSSgBzQ4rJWQp1u6o+3FVwMNnT5bzQbMb+o31TjYYeRi05uAcpF8koxdfzeoe5ElzPmua7W7N28YJhF7iEKqIw==
-  dependencies:
-    ssr-window "^4.0.0"
-
->>>>>>> 46e265ba4a584560c0f860085056295302500cb0
 domelementtype@1:
   version "1.3.1"
   resolved "https://registry.yarnpkg.com/domelementtype/-/domelementtype-1.3.1.tgz#d048c44b37b0d10a7f2a3d5fee3f4333d790481f"
@@ -4835,11 +4822,7 @@ domexception@^2.0.1:
   dependencies:
     webidl-conversions "^5.0.0"
 
-<<<<<<< HEAD
-domhandler@5.0.3, domhandler@^5.0.1, domhandler@^5.0.2:
-=======
 domhandler@5.0.3, domhandler@^5.0.1, domhandler@^5.0.2, domhandler@^5.0.3:
->>>>>>> 46e265ba4a584560c0f860085056295302500cb0
   version "5.0.3"
   resolved "https://registry.yarnpkg.com/domhandler/-/domhandler-5.0.3.tgz#cc385f7f751f1d1fc650c21374804254538c7d31"
   integrity sha512-cgwlv/1iFQiFnU96XXgROh8xTeetsnJiDsTc7TYCLFd9+/WNkIqPTxiM/8pSd8VIrhXGTf1Ny1q1hquVqDJB5w==
@@ -6081,8 +6064,6 @@ html-to-draftjs@^1.5.0:
   resolved "https://registry.yarnpkg.com/html-to-draftjs/-/html-to-draftjs-1.5.0.tgz#0df0eabf429deaedb63f5c859889e2c983606e86"
   integrity sha512-kggLXBNciKDwKf+KYsuE+V5gw4dZ7nHyGMX9m0wy7urzWjKGWyNFetmArRLvRV0VrxKN70WylFsJvMTJx02OBQ==
 
-<<<<<<< HEAD
-=======
 html-to-text@^9.0.3:
   version "9.0.3"
   resolved "https://registry.yarnpkg.com/html-to-text/-/html-to-text-9.0.3.tgz#331368f32fcb270c59dbd3a7fdb32813d2a490bc"
@@ -6094,7 +6075,6 @@ html-to-text@^9.0.3:
     htmlparser2 "^8.0.1"
     selderee "^0.10.0"
 
->>>>>>> 46e265ba4a584560c0f860085056295302500cb0
 html-webpack-plugin@^5.5.0:
   version "5.5.0"
   resolved "https://registry.yarnpkg.com/html-webpack-plugin/-/html-webpack-plugin-5.5.0.tgz#c3911936f57681c1f9f4d8b68c158cd9dfe52f50"
@@ -6106,11 +6086,7 @@ html-webpack-plugin@^5.5.0:
     pretty-error "^4.0.0"
     tapable "^2.0.0"
 
-<<<<<<< HEAD
-htmlparser2@8.0.1:
-=======
 htmlparser2@8.0.1, htmlparser2@^8.0.1:
->>>>>>> 46e265ba4a584560c0f860085056295302500cb0
   version "8.0.1"
   resolved "https://registry.yarnpkg.com/htmlparser2/-/htmlparser2-8.0.1.tgz#abaa985474fcefe269bc761a779b544d7196d010"
   integrity sha512-4lVbmc1diZC7GUJQtRQ5yBAeUCL1exyMwmForWkRLnwyzWBFxN633SALPMGYaWZvKe9j1pRZJpauvmxENSp/EA==
@@ -9662,11 +9638,7 @@ sprintf-js@~1.0.2:
   resolved "https://registry.yarnpkg.com/sprintf-js/-/sprintf-js-1.0.3.tgz#04e6926f662895354f3dd015203633b857297e2c"
   integrity sha512-D9cPgkvLlV3t3IzL0D0YLvGA9Ahk4PcvVwUbN0dSGr1aP0Nrt4AEnTUbuGvquEC0mA64Gqt1fzirlRs5ibXx8g==
 
-<<<<<<< HEAD
 ssr-window@^4.0.2:
-=======
-ssr-window@^4.0.0, ssr-window@^4.0.2:
->>>>>>> 46e265ba4a584560c0f860085056295302500cb0
   version "4.0.2"
   resolved "https://registry.yarnpkg.com/ssr-window/-/ssr-window-4.0.2.tgz#dc6b3ee37be86ac0e3ddc60030f7b3bc9b8553be"
   integrity sha512-ISv/Ch+ig7SOtw7G2+qkwfVASzazUnvlDTwypdLoPoySv+6MqlOV10VwPSE6EWkGjhW50lUmghPmpYZXMu/+AQ==
@@ -9939,20 +9911,11 @@ svgo@^2.7.0:
     picocolors "^1.0.0"
     stable "^0.1.8"
 
-<<<<<<< HEAD
 swiper@^9.0.1:
   version "9.0.1"
   resolved "https://registry.yarnpkg.com/swiper/-/swiper-9.0.1.tgz#5ce88babe72bbedf181ba9648c8e7a8982440f7f"
   integrity sha512-qSxZcfBSUJPAIYuYQu9XNI9b5bHeOXhA5ezlnHGeoKRGr4e8CH0TXvO/zN0bMf0M2DcUX5a/UxYQqgYvjmjmWw==
   dependencies:
-=======
-swiper@^8.4.6:
-  version "8.4.6"
-  resolved "https://registry.yarnpkg.com/swiper/-/swiper-8.4.6.tgz#5b52c83cb4aa9ce6f1640e44d3f93ff4ea6f7682"
-  integrity sha512-HACW035vBz2T6Kfut23EAzXhcDpgR8doX+wjq0ZUvJgS5SQApGrV885DAPLBFnmPUISsAhNSVxPKDxqroFvXvQ==
-  dependencies:
-    dom7 "^4.0.4"
->>>>>>> 46e265ba4a584560c0f860085056295302500cb0
     ssr-window "^4.0.2"
 
 symbol-tree@^3.2.4:
