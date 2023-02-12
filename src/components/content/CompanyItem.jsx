@@ -6,7 +6,7 @@ import LocationOnIcon from "@mui/icons-material/LocationOn";
 import VerifiedIcon from "@mui/icons-material/Verified";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import { Link } from "react-router-dom";
-
+import { PATHNAME } from "../../constants/pathname";
 import { COLORS } from "../../constants/styles";
 
 const JobItem = ({
@@ -35,9 +35,9 @@ const JobItem = ({
     width: "18px",
     marginRight: "5px",
   };
-
+  const { jobs } = PATHNAME;
   return (
-    <Link to={`/jobs/${companyName}`}>
+    <Link to={`${jobs}/${companyName}`}>
       {" "}
       <div className={styles.jobInfo}>
         <img src={photoUrl} alt="" />

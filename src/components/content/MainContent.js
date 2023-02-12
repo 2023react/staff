@@ -16,8 +16,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { addJobsData } from "../../store/slices/jobsSlice";
 import Selectlimit from "../../UI/Selectlimit";
 import LinearColor from "../../UI/Progress";
-
+import { SwiperComponent } from "../swiper/Swiper";
+import { PATHNAME } from "../../constants/pathname";
 const MainContent = () => {
+  const { jobs } = PATHNAME;
   const [limit, setLimit] = useState();
   const handleChange = (e) => {
     setLimit(e.target.value);
@@ -77,14 +79,16 @@ const MainContent = () => {
 
   return (
     <div className={styles.mainContent}>
-      <div className={styles.contentHotJobs}>Hot job</div>
+      <div className={styles.contentHotJobs}>
+        <SwiperComponent />
+      </div>
       <div className={styles.contentNavbar}>
         {" "}
         <div className={styles.selectLimit}>
           {" "}
           <Selectlimit limit={limit} handleChange={handleChange} />
         </div>
-        {location === "/jobs" ? (
+        {location === jobs ? (
           <Navbar />
         ) : (
           <p className={styles.companiesNavbarSuccessor}>

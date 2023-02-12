@@ -22,8 +22,10 @@ import {
 } from "../../store/slices/newJobSlice";
 import draftToHtml from "draftjs-to-html";
 import { currentSelector } from "../../store/slices/loginSlice";
-
+import { PATHNAME } from "../../constants/pathname";
 const JobDetailsNewWork = () => {
+  const { jobInfo, jobInfoToCompany, companyPage, addNewWork, current } =
+    PATHNAME;
   const location = useLocation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -38,15 +40,15 @@ const JobDetailsNewWork = () => {
   const currentUser = useSelector(currentSelector);
   const activeData = useSelector(activeDataSelector);
 
-  console.log(activeData);
+  console.log("s", companyPage);
 
   const getData = useCallback(async () => {
-    if (pathName === `/jobInfo` || pathName === `/jobInfoToCompany/${id}`) {
+    if (pathName === `${jobInfo}` || pathName === `${jobInfoToCompany}/${id}`) {
       setJobData(activeData);
       setLoading(true);
     }
     if (
-      pathName === `/jobInfoToCompany/${id}` &&
+      pathName === `${jobInfoToCompany}/${id}` &&
       location.search === "?current"
     ) {
       const docRef = doc(db, "jobs", id);
@@ -100,7 +102,7 @@ const JobDetailsNewWork = () => {
       }
     }
 
-    navigate("/companyPage");
+    navigate(companyPage);
   };
 
   const onClickEdit = () => {
@@ -119,7 +121,7 @@ const JobDetailsNewWork = () => {
         JobType: jobData.JobType,
       })
     );
-    id ? navigate(`/addNewWork/${id}`) : navigate("/addNewWork");
+    id ? navigate(`${addNewWork}/${id}`) : navigate(addNewWork);
   };
 
   return (
@@ -229,7 +231,7 @@ const JobDetailsNewWork = () => {
               Edit
             </BasicButtons>
 
-            {(pathName === `/jobInfo` || location.search !== "?current") && (
+            {(pathName === `${jobInfo}` || location.search !== current) && (
               <BasicButtons onClick={onAddJob} className={styles.btn}>
                 Add
               </BasicButtons>
