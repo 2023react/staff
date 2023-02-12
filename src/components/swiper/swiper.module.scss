@@ -1,20 +1,10 @@
-.mySwiper {
-  width: 67%;
-}
-
-.swiper {
-  background-color: white;
-  border: 1px solid rgb(225, 220, 220);
-  min-height: 400px;
-}
-
 .swiper_info {
   padding: 10px;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
   align-items: center;
-  height: 150px;
 
+  // background-color: #4f248f;
   .avatar {
     position: absolute;
     right: 20px;
@@ -23,39 +13,98 @@
 }
 
 .name {
-  word-wrap: break-word;
-  width: 50%;
-
-  span {
-    color: #46af3a;
-  }
+  // background-color: rgb(160, 95, 95);
 }
 .nameInfo {
-  min-height: 100px;
+  // background-color: rgb(60, 158, 193);
+
   padding-top: 30px;
 }
-.imageBlog {
-  display: block;
+.nameInfoSmall {
+  // background-color: rgb(60, 158, 193);
+
+  padding-top: 30px;
+
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -moz-box-orient: vertical;
+  -ms-box-orient: vertical;
+  box-orient: vertical;
+  -webkit-line-clamp: 1;
+  -moz-line-clamp: 1;
+  -ms-line-clamp: 1;
+  line-clamp: 1;
+  overflow: hidden;
 }
 
+// .imageBlog {
+//   background-color: #46af3a;
+// }
+
 .text {
+  // background-color: aqua;
   padding: 20px;
-  word-wrap: break-word;
-  min-height: 180px;
+
+  max-height: 100px;
+  line-height: 20px;
+  word-break: break-all;
+
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -moz-box-orient: vertical;
+  -ms-box-orient: vertical;
+  box-orient: vertical;
+  -webkit-line-clamp: 6;
+  -moz-line-clamp: 6;
+  -ms-line-clamp: 6;
+  line-clamp: 6;
+  overflow: hidden;
 }
-.pagination_padding {
-  margin-bottom: 50px;
-}
+
 .image {
   max-width: 70%;
 
   border: 1px solid rgb(225, 220, 220);
 }
 .jobInfoButton {
+  background-color: aliceblue;
   display: block;
   text-align: center;
   margin: 5px;
   button {
     margin: 5px;
   }
+}
+.slide {
+  background-color: #f6f1f3;
+  // background-color: red;
+  height: 100%;
+}
+
+.swiperMain {
+  border: 1px solid rgb(225, 220, 220);
+  padding: 40px;
+  // background-color: palevioletred;
+  width: 1200px;
+}
+
+.swiper {
+  width: 840px;
+}
+
+.dots {
+  display: none;
+}
+
+:root {
+  --swiper-navigation-size: 30px;
+}
+
+.span {
+  color: #46af3a;
+  font-size: 14px;
+}
+.spanSmall {
+  color: #46af3a;
+  font-size: 12px;
 }

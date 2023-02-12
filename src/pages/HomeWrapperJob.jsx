@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Button from "@mui/material/Button";
 import SearchIcon from "@mui/icons-material/Search";
 import { margin } from "@mui/system";
-import Slider from "../components/Carousel";
+import Slider from "../components/carusel/Carousel";
 import styles from "./Home.module.scss";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -16,6 +16,7 @@ import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import MenuItem from "@mui/material/MenuItem";
 import { Link } from "react-router-dom";
+import { PATHNAME } from "../constants/pathname";
 import {
   deleteFilter,
   emptyFilter,
@@ -23,6 +24,7 @@ import {
 } from "../store/slices/filterSlice";
 
 export function WrapperJob() {
+  const { jobs } = PATHNAME;
   const dispatch = useDispatch();
   const category = useSelector((state) => state.filterSlice.jobCategory);
   const value = String(category);
@@ -62,7 +64,7 @@ export function WrapperJob() {
       </div>
 
       <div className={styles.fields}>
-        <Link to="/jobs">
+        <Link to={jobs}>
           <Button className={styles.searchbtn} variant="contained">
             <SearchIcon />
           </Button>

@@ -56,7 +56,6 @@ function App() {
   const dispatch = useDispatch();
   useEffect(() => {
     onAuthStateChanged(auth, (currentUser) => {
-      console.log(currentUser);
       dispatch(changeCurrentUser(currentUser));
     });
   }, [dispatch]);
