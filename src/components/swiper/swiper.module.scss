@@ -37,9 +37,9 @@
   overflow: hidden;
 }
 
-// .imageBlog {
-//   background-color: #46af3a;
-// }
+.imageBlog {
+  width: 40%;
+}
 
 .text {
   // background-color: aqua;
@@ -62,7 +62,7 @@
 }
 
 .image {
-  max-width: 70%;
+  width: 100%;
 
   border: 1px solid rgb(225, 220, 220);
 }

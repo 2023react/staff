@@ -131,7 +131,7 @@ export const SwiperComponent = () => {
         <SwiperSlide className={styles.slide}>
           <div className={styles.swiper_info}>
             <div className={styles.imageBlog}>
-              <img className={styles.image} src={item.item.photoUrl} />
+              <img className={styles.image} src={item.item.img} />
             </div>
             <div className={styles.name}>
               <div className={styles.avatar}>
