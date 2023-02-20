@@ -1,30 +1,4 @@
-.swiper_info {
-  padding: 10px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  // background-color: #4f248f;
-  .avatar {
-    position: absolute;
-    right: 20px;
-    top: 5px;
-  }
-}
-
-.name {
-  // background-color: rgb(160, 95, 95);
-}
-.nameInfo {
-  // background-color: rgb(60, 158, 193);
-
-  padding-top: 30px;
-}
 .nameInfoSmall {
-  // background-color: rgb(60, 158, 193);
-
-  padding-top: 30px;
-
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -moz-box-orient: vertical;
@@ -35,17 +9,28 @@
   -ms-line-clamp: 1;
   line-clamp: 1;
   overflow: hidden;
+  font-size: 13px;
 }
 
 .imageBlog {
   width: 40%;
+
+  .image {
+    width: 100px;
+    height: 120px;
+    border: 1px solid rgb(225, 220, 220);
+  }
+
+  .smallImage {
+    width: 60px;
+    height: 70px;
+  }
 }
 
 .text {
-  // background-color: aqua;
   padding: 20px;
 
-  max-height: 100px;
+  height: 100px;
   line-height: 20px;
   word-break: break-all;
 
@@ -60,36 +45,84 @@
   line-clamp: 6;
   overflow: hidden;
 }
+.smallText {
+  height: 43px;
+  line-height: 20px;
+  word-break: break-all;
 
-.image {
-  width: 100%;
-
-  border: 1px solid rgb(225, 220, 220);
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -moz-box-orient: vertical;
+  -ms-box-orient: vertical;
+  box-orient: vertical;
+  -webkit-line-clamp: 3;
+  -moz-line-clamp: 3;
+  -ms-line-clamp: 3;
+  line-clamp: 3;
+  overflow: hidden;
 }
+
 .jobInfoButton {
   background-color: aliceblue;
+
   display: block;
+
   text-align: center;
   margin: 5px;
   button {
     margin: 5px;
   }
 }
-.slide {
-  background-color: #f6f1f3;
-  // background-color: red;
-  height: 100%;
-}
-
 .swiperMain {
-  border: 1px solid rgb(225, 220, 220);
   padding: 40px;
-  // background-color: palevioletred;
+
   width: 1200px;
 }
 
+.slide {
+  background-color: white;
+
+  border: 1px solid rgb(225, 220, 220);
+  height: 100%;
+  min-height: 150px;
+}
 .swiper {
   width: 840px;
+}
+
+.swiper_info {
+  padding: 10px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .avatar {
+    position: absolute;
+    right: 20px;
+    top: 5px;
+  }
+}
+.name {
+  width: 50%;
+
+  .span {
+    color: #46af3a;
+    font-size: 14px;
+  }
+}
+.nameInfo {
+  font-weight: 600;
+  padding: 10px 0 8px 0;
+}
+.nameSmall {
+  margin-right: 30px;
+  margin-top: 15px;
+}
+
+.spanSmall {
+  color: #46af3a;
+  font-size: 12px;
 }
 
 .dots {
@@ -98,13 +131,4 @@
 
 :root {
   --swiper-navigation-size: 30px;
-}
-
-.span {
-  color: #46af3a;
-  font-size: 14px;
-}
-.spanSmall {
-  color: #46af3a;
-  font-size: 12px;
 }

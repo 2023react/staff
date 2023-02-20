@@ -12,92 +12,13 @@ import parse from "html-react-parser";
 import HeartIcon from "../../UI/HeartIcon";
 import { useSelector } from "react-redux";
 import { useLocation } from "react-router";
-import {
-  useGetFiltredDataQuery,
-  useGetjobQuery,
-} from "../../store/slices/dataControlRTKQ";
-import { useState } from "react";
-import { useCallback } from "react";
-import {
-  collection,
-  doc,
-  getDoc,
-  getDocs,
-  query,
-  where,
-} from "firebase/firestore";
-import { db } from "../../firebase";
-import { useEffect } from "react";
+import { v4 as uuid } from "uuid";
+import { useGetFiltredDataQuery } from "../../store/slices/dataControlRTKQ";
+
+import { where } from "firebase/firestore";
+
 import draftToHtml from "draftjs-to-html";
 
-// export const SwiperComponent = () => {
-//   const jobData = useSelector((state) => state.jobsSlice.jobsData);
-
-//   return (
-//     <Swiper
-//       breakpoints={{
-//         380: {
-//           width: 380,
-//           slidesPerView: 1,
-//         },
-//       }}
-//       slidesPerView={3}
-//       spaceBetween={50}
-//       loop={true}
-//       pagination={{
-//         clickable: true,
-//         el: ".swiper-pagination",
-//       }}
-//       autoplay={{
-//         delay: 2500,
-//         disableOnInteraction: false,
-//       }}
-//       modules={[Pagination, Autoplay]}
-//       className={styles.mySwiper}
-//     >
-//       {jobData.map((item) => (
-//         <div>
-//           <SwiperSlide className={styles.swiper} key={uuid()}>
-//             <div className={styles.swiper_info}>
-//               <div className={styles.imageBlog}>
-//                 <img className={styles.image} src={item.item.photoUrl} />
-//               </div>
-//               <div className={styles.name}>
-//                 <div className={styles.avatar}>
-//                   <Avatar sx={{ background: "#424548" }}>
-//                     <LocalFireDepartmentIcon
-//                       sx={{ color: "#fc6c33", fontSize: "30px" }}
-//                     />
-//                   </Avatar>
-//                 </div>
-//                 <div className={styles.nameInfo}>
-//                   <h2>{item.item.jobName}</h2>
-//                 </div>
-//                 <span>{item.item.companyName}</span>
-//               </div>
-//             </div>
-//             <div className={styles.text}>
-//               <p>{item.item.jobDescription}</p>
-//             </div>
-//             <div className={styles.jobInfoButton}>
-//               <BasicButtons size="small" variant="Follow">
-//                 <HeartIcon />
-//                 Follow
-//               </BasicButtons>
-//               <BasicButtons size="small" variant="ViewMore">
-//                 View more
-//               </BasicButtons>
-//             </div>
-//           </SwiperSlide>
-//         </div>
-//       ))}
-//       <div className={styles.pagination_padding}></div>
-//       <div>
-//         <div class="swiper-pagination"></div>
-//       </div>
-//     </Swiper>
-//   );
-// };
 export const SwiperComponent = () => {
   const jobDatas = useSelector((state) => state.jobsSlice.jobsData);
   const jobCategory = useSelector((state) => state.filterSlice.jobCategory);
@@ -110,11 +31,10 @@ export const SwiperComponent = () => {
     filterHints,
   });
 
-  console.log("d", jobData);
   return (
     <Swiper
       modules={[Pagination, Autoplay, Navigation]}
-      spaceBetween={40}
+      spaceBetween={45}
       slidesPerView={3}
       className={`${styles.swiperMain} ${[isHomePage ? "" : styles.swiper]}`}
       autoplay={{
@@ -128,12 +48,26 @@ export const SwiperComponent = () => {
       navigation={true}
     >
       {jobData?.map((item) => (
-        <SwiperSlide className={styles.slide}>
+        <SwiperSlide className={styles.slide} key={uuid()}>
           <div className={styles.swiper_info}>
-            <div className={styles.imageBlog}>
-              <img className={styles.image} src={item.item.img} />
+            <div
+              className={`${styles.imageBlog} ${[
+                isHomePage ? "" : styles.smallImageB,
+              ]}`}
+              src={item.item.img}
+            >
+              <img
+                className={`${styles.image} ${[
+                  isHomePage ? "" : styles.smallImage,
+                ]}`}
+                src={item.item.img}
+              />
             </div>
-            <div className={styles.name}>
+            <div
+              className={`${styles.name} ${[
+                isHomePage ? "" : styles.nameSmall,
+              ]}`}
+            >
               <div className={styles.avatar}>
                 <Avatar sx={{ background: "#424548" }}>
                   <LocalFireDepartmentIcon
@@ -146,21 +80,21 @@ export const SwiperComponent = () => {
                   isHomePage ? "" : styles.nameInfoSmall,
                 ]}`}
               >
-                <p>{item.item.jobName}</p>
+                <div>{item.item.jobName}</div>
               </div>
-              <p
+              <div
                 className={`${styles.span} ${[
                   isHomePage ? "" : styles.spanSmall,
                 ]}`}
               >
                 {item.item.companyName}
-              </p>
+              </div>
             </div>
           </div>
-          <div className={styles.text}>
-            {parse(`${draftToHtml(jobData.description)}`)}
-            {/* <p>{item.item.jobDescription}</p> */}
-            <p>{parse(`${draftToHtml(item.item.description)}`)}</p>
+          <div
+            className={`${styles.text} ${[isHomePage ? "" : styles.smallText]}`}
+          >
+            <div>{parse(`${draftToHtml(item.item.description)}`)}</div>
           </div>
           <div className={styles.jobInfoButton}>
             <BasicButtons size="small" variant="Follow">
