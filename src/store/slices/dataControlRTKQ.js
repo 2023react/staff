@@ -23,10 +23,11 @@ import { db } from "../../firebase";
 
 export const dataApi = createApi({
   reducerPath: "dataApi",
-  tagTypes: ["Jobs", "Info", "Companies"],
+
+  tagTypes: ["Jobs", "Info", "Cv", "Companies"],
   baseQuery: fakeBaseQuery(),
   endpoints: (builder) => ({
-    getFiltredData: builder.query({
+    getFiltredWhere: builder.query({
       async queryFn({ limits, filterHints }) {
         try {
           const fetchData = await getDocs(
@@ -40,6 +41,7 @@ export const dataApi = createApi({
 
           return { data };
         } catch (e) {
+          console.log(e, "error");
           return { error: e };
         }
       },
@@ -147,7 +149,8 @@ export const dataApi = createApi({
   }),
 });
 export const {
-  useGetFiltredDataQuery,
+  useGetFiltredINQuery,
+  useLazyGetFiltredWhereQuery,
   useAddJobsMutation,
   useDeleteJobsMutation,
   useGetDataQuery,

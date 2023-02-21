@@ -25,14 +25,17 @@ import UserPage from "./components/user/UserPage";
 import LoginForm from "./components/login/loginForm/LoginForm";
 import { doc, getDoc } from "firebase/firestore";
 import CompanyLogin from "./components/login/companyLogin/CompanyLogin";
+import PDFConvertor from "./components/user/pdfConvertor/PDFConvertor";
 
 const r = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Layout />}>
       <Route index element={<Home />} />
       <Route path="/jobs" element={<Jobs />} />
+
       <Route path="/company/:id" element={<CompanyPage />} />
       <Route path="/companyDetails/:id" element={<CompanyPageDetails />} />
+      <Route path="/user/:name" element={<UserPage />} />
       <Route path="/user" element={<UserPage />} />
       <Route path="/companies" element={<Companies />} />
       <Route path="/jobs/:id" element={<JobDetails />} />
@@ -63,6 +66,7 @@ const r = createBrowserRouter(
       <Route path="/jobInfo/:id" element={<JobDetailsNewWork />} />
 
       <Route path="/jobInfoToCompany/:id" element={<JobDetailsNewWork />} />
+      <Route path="/pdfcv" element={<PDFConvertor />} />
     </Route>
   )
 );

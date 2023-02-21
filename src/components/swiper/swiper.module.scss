@@ -1,19 +1,101 @@
-.mySwiper {
-  width: 67%;
+.nameInfoSmall {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -moz-box-orient: vertical;
+  -ms-box-orient: vertical;
+  box-orient: vertical;
+  -webkit-line-clamp: 1;
+  -moz-line-clamp: 1;
+  -ms-line-clamp: 1;
+  line-clamp: 1;
+  overflow: hidden;
+  font-size: 13px;
 }
 
-.swiper {
+.imageBlog {
+  width: 40%;
+
+  .image {
+    width: 100px;
+    height: 120px;
+    border: 1px solid rgb(225, 220, 220);
+  }
+
+  .smallImage {
+    width: 60px;
+    height: 70px;
+  }
+}
+
+.text {
+  padding: 20px;
+
+  height: 100px;
+  line-height: 20px;
+  word-break: break-all;
+
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -moz-box-orient: vertical;
+  -ms-box-orient: vertical;
+  box-orient: vertical;
+  -webkit-line-clamp: 6;
+  -moz-line-clamp: 6;
+  -ms-line-clamp: 6;
+  line-clamp: 6;
+  overflow: hidden;
+}
+.smallText {
+  height: 43px;
+  line-height: 20px;
+  word-break: break-all;
+
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -moz-box-orient: vertical;
+  -ms-box-orient: vertical;
+  box-orient: vertical;
+  -webkit-line-clamp: 3;
+  -moz-line-clamp: 3;
+  -ms-line-clamp: 3;
+  line-clamp: 3;
+  overflow: hidden;
+}
+
+.jobInfoButton {
+  background-color: aliceblue;
+
+  display: block;
+
+  text-align: center;
+  margin: 5px;
+  button {
+    margin: 5px;
+  }
+}
+.swiperMain {
+  padding: 40px;
+
+  width: 1200px;
+}
+
+.slide {
   background-color: white;
+
   border: 1px solid rgb(225, 220, 220);
-  min-height: 400px;
+  height: 100%;
+  min-height: 150px;
+}
+.swiper {
+  width: 840px;
 }
 
 .swiper_info {
   padding: 10px;
+
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
   align-items: center;
-  height: 150px;
 
   .avatar {
     position: absolute;
@@ -21,41 +103,32 @@
     top: 5px;
   }
 }
-
 .name {
-  word-wrap: break-word;
   width: 50%;
 
-  span {
+  .span {
     color: #46af3a;
+    font-size: 14px;
   }
 }
 .nameInfo {
-  min-height: 100px;
-  padding-top: 30px;
+  font-weight: 600;
+  padding: 10px 0 8px 0;
 }
-.imageBlog {
-  display: block;
+.nameSmall {
+  margin-right: 30px;
+  margin-top: 15px;
 }
 
-.text {
-  padding: 20px;
-  word-wrap: break-word;
-  min-height: 180px;
+.spanSmall {
+  color: #46af3a;
+  font-size: 12px;
 }
-.pagination_padding {
-  margin-bottom: 50px;
-}
-.image {
-  max-width: 70%;
 
-  border: 1px solid rgb(225, 220, 220);
+.dots {
+  display: none;
 }
-.jobInfoButton {
-  display: block;
-  text-align: center;
-  margin: 5px;
-  button {
-    margin: 5px;
-  }
+
+:root {
+  --swiper-navigation-size: 30px;
 }

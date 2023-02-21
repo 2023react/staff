@@ -8,6 +8,7 @@ import Email from "../../../UI/Email";
 import Travel from "../../../UI/Travel";
 import Bag from "../../../UI/Bag";
 import EditActionButtons from "../../../UI/EditIcon";
+import { NavLink } from "react-router-dom";
 
 const UserNavbar = ({ user }) => {
   const verifiedIconStyles = { width: "25px" };
@@ -39,7 +40,7 @@ const UserNavbar = ({ user }) => {
             <div className={styles.lable}>
               <div className={styles.itemsWraper}>
                 <Email color="customGreen" />
-                <h3>{user.email}</h3>
+                <h3>{user?.email}</h3>
               </div>
             </div>
             <div className={styles.lable}>
@@ -55,11 +56,17 @@ const UserNavbar = ({ user }) => {
         </div>
         <div className={styles.followBtn}>
           <div className={styles.itemsWraper}>
-            <EditActionButtons />
             <FollowButton size="small" variant="Follow">
-              <HeartIcon /> Following
+              <HeartIcon variant="heart" /> Subscriptions
             </FollowButton>
+            <NavLink to="/pdfcv">
+              {" "}
+              <FollowButton variant="ViewMore">Convert CV to PDF</FollowButton>
+            </NavLink>
           </div>
+        </div>
+        <div className={styles.userEdit}>
+          <EditActionButtons />
         </div>
       </div>
     </div>

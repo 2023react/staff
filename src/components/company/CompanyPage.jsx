@@ -10,7 +10,6 @@ import parse from "html-react-parser";
 
 import {
   useGetDataQuery,
-  useUpdateDataMutation,
   useUpdateCompanyDataMutation,
   dataApi,
 } from "../../store/slices/dataControlRTKQ";
@@ -27,19 +26,29 @@ import {
   getDoc,
 } from "firebase/firestore";
 import JobItem from "../content/JobItem";
+
 import { useNavigate, useParams } from "react-router";
 import TextEditor from "../textEditor/TextEditor";
 import Contacts from "./contacts/Contacts";
 
+import { PATHNAME } from "../../constants/pathname";
+
 const CompanyPage = () => {
+  const { addNewWork } = PATHNAME;
   const navigate = useNavigate();
   const params = useParams();
   const currentUser = useSelector((state) => state.loginSlice.currentUser);
+
   const id = params.id;
 
   // const { data, isLoading } = useGetDataQuery(id);
   // console.log(isLoading, i + 1);
   // const currentInfo = useSelector((state) => state.companyInfoSlice);
+
+  const { data, isLoading } = useGetDataQuery({ id: currentUser?.uid });
+
+  const currentInfo = useSelector((state) => state.companyInfoSlice);
+
   const [open, setOpen] = useState(false);
   const [info, setInfo] = useState();
   const [defaultInfo, setDefaultInfo] = useState();
@@ -91,7 +100,7 @@ const CompanyPage = () => {
   }, [currentUser?.displayName, id]);
 
   const onClickAdd = () => {
-    navigate("/addNewWork");
+    navigate(addNewWork);
   };
 
   // const [updateData] = useUpdateDataMutation();
@@ -113,6 +122,7 @@ const CompanyPage = () => {
 
     handleClose();
   };
+
   return (
     <div className={styles.outContiner}>
       <div className="container">
@@ -137,7 +147,6 @@ const CompanyPage = () => {
               />
             </div>
 
-            {/* <div>{parse(`${draftToHtml(info)}`)}</div> */}
             <div className={styles.addInfo}>
               <AddActionButtons
                 onClick={() => {
@@ -153,15 +162,6 @@ const CompanyPage = () => {
                 handleClose={handleClose}
                 title="Type info about your company"
               >
-                {/* <div className={styles.editorBlock}>
-                  <p>Title</p>
-                  <EditorComponent data={update} isTitle />
-                </div>
-
-                <div className={styles.editorBlock}>
-                  <p>Description</p>
-                  <EditorComponent data={update} />
-                </div> */}
                 <TextEditor
                   big
                   value={defaultInfo}

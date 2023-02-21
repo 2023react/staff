@@ -2,7 +2,7 @@ import React from "react";
 import Button from "@mui/material/Button";
 import SearchIcon from "@mui/icons-material/Search";
 import { margin } from "@mui/system";
-import Slider from "../components/Carousel";
+import Slider from "../components/carusel/Carousel";
 import styles from "./Home.module.scss";
 import { useSelector } from "react-redux";
 

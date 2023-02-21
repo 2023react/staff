@@ -3,16 +3,19 @@ import styles from "./contents.module.scss";
 import BasicButtons from "../../UI/Button";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
-
+import { PATHNAME } from "../../constants/pathname";
 import { Link } from "react-router-dom";
 
 import BassicVerifiedIcon from "../../UI/VerifiedIcon";
 import HeartIcon from "../../UI/HeartIcon";
 
 const JobItem = ({ id, item, toCompany }) => {
+  const { jobs, jobInfoToCompany } = PATHNAME;
   const iconWidth = { width: "15px" };
   return (
-    <Link to={!toCompany ? `/jobs/${id}` : `/jobInfoToCompany/${id}?current`}>
+    <Link
+      to={!toCompany ? `${jobs}/${id}` : `${jobInfoToCompany}/${id}?current`}
+    >
       <div className={styles.jobInfo}>
         <img src={item?.img} alt="img" />
         <div className={styles.jobInfoTitleBlocks}>

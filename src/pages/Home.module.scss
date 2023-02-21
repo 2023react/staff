@@ -1,3 +1,10 @@
+.main {
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+}
+
 .search_section {
   background: linear-gradient(170deg, #46af3a 30%, #407bff) no-repeat;
   width: 100%;

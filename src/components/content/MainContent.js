@@ -12,10 +12,11 @@ import {
 import { where } from "firebase/firestore";
 
 import { useDispatch, useSelector } from "react-redux";
-import { addJobsData } from "../../store/slices/jobsSlice";
 import Selectlimit from "../../UI/Selectlimit";
 import LinearColor from "../../UI/Progress";
+
 import CompanyItem from "../company/companyItem/CompanyItem";
+import { SwiperComponent } from "../swiper/Swiper";
 
 const MainContent = () => {
   const dispatch = useDispatch();
@@ -46,27 +47,6 @@ const MainContent = () => {
     return [...industryType];
   };
 
-  // const getData = useCallback(async () => {
-  //     const ref = collection(db, "jobs");
-  //     const levelsType = levelCategory.map((item) =>
-  //       where("requiredCandidateLevel", "==", item)
-  //     );
-  //     const jobsType = jobCategory.map((item) =>
-  //       where("jobCategory", "==", item)
-  //     );
-  //     const q1 = query(ref, ...levelsType, ...jobsType);
-  //     const fetchData = await getDocs(q1);
-  //     const data = [];
-  //     fetchData.forEach((doc) => {
-  //       data.push({ item: doc.data(), id: doc.id });
-  //     });
-  //     dispatch(addJobsData(data));
-  //   }, [dispatch, jobCategory, levelCategory]);
-  //   useEffect(() => {
-  //     getData();
-  //   }, [getData]);
-  //   const jobData = useSelector((state) => state.jobsSlice?.jobsData);
-
   const { data, isLoading } = useGetFiltredDataQuery({
     limits: limit,
     filterHints: getFilteredJobs(),
@@ -87,17 +67,60 @@ const MainContent = () => {
     ));
   };
 
-  console.log(data);
+  // import { SwiperComponent } from "../swiper/Swiper";
+  // import { PATHNAME } from "../../constants/pathname";
+  // const MainContent = () => {
+  //   const { jobs } = PATHNAME;
+  //   const [limit, setLimit] = useState();
+  //   const [jobsData, setJobsData] = useState([]);
+  //   const location = useLocation().pathname;
+  //   const dispatch = useDispatch();
+  //   const levelCategory = useSelector((state) => state.filterSlice.levelCategory);
+  //   const jobCategory = useSelector((state) => state.filterSlice.jobCategory);
+  //   const handleChange = (e) => {
+  //     setLimit(e.target.value);
+  //   };
+  //   const filterHints = jobCategory.length
+  //     ? [where("jobCategory", "in", jobCategory)]
+  //     : levelCategory.length
+  //     ? [where("level", "in", levelCategory)]
+  //     : [];
+
+  //   const { data, isLoading } = useGetFiltredINQuery({
+  //     limits: limit,
+  //     filterHints,
+  //   });
+  //   useEffect(() => {
+  //     let filtredJobs = data;
+
+  //     if (jobCategory.length && levelCategory.length) {
+  //       filtredJobs = data.filter((value) =>
+  //         levelCategory.includes(value.item.level)
+  //       );
+  //     }
+  //     if (filtredJobs === jobsData) {
+  //       return;
+  //     }
+  //     setJobsData(filtredJobs);
+  //   }, [data, jobCategory, levelCategory, jobsData]);
+  //   const [addJob, { isSuccess }] = useAddJobsMutation();
+  //   const [deleteJob, { isError }] = useDeleteJobsMutation();
+  //   const handleAddJob = async (job) => {
+  //     addJob({ job }).unwrap();
+  //   };
+
+  //   const handleDeleteJob = async (job) => {
+  //     deleteJob("f2604580-8c76-497e-a6e1-15a34a3c9b5c").unwrap();
+  //   };
+  //   dispatch(addJobsData(data));
 
   return (
     <div className={styles.mainContent}>
-      <div className={styles.contentHotJobs}>Hot job</div>
+      <div className={styles.contentHotJobs}>
+        <SwiperComponent />
+      </div>
       <div className={styles.contentNavbar}>
-        {/* <div className={styles.selectLimit}>
-          
-          <Selectlimit limit={limit} handleChange={handleChange} />
-        </div> */}
-        {location === "/jobs" ? (
+        {location === "jobs" ? (
           <Navbar />
         ) : (
           <p className={styles.companiesNavbarSuccessor}>
@@ -108,6 +131,14 @@ const MainContent = () => {
 
       <div className={styles.jobsColections}>
         {isLoading || loading ? <LinearColor /> : getData()}
+
+        {/* // {isLoading ? ( */}
+        {/* //   <LinearColor />
+        // ) : (
+        //   jobsData?.map((job) => {
+        //     return <JobItem item={job?.item} id={job?.id} key={uuid()} />;
+        //   })
+        // )} */}
       </div>
     </div>
   );

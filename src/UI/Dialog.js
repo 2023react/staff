@@ -31,13 +31,21 @@ export default function AlertDialogSlide({
           sx: { height: "100%", maxWidth: "80%" },
         }}
       >
-        {" "}
-        <DialogActions>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "flex-end",
+            height: "50px",
+            backgroundColor: " #46af3a",
+          }}
+        >
+          {" "}
           <CloseIcon
-            sx={{ fontSize: "32px", cursor: "pointer" }}
+            sx={{ fontSize: "32px", cursor: "pointer", color: "#fff" }}
             onClick={handleClose}
           ></CloseIcon>
-        </DialogActions>
+        </div>{" "}
         <DialogTitle sx={{ textAlign: "center", ...customStylesTitle }}>
           {title}
         </DialogTitle>
@@ -46,7 +54,8 @@ export default function AlertDialogSlide({
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
-            gap: "30px",
+            width: "100%",
+            // fullWidth: "true",
           }}
         >
           {children}

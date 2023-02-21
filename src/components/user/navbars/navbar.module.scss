@@ -12,6 +12,11 @@
       object-fit: cover;
     }
   }
+
+  .userEdit {
+    display: flex;
+    justify-content: flex-end;
+  }
   .companyInfo {
     position: relative;
     display: flex;
@@ -30,7 +35,7 @@
       .titleList {
         display: flex;
         justify-content: space-between;
-
+        gap: 20px;
         .lable {
           display: flex;
           flex-direction: column;
