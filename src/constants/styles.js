@@ -45,6 +45,15 @@ export const theme = createTheme({
             marginRight: "5px",
           },
         },
+        {
+          props: { variant: "remove" },
+          style: {
+            cursor: "pointer",
+            width: "30px",
+            marginLeft: "5px",
+            color: COLORS.customGray,
+          },
+        },
       ],
     },
 

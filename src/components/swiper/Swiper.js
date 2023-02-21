@@ -61,6 +61,7 @@ export const SwiperComponent = () => {
                   isHomePage ? "" : styles.smallImage,
                 ]}`}
                 src={item.item.img}
+                alt=""
               />
             </div>
             <div

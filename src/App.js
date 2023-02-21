@@ -21,6 +21,7 @@ import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
 import JobDetailsNewWork from "./components/JobDetails/JobDetailsNewWork";
 import AddNewWork from "./components/addNewWork/AddNewWork";
 import UserPage from "./components/user/UserPage";
+import PDFConvertor from "./components/user/pdfConvertor/PDFConvertor";
 
 const r = createBrowserRouter(
   createRoutesFromElements(
@@ -28,6 +29,7 @@ const r = createBrowserRouter(
       <Route index element={<Home />} />
       <Route path="/jobs" element={<Jobs />} />
       <Route path="/company/:name" element={<CompanyPage />} />
+      <Route path="/user/:name" element={<UserPage />} />
       <Route path="/user" element={<UserPage />} />
       <Route path="/companies" element={<Companies />} />
       <Route path="/jobs/:id" element={<JobDetails />} />
@@ -49,6 +51,7 @@ const r = createBrowserRouter(
       <Route path="/jobInfo/:id" element={<JobDetailsNewWork />} />
 
       <Route path="/jobInfoToCompany/:id" element={<JobDetailsNewWork />} />
+      <Route path="/pdfcv" element={<PDFConvertor />} />
     </Route>
   )
 );

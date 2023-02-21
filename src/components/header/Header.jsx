@@ -64,7 +64,11 @@ const Header = () => {
                 </NavLink>
                 {currentUser ? (
                   <NavLink
-                    to={`/company/${currentUser.displayName}`}
+                    to={
+                      currentUser.photoURL
+                        ? `/company/${currentUser.displayName}`
+                        : `/user/${currentUser.displayName}`
+                    }
                     className={style.logOutoBox}
                   >
                     {" "}

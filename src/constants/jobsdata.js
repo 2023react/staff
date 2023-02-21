@@ -8,7 +8,7 @@ export const jobsData = [
     jobDescription:
       "BostonGene is a pioneer company that uses biomedical software to identify new and personalized treatment options with next-generation multi-platform analytics, improving and optimizing cancer patient outcomes. We develop a distributed information and analytical system that provides oncologists with the necessary data for diagnosis and personalized treatment of patients.",
     jobCategory: "Software development",
-    requiredCandidateLevel: "Student",
+    level: "Student",
     location: "Yerevan",
     professionalSkills: ["JavaScript", "React.js", "Redux", "TypeScript"],
     requiredqualifications: [
@@ -28,7 +28,7 @@ export const jobsData = [
     jobDescription:
       "DPD in Armenia (“Evrazes Express” LLC) is looking for a skilled, enthusiastic and competent specialist for the position of Customer Service Agent who will represent front line of the company.",
     jobCategory: "Sales/service management",
-    requiredCandidateLevel: "Senior",
+    level: "Senior",
     location: "Yerevan",
     professionalSkills: ["Advising clients by phone"],
     requiredqualifications: [
@@ -48,7 +48,7 @@ export const jobsData = [
     jobDescription:
       "BostonGene is a pioneer company that uses biomedical software to identify new and personalized treatment options with next-generation multi-platform analytics, improving and optimizing cancer patient outcomes. We develop a distributed information and analytical system that provides oncologists with the necessary data for diagnosis and personalized treatment of patients.",
     jobCategory: "Software development",
-    requiredCandidateLevel: "Mid level",
+    level: "Mid level",
     location: "Yerevan",
     professionalSkills: ["JavaScript", "React.js", "Redux", "TypeScript"],
     requiredqualifications: [
@@ -149,7 +149,7 @@ export const jobsData = [
     jobDescription:
       "DPD in Armenia (“Evrazes Express” LLC) is looking for a skilled, enthusiastic and competent specialist for the position of Customer Service Agent who will represent front line of the company.",
     jobCategory: "Sales/service management",
-    requiredCandidateLevel: "Not defined",
+    level: "Not defined",
     location: "Yerevan",
     professionalSkills: ["JavaScript", "React.js", "Redux", "TypeScript"],
     softSkills: [
@@ -173,19 +173,5 @@ export const jobsData = [
       "frequent performance reviews;",
       "competitive salary and healthcare insurance, on-site catering.",
     ],
-  },
-
-  {
-    name: "hello",
-    age: 20,
-  },
-
-  {
-    name: "hello",
-    age: 21,
-  },
-  {
-    name: "hello",
-    age: 22,
   },
 ];

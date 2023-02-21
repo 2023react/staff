@@ -14,7 +14,7 @@ const EditorComponent = ({ isTitle, data }) => {
   const dispatch = useDispatch();
 
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
-  let onEdite = isTitle ? onEditTitle : onEditText;
+  let onEdit = isTitle ? onEditTitle : onEditText;
 
   useEffect(() => {
     if (data) {
@@ -26,8 +26,8 @@ const EditorComponent = ({ isTitle, data }) => {
   }, [data, isTitle]);
   useEffect(() => {
     let data = convertToRaw(editorState.getCurrentContent());
-    dispatch(onEdite(data));
-  }, [editorState, dispatch, onEdite]);
+    dispatch(onEdit(data));
+  }, [editorState, dispatch, onEdit]);
 
   // const blocksFromHTML = convertFromHTML(<p>html</p>);
   // const state = ContentState.createFromBlockArray(

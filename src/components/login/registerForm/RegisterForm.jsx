@@ -4,6 +4,14 @@ import { useForm } from "react-hook-form";
 
 import InputField from "../input/Input";
 import RegisterButtons from "../../../UI/Button";
+import { useNavigate } from "react-router";
+import {
+  createUserWithEmailAndPassword,
+  getAuth,
+  updateProfile,
+} from "firebase/auth";
+import { auth, db } from "../../../firebase";
+import { doc, setDoc } from "firebase/firestore";
 
 const RegisterForm = () => {
   const {
@@ -14,9 +22,36 @@ const RegisterForm = () => {
     mode: "onBlur",
   });
 
+  const navigate = useNavigate();
   const onSubmit = async (data) => {
     try {
-    } catch (error) {}
+      const res = await createUserWithEmailAndPassword(
+        auth,
+        data.email,
+        data.password
+      );
+
+      try {
+        await updateProfile(res.user, {
+          displayName: data.firstName,
+          isAnonymous: true,
+        });
+
+        await setDoc(doc(db, "users", res.user.uid), {
+          uid: res.user.uid,
+          firstName: data.firstName,
+          lastName: data.lastName,
+          email: data.email,
+          isAnonymous: true,
+        });
+      } catch (err) {
+        console.log(err);
+      }
+
+      navigate("/");
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (

@@ -5,45 +5,29 @@ import { Editor } from "react-draft-wysiwyg";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import styles from "./editorStyle.module.scss";
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
-import {
-  onEditText,
-  onEditTitle,
-} from "../../../store/slices/companyInfoSlice";
-const EditorComponent = ({ isTitle, data }) => {
-  const dispatch = useDispatch();
 
+const EditorComponent = ({ isTitle, update, onEdit }) => {
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
-  let onEdite = isTitle ? onEditTitle : onEditText;
 
   useEffect(() => {
-    if (data) {
-      let editorData = isTitle ? data.title : data.text;
-      setEditorState(EditorState.createWithContent(convertFromRaw(editorData)));
+    if (update?.cvInfo?.editorData) {
+      setEditorState(
+        EditorState.createWithContent(convertFromRaw(update.cvInfo.editorData))
+      );
     } else {
       setEditorState(EditorState.createEmpty());
     }
-  }, [data, isTitle]);
+  }, [update]);
   useEffect(() => {
-    let data = convertToRaw(editorState.getCurrentContent());
-    dispatch(onEdite(data));
-  }, [editorState, dispatch, onEdite]);
-
-  // const blocksFromHTML = convertFromHTML(<p>html</p>);
-  // const state = ContentState.createFromBlockArray(
-  //   blocksFromHTML.contentBlocks,
-  //   blocksFromHTML.entityMap
-  // );
-  // const imutable = EditorState.createWithContent(state);
-
-  // function createMarkup(html) {
-  //   return {
-  //     __html: DOMPurify.sanitize(html),
-  //   };
-  // }
+    onEdit(convertToRaw(editorState.getCurrentContent()));
+  }, [editorState, onEdit]);
 
   return (
-    <div>
+    <div className={styles.mainBox}>
+      <div>
+        {" "}
+        <span style={{ fontSize: "14px" }}>{update?.data?.title}</span>
+      </div>
       <Editor
         editorState={editorState}
         toolbarClassName={styles.toolbar}
@@ -78,10 +62,18 @@ const EditorComponent = ({ isTitle, data }) => {
             "remove",
             "history",
           ],
-          inline: { inDropdown: true },
-          list: { inDropdown: true },
+          inline: {
+            inDropdown: true,
+          },
+          list: {
+            inDropdown: true,
+          },
           textAlign: { inDropdown: true },
-          link: { inDropdown: true, showOpenOptionOnHover: true },
+          link: {
+            inDropdown: true,
+            showOpenOptionOnHover: true,
+          },
+
           history: { inDropdown: true },
         }}
       />
