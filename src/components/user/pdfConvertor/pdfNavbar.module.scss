@@ -1,41 +1,34 @@
 .companyNavbar {
-  background-color: #fff;
-
+  font-size: 11px;
   display: flex;
   flex-direction: column;
 
-  .companyCoverPhoto {
-    display: flex;
-    img {
-      width: 100%;
-      max-height: 300px;
-      object-fit: cover;
-    }
+  h1 {
+    font-size: 16px;
+  }
+  h3 {
+    font-size: 14px;
   }
 
-  .userEdit {
-    display: flex;
-    justify-content: flex-end;
-  }
   .companyInfo {
-    position: relative;
+    border-radius: 8px;
     display: flex;
     border: 1px solid #ddd;
-    background-color: #fff;
+    background-color: #46af3a;
     padding: 10px 0;
     margin-bottom: 10px;
-    justify-content: space-between;
 
     .companyInfoBlock {
       display: flex;
       flex-direction: column;
       gap: 10px;
-      padding: 15px 0 15px 180px;
+      padding: 35px;
 
       .titleList {
         display: flex;
         justify-content: space-between;
-        gap: 20px;
+        gap: 100px;
+
         .lable {
           display: flex;
           flex-direction: column;
@@ -51,19 +44,11 @@
       }
     }
 
-    .followBtn {
-      display: flex;
-      align-items: center;
-      padding-right: 15px;
-    }
     .companyPhoto {
-      top: -70px;
-      z-index: 1;
-      position: absolute;
-      left: 20px;
       border: 3px solid #fff;
       background: #fff;
       box-shadow: 0 0 2px 2px hsl(0deg 0% 63% / 23%);
+      padding: 5px;
     }
   }
 }

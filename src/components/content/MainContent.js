@@ -8,7 +8,7 @@ import { v4 as uuid } from "uuid";
 import {
   useAddJobsMutation,
   useDeleteJobsMutation,
-  useGetFiltredDataQuery,
+  useGetFiltredINQuery,
 } from "../../store/slices/dataControlRTKQ";
 import { where } from "firebase/firestore";
 
@@ -19,62 +19,47 @@ import LinearColor from "../../UI/Progress";
 
 const MainContent = () => {
   const [limit, setLimit] = useState();
+  const [jobsData, setJobsData] = useState([]);
+  const location = useLocation().pathname;
+  const dispatch = useDispatch();
+  const levelCategory = useSelector((state) => state.filterSlice.levelCategory);
+  const jobCategory = useSelector((state) => state.filterSlice.jobCategory);
   const handleChange = (e) => {
     setLimit(e.target.value);
   };
-  const location = useLocation().pathname;
-  const dispatch = useDispatch();
-  const jobData = useSelector((state) => state.jobsSlice.jobsData);
-  const levelCategory = useSelector((state) => state.filterSlice.levelCategory);
-  const jobCategory = useSelector((state) => state.filterSlice.jobCategory);
+  const filterHints = jobCategory.length
+    ? [where("jobCategory", "in", jobCategory)]
+    : levelCategory.length
+    ? [where("level", "in", levelCategory)]
+    : [];
 
-  const levelsType = levelCategory.map((item) =>
-    where("requiredCandidateLevel", "==", item)
-  );
-  const jobsType = jobCategory.map((item) => where("jobCategory", "==", item));
-
-  const filterHints = [...jobsType, ...levelsType];
-  const { data, isLoading } = useGetFiltredDataQuery({
+  const { data, isLoading } = useGetFiltredINQuery({
     limits: limit,
     filterHints,
   });
+  useEffect(() => {
+    let filtredJobs = data;
+
+    if (jobCategory.length && levelCategory.length) {
+      filtredJobs = data.filter((value) =>
+        levelCategory.includes(value.item.level)
+      );
+    }
+    if (filtredJobs === jobsData) {
+      return;
+    }
+    setJobsData(filtredJobs);
+  }, [data, jobCategory, levelCategory, jobsData]);
   const [addJob, { isSuccess }] = useAddJobsMutation();
   const [deleteJob, { isError }] = useDeleteJobsMutation();
-
   const handleAddJob = async (job) => {
     addJob({ job }).unwrap();
   };
+
   const handleDeleteJob = async (job) => {
     deleteJob("f2604580-8c76-497e-a6e1-15a34a3c9b5c").unwrap();
   };
   dispatch(addJobsData(data));
-
-  // const getData = useCallback(async () => {
-  //   const ref = collection(db, "jobs");
-  //   const levelsType = levelCategory.map((item) =>
-  //     where("requiredCandidateLevel", "==", item)
-  //   );
-  //   const jobsType = jobCategory.map((item) =>
-  //     where("jobCategory", "==", item)
-  //   );
-
-  //   const q1 = query(ref, ...levelsType, ...jobsType);
-  //   const fetchData = await getDocs(q1);
-
-  //   const data = [];
-  //   fetchData.forEach((doc) => {
-  //     data.push({ item: doc.data(), id: doc.id });
-  //   });
-
-  //   dispatch(addJobsData(data));
-  // }, [dispatch, jobCategory, levelCategory]);
-
-  // useEffect(() => {
-  //   getData();
-  // }, [getData]);
-
-  // const jobData = useSelector((state) => state.jobsSlice?.jobsData);
-
   return (
     <div className={styles.mainContent}>
       <div className={styles.contentHotJobs}>Hot job</div>
@@ -97,7 +82,7 @@ const MainContent = () => {
         {isLoading ? (
           <LinearColor />
         ) : (
-          data.map((job) => {
+          jobsData?.map((job) => {
             return <JobItem item={job?.item} id={job?.id} key={uuid()} />;
           })
         )}

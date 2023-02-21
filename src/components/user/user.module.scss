@@ -4,9 +4,16 @@
   box-shadow: 0 0 8px #dedede;
 
   .user {
-    height: 1500px;
-    margin-top: 15px;
+    margin: 15px 0;
+
     .userInfo {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      .cvItem {
+        border: outset 3px #46af3a;
+        border-radius: 5px;
+      }
     }
     .addInfo {
       display: flex;

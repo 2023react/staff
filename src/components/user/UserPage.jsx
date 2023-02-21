@@ -1,45 +1,77 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { v4 as uuid } from "uuid";
-
 import AlertDialogSlide from "../../UI/Dialog";
 import styles from "./user.module.scss";
-
-import AddActionButtons from "./accordion/AddIcon";
 import EditorComponent from "./editor/Editor";
-import {
-  useGetDataQuery,
-  useUpdateDataMutation,
-} from "../../store/slices/dataControlRTKQ";
 import BasicButtons from "../../UI/Button";
-import LinearColor from "../../UI/Progress";
 import { useEffect, useCallback } from "react";
 import UserNavbar from "./navbars/UserNavbar";
-import { RESUME } from "../../constants/userdata";
-import ResumeItem from "./accordion/ResumeItem";
+import { CV, TYPES } from "../../constants/userdata";
+import CvItem from "./accordion/CvItem";
+import { changeCv } from "../../store/slices/userSlice";
+import LimitTags from "./limitTags/LimitTags";
+import AutocompleteLevelSlider from "./levelSlider/AutocompleteLevelSlider";
+import FormCV from "./formEditor/FormCV";
+import {
+  useGetCvQuery,
+  useUpdateCvMutation,
+} from "../../store/slices/dataControlRTKQ";
+import LinearColor from "../../UI/Progress";
 
 const UserPage = () => {
   const currentUser = useSelector((state) => state.loginSlice.currentUser);
-
-  console.log(currentUser);
-  const { data, isLoading } = useGetDataQuery({ id: currentUser.uid });
-  const currentInfo = useSelector((state) => state.companyInfoSlice);
+  const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
   const [update, setUpdate] = useState();
+  const [convertedData, setConvertedData] = useState();
+  const [updateCv, { isSuccess }] = useUpdateCvMutation();
+  const { data, isLoading } = useGetCvQuery({ id: currentUser?.uid });
+  const cvData = useSelector((state) => state.userSlice.cvData);
+  const [test, setTest] = useState(true);
+  const setCvData = (id, cvData, title) => {
+    updateCv({ id, cvData, title }).unwrap();
+  };
+
+  useEffect(() => {
+    if (currentUser) {
+      setTest(false);
+    }
+
+    if (data) {
+      dispatch(changeCv(data));
+    }
+  }, [data, dispatch, currentUser]);
+  // useEffect(() => {
+  //   if (cvData && currentUser) {
+  //     updateCv({ id: currentUser?.uid, cvData: cvData }).unwrap();
+  //   }
+  // }, [cvData]);
 
   const handleClose = () => {
     setOpen(false);
+    setUpdate();
   };
-  const [updateData] = useUpdateDataMutation();
-  const handleClick = async () => {
-    updateData({
-      id: currentUser.uid,
-      update: update,
-      currentInfo: currentInfo,
-    }).unwrap();
 
-    handleClose();
+  const handleClick = (data) => {
+    dispatch(
+      changeCv({
+        ...cvData,
+        [update.title]: {
+          ...(data ? { formData: data } : { editorData: convertedData }),
+        },
+      })
+    );
+    setCvData(currentUser.uid, {
+      ...cvData,
+      [update.title]: {
+        ...(data ? { formData: data } : { editorData: convertedData }),
+      },
+    });
+    setConvertedData();
+    setOpen(false);
   };
+
   return (
     <div className={styles.outContiner}>
       <div className="container">
@@ -47,50 +79,63 @@ const UserPage = () => {
           <div>
             <UserNavbar user={currentUser} />
           </div>
+
           <div className={styles.userInfo}>
-            {isLoading ? (
+            {test || isLoading ? (
               <LinearColor />
             ) : (
-              RESUME.map((p) => {
+              CV.map((p) => {
                 return (
-                  <ResumeItem
-                    title={p.title}
-                    lable={p.lable}
-                    key={uuid()}
-                    onClick={(currentData) => {
-                      setOpen(true);
-                    }}
-                  />
+                  <div className={styles.cvItem} key={uuid()}>
+                    <CvItem
+                      cvData={cvData}
+                      data={p?.data}
+                      title={p.title}
+                      lable={p.lable}
+                      onClick={(currentData) => {
+                        setOpen(true);
+                        setUpdate(currentData);
+                      }}
+                    />
+                  </div>
                 );
               })
             )}
           </div>
-          <div className={styles.addInfo}>
-            <AddActionButtons
-              onClick={() => {
-                setOpen(true);
-                setUpdate();
-              }}
-            />
-          </div>
 
           <div className={styles.editorDialog}>
-            <AlertDialogSlide
-              open={open}
-              handleClose={handleClose}
-              title="Type your text"
-            >
-              <BasicButtons onClick={handleClick}> ADD</BasicButtons>
-              <EditorComponent
-                data={update}
-                handleClose={handleClose}
-                isTitle={true}
-              />
-              <EditorComponent
-                data={update}
-                handleClose={handleClose}
-                isTitle={false}
-              />
+            <AlertDialogSlide open={open} handleClose={handleClose}>
+              {TYPES.editor.includes(update?.title) ? (
+                <>
+                  <BasicButtons onClick={() => handleClick()}>
+                    {" "}
+                    ADD
+                  </BasicButtons>
+                  <EditorComponent onEdit={setConvertedData} update={update} />
+                </>
+              ) : TYPES.formEditor.includes(update?.title) ? (
+                <FormCV
+                  handleClose={handleClose}
+                  cvData={cvData}
+                  update={update}
+                  onClick={handleClick}
+                  onEdit={setConvertedData}
+                />
+              ) : TYPES.levelSlider.includes(update?.title) ? (
+                <AutocompleteLevelSlider
+                  handleClick={handleClick}
+                  update={update}
+                  handleClose={handleClose}
+                />
+              ) : TYPES.autocomplete.includes(update?.title) ? (
+                <LimitTags
+                  cvData={cvData}
+                  update={update}
+                  onClick={handleClick}
+                  onEdit={setConvertedData}
+                  handleClose={handleClose}
+                />
+              ) : null}
             </AlertDialogSlide>
           </div>
         </div>

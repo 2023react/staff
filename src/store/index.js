@@ -4,7 +4,7 @@ import companyInfoSlice from "./slices/companyInfoSlice";
 import filterSlice from "./slices/filterSlice";
 import jobsSlice from "./slices/jobsSlice";
 import loginSlice from "./slices/loginSlice";
-
+import userSlice from "./slices/userSlice";
 import { dataApi } from "./slices/dataControlRTKQ";
 
 import newJobSlice from "./slices/newJobSlice";
@@ -14,7 +14,7 @@ const store = configureStore({
     jobsSlice,
     filterSlice,
     loginSlice,
-
+    userSlice,
     companyInfoSlice,
     [dataApi.reducerPath]: dataApi.reducer,
 

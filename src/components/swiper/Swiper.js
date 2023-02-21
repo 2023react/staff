@@ -74,7 +74,7 @@ export const SwiperComponent = () => {
       ))}
       <div className={styles.pagination_padding}></div>
       <div>
-        <div class="swiper-pagination"></div>
+        <div className="swiper-pagination"></div>
       </div>
     </Swiper>
   );
