@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   Route,
   RouterProvider,
@@ -8,6 +8,7 @@ import {
 } from "react-router-dom";
 import "./App.scss";
 import CompanyPage from "./components/company/CompanyPage";
+import CompanyPageDetails from "./components/company/CompanyPageDetails.jsx";
 import RegisterCompany from "./components/login/companyRegister/RegisterCompany";
 import Companies from "./pages/Companies";
 import Home from "./pages/Home";
@@ -15,19 +16,23 @@ import Jobs from "./pages/Jobs";
 import JobDetails from "./components/JobDetails/JobDetails";
 import { Layout } from "./components/Layout";
 import { onAuthStateChanged } from "firebase/auth";
-import { auth } from "./firebase";
-import { changeCurrentUser } from "./store/slices/loginSlice";
+import { auth, db } from "./firebase";
+import { changeCurrentUser, changeIsUser } from "./store/slices/loginSlice";
 import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
 import JobDetailsNewWork from "./components/JobDetails/JobDetailsNewWork";
 import AddNewWork from "./components/addNewWork/AddNewWork";
 import UserPage from "./components/user/UserPage";
+import LoginForm from "./components/login/loginForm/LoginForm";
+import { doc, getDoc } from "firebase/firestore";
+import CompanyLogin from "./components/login/companyLogin/CompanyLogin";
 
 const r = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Layout />}>
       <Route index element={<Home />} />
       <Route path="/jobs" element={<Jobs />} />
-      <Route path="/company/:name" element={<CompanyPage />} />
+      <Route path="/company/:id" element={<CompanyPage />} />
+      <Route path="/companyDetails/:id" element={<CompanyPageDetails />} />
       <Route path="/user" element={<UserPage />} />
       <Route path="/companies" element={<Companies />} />
       <Route path="/jobs/:id" element={<JobDetails />} />
@@ -39,7 +44,16 @@ const r = createBrowserRouter(
           </ProtectedRoute>
         }
       />
-      <Route path="/companyPage" element={<CompanyPage />} />
+      <Route
+        path="/company/login"
+        element={
+          <ProtectedRoute>
+            <CompanyLogin />
+          </ProtectedRoute>
+        }
+      />
+
+      {/* <Route path="/companyPage" element={<CompanyPage />} /> */}
       <Route path="/addNewWork" element={<AddNewWork />} />
 
       <Route path="/addNewWork/:id" element={<AddNewWork />} />
@@ -55,15 +69,24 @@ const r = createBrowserRouter(
 function App() {
   const dispatch = useDispatch();
   useEffect(() => {
-    onAuthStateChanged(auth, (currentUser) => {
-      console.log(currentUser);
-      dispatch(changeCurrentUser(currentUser));
-    });
-  }, [dispatch]);
+    const getData = () => {
+      onAuthStateChanged(auth, async (currentUser) => {
+        dispatch(changeCurrentUser(currentUser));
+        try {
+          const docRef = doc(db, "users", currentUser.uid);
+          const d = await getDoc(docRef);
+          dispatch(changeIsUser(d?.data().isUser));
+        } catch (error) {}
+      });
+    };
+    getData();
+  }, [auth]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
   });
+
+  console.log(useSelector((state) => state.loginSlice.isUser));
 
   return (
     <div className="App">

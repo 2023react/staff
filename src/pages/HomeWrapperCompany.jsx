@@ -1,18 +1,12 @@
 import React, { useState } from "react";
 import Button from "@mui/material/Button";
 import SearchIcon from "@mui/icons-material/Search";
-import { margin } from "@mui/system";
-import Slider from "../components/Carousel";
 import styles from "./Home.module.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { v4 as uuid } from "uuid";
 import { COMPANY__INDUSTRIES } from "../constants/category";
-import {
-  deleteFilter,
-  emptyFilter,
-  setFilter,
-} from "../store/slices/filterSlice";
+import { emptyFilter, setFilter } from "../store/slices/filterSlice";
 
 export function WrapperCompany() {
   const dispatch = useDispatch();

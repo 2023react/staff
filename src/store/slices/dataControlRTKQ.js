@@ -23,7 +23,7 @@ import { db } from "../../firebase";
 
 export const dataApi = createApi({
   reducerPath: "dataApi",
-  tagTypes: ["Jobs", "Info"],
+  tagTypes: ["Jobs", "Info", "Companies"],
   baseQuery: fakeBaseQuery(),
   endpoints: (builder) => ({
     getFiltredData: builder.query({
@@ -45,6 +45,25 @@ export const dataApi = createApi({
       },
       providesTags: ["Jobs"],
     }),
+    getFiltredCompanies: builder.query({
+      async queryFn({ filterHintsCompany }) {
+        try {
+          const fetchData = await getDocs(
+            query(collection(db, "companies"), ...filterHintsCompany)
+          );
+          const data = [];
+          fetchData.forEach((doc) => {
+            data.push({ item: doc.data(), id: doc.id });
+          });
+
+          return { data };
+        } catch (e) {
+          return { error: e };
+        }
+      },
+      providesTags: ["Companies"],
+    }),
+
     addJobs: builder.mutation({
       async queryFn({ job }) {
         try {
@@ -75,11 +94,11 @@ export const dataApi = createApi({
     }),
 
     getData: builder.query({
-      async queryFn({ id }) {
+      async queryFn(id) {
         try {
           const docRef = doc(db, "companies", id);
           const data = await getDoc(docRef);
-          return { data: data.data().about };
+          return data.data().aboutUs;
         } catch (e) {
           return { error: e };
         }
@@ -110,6 +129,21 @@ export const dataApi = createApi({
 
       invalidatesTags: ["Info"],
     }),
+    updateCompanyData: builder.mutation({
+      async queryFn({ id, info }) {
+        try {
+          const document = doc(db, "companies", id);
+          await updateDoc(document, {
+            aboutUs: info,
+          });
+          return { data: "ok" };
+        } catch (e) {
+          return { error: e };
+        }
+      },
+
+      invalidatesTags: ["Info"],
+    }),
   }),
 });
 export const {
@@ -118,5 +152,7 @@ export const {
   useDeleteJobsMutation,
   useGetDataQuery,
   useUpdateDataMutation,
+  useUpdateCompanyDataMutation,
+  useGetFiltredCompaniesQuery,
 } = dataApi;
 export const jobApi = dataApi.reducer;

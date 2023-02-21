@@ -29,29 +29,25 @@ const DialogLogin = () => {
         handleClose={handleClose}
         title={showRegister ? "Register" : "Login"}
       >
-        {!showLoginCompany ? (
-          <>
-            <div>
-              <BasicButtons
-                onClick={onClickBtnRegister}
-                variant={showLogin ? "outlined" : "contained"}
-                customStyles={{ borderRadius: "0" }}
-              >
-                Register your account
-              </BasicButtons>
-              <BasicButtons
-                customStyles={{ borderRadius: "0" }}
-                onClick={onClickBtnLogin}
-                variant={showRegister ? "outlined" : "contained"}
-              >
-                Sign in to your account
-              </BasicButtons>
-            </div>
-            {showRegister ? <RegisterForm /> : <LoginForm />}
-          </>
-        ) : (
-          <LoginForm />
-        )}
+        <>
+          <div>
+            <BasicButtons
+              onClick={onClickBtnRegister}
+              variant={showLogin ? "outlined" : "contained"}
+              customStyles={{ borderRadius: "0" }}
+            >
+              Register your account
+            </BasicButtons>
+            <BasicButtons
+              customStyles={{ borderRadius: "0" }}
+              onClick={onClickBtnLogin}
+              variant={showRegister ? "outlined" : "contained"}
+            >
+              Sign in to your account
+            </BasicButtons>
+          </div>
+          {showRegister ? <RegisterForm /> : <LoginForm />}
+        </>
       </AlertDialogSlide>
     </>
   );

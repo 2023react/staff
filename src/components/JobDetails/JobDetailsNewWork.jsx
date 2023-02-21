@@ -12,7 +12,7 @@ import parse from "html-react-parser";
 
 import { useDispatch, useSelector } from "react-redux";
 
-import { doc, setDoc, getDoc, updateDoc } from "firebase/firestore";
+import { doc, setDoc, getDoc, updateDoc, deleteDoc } from "firebase/firestore";
 import { db } from "../../firebase";
 import BasicButtons from "../../UI/Button";
 import { useState } from "react";
@@ -38,8 +38,6 @@ const JobDetailsNewWork = () => {
   const currentUser = useSelector(currentSelector);
   const activeData = useSelector(activeDataSelector);
 
-  console.log(activeData);
-
   const getData = useCallback(async () => {
     if (pathName === `/jobInfo` || pathName === `/jobInfoToCompany/${id}`) {
       setJobData(activeData);
@@ -64,6 +62,11 @@ const JobDetailsNewWork = () => {
     getData();
   }, [getData]);
 
+  const onClickDelete = async () => {
+    await deleteDoc(doc(db, "jobs", id));
+    navigate("/companyPage");
+  };
+
   const onAddJob = async () => {
     try {
       const document = doc(db, "jobs", id);
@@ -72,12 +75,12 @@ const JobDetailsNewWork = () => {
       });
     } catch (error) {
       try {
-        console.log(jobData);
         await setDoc(doc(db, "jobs", uuid()), {
           ...jobData,
           companyName: currentUser.displayName,
           id: uuid(),
           img: currentUser.photoURL,
+          companyId: currentUser.uid,
         });
 
         dispatch(
@@ -100,7 +103,7 @@ const JobDetailsNewWork = () => {
       }
     }
 
-    navigate("/companyPage");
+    navigate(`/company/${currentUser.uid}`);
   };
 
   const onClickEdit = () => {
@@ -225,6 +228,9 @@ const JobDetailsNewWork = () => {
             </div>
           </div>
           <div className={styles.apply_btns_block}>
+            <BasicButtons onClick={onClickDelete} className={styles.btn}>
+              Delete
+            </BasicButtons>
             <BasicButtons onClick={onClickEdit} className={styles.btn}>
               Edit
             </BasicButtons>

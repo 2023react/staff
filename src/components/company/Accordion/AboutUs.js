@@ -20,12 +20,17 @@ export default function CompanyInfo({ title, text, children, onClick }) {
           aria-controls="panel1a-content"
           id="panel1a-header"
         >
-          <Typography>{parse(`${draftToHtml(title)}`)}</Typography>
+          <Typography className={styles.typography}>
+            ...
+            {/* {parse(`${draftToHtml(title)}`)} */}
+          </Typography>
         </AccordionSummary>
         <AccordionDetails>
           <div className={styles.changeButtons}>
             {children}
-            <Typography>{parse(`${draftToHtml(text)}`)}</Typography>
+            <Typography className={styles.typography}>
+              {parse(`${draftToHtml(text)}`)}
+            </Typography>
             <div className={styles.changeIcons}>
               <EditActionButtons onClick={handleClick} />
             </div>

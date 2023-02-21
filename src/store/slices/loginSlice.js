@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   currentUser: null,
+  isUser: null,
   showLogin: false,
   showRegister: false,
   showComponyLogin: false,
@@ -12,6 +13,9 @@ const loginSlice = createSlice({
   initialState,
 
   reducers: {
+    changeIsUser(state, action) {
+      state.isUser = action.payload;
+    },
     changeCurrentUser(state, action) {
       state.currentUser = action.payload;
     },
@@ -47,9 +51,8 @@ export const {
   openRegister,
   closeLoginModal,
   openComponyLogin,
-
+  changeIsUser,
   addCurrentCompany,
-
   changeCurrentUser,
   onClickSignUp,
 } = loginSlice.actions;

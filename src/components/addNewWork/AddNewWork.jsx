@@ -2,30 +2,28 @@ import React, { useCallback, useEffect, useState } from "react";
 import style from "./addNewWork.module.scss";
 
 import TextEditor from "../textEditor/TextEditor";
-import parse from "html-react-parser";
-
 import { useForm } from "react-hook-form";
 
-import {
-  addAllData,
-  addDecr,
-  addInfo,
-  addqual,
-  addRespos,
-  changeJobSlice,
-} from "../../store/slices/newJobSlice";
+import { changeJobSlice } from "../../store/slices/newJobSlice";
 
-import { useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import Select from "../select/Select";
 
 import TextField from "@mui/material/TextField";
 
-import { INDUSTRIES_LEVELS } from "../../constants/options";
 import { useNavigate, useParams } from "react-router";
 import BasicButtons from "../../UI/Button";
 import InputField from "../login/input/Input";
+import {
+  COMPANY__INDUSTRIES,
+  LEVEL_CATEGORY,
+  JOB_TYPE,
+  CITIES,
+  JOB__CATEGORY,
+} from "../../constants/category";
+import { doc, getDoc } from "firebase/firestore";
+import { db } from "../../firebase";
 
 const AddNewWork = () => {
   const params = useParams();
@@ -40,6 +38,48 @@ const AddNewWork = () => {
     qualifications: selectEditor.qualifications,
     additionalInformation: selectEditor.additionalInformation,
   });
+
+  const [defaultValue, setDefaultValue] = useState({
+    description: selectEditor.description,
+    responsibilities: selectEditor.responsibilities,
+    qualifications: selectEditor.qualifications,
+    additionalInformation: selectEditor.additionalInformation,
+  });
+
+  useEffect(() => {
+    const getData = async () => {
+      const docRef = doc(db, "jobs", id);
+      const data = await getDoc(docRef);
+      setDefaultValue({
+        description: data.data().description,
+        responsibilities: data.data().responsibilities,
+        qualifications: data.data().qualifications,
+        additionalInformation: data.data().additionalInformation,
+      });
+      setEditorData({
+        description: data.data().description,
+        responsibilities: data.data().responsibilities,
+        qualifications: data.data().qualifications,
+        additionalInformation: data.data().additionalInformation,
+      });
+      dispatch(
+        changeJobSlice({
+          description: data.data().description,
+          responsibilities: data.data().responsibilities,
+          qualifications: data.data().qualifications,
+          additionalInformation: data.data().additionalInformation,
+          category: data.data().category,
+          date: data.data().date,
+          industry: data.data().industry,
+          jobName: data.data().jobName,
+          level: data.data().level,
+          location: data.data().location,
+          JobType: data.data().JobType,
+        })
+      );
+    };
+    getData();
+  }, []);
 
   const {
     register,
@@ -56,7 +96,6 @@ const AddNewWork = () => {
   }, []);
 
   const onSubmit = (data) => {
-    reset();
     dispatch(
       changeJobSlice({
         description: editorData.description,
@@ -128,7 +167,7 @@ const AddNewWork = () => {
               name="industry"
               register={register}
               errors={errors}
-              options={INDUSTRIES_LEVELS}
+              options={COMPANY__INDUSTRIES.data}
             />
           </div>
 
@@ -140,7 +179,7 @@ const AddNewWork = () => {
               name="JobType"
               register={register}
               errors={errors}
-              options={INDUSTRIES_LEVELS}
+              options={JOB_TYPE.data}
             />
           </div>
 
@@ -152,7 +191,7 @@ const AddNewWork = () => {
               name="category"
               register={register}
               errors={errors}
-              options={INDUSTRIES_LEVELS}
+              options={JOB__CATEGORY.data}
             />
           </div>
 
@@ -164,7 +203,7 @@ const AddNewWork = () => {
               value={selectEditor.location}
               register={register}
               errors={errors}
-              options={INDUSTRIES_LEVELS}
+              options={CITIES.data}
             />
           </div>
 
@@ -176,7 +215,7 @@ const AddNewWork = () => {
               value={selectEditor.level}
               register={register}
               errors={errors}
-              options={INDUSTRIES_LEVELS}
+              options={LEVEL_CATEGORY.data}
             />
           </div>
 
@@ -194,7 +233,7 @@ const AddNewWork = () => {
           <div className={style.itemEditor}>
             <h3>Job description</h3>
             <TextEditor
-              value={editorData.description}
+              value={defaultValue?.description}
               onChange={(editorState) => {
                 setEditorData({
                   ...editorData,
@@ -213,14 +252,14 @@ const AddNewWork = () => {
                   responsibilities: editorState,
                 });
               }}
-              value={editorData.responsibilities}
+              value={defaultValue?.responsibilities}
             />
           </div>
 
           <div className={style.itemEditor}>
             <h3>Job Qualifications</h3>
             <TextEditor
-              value={editorData.qualifications}
+              value={defaultValue?.qualifications}
               onChange={(editorState) => {
                 setEditorData({
                   ...editorData,
@@ -233,7 +272,7 @@ const AddNewWork = () => {
           <div className={style.itemEditor}>
             <h3>Additional information</h3>
             <TextEditor
-              value={editorData.additionalInformation}
+              value={defaultValue?.additionalInformation}
               onChange={(editorState) => {
                 setEditorData({
                   ...editorData,

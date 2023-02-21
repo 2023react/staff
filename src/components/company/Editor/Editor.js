@@ -10,6 +10,7 @@ import {
   onEditText,
   onEditTitle,
 } from "../../../store/slices/companyInfoSlice";
+import TextEditor from "../../textEditor/TextEditor";
 const EditorComponent = ({ isTitle, data }) => {
   const dispatch = useDispatch();
 
@@ -24,6 +25,7 @@ const EditorComponent = ({ isTitle, data }) => {
       setEditorState(EditorState.createEmpty());
     }
   }, [data, isTitle]);
+
   useEffect(() => {
     let data = convertToRaw(editorState.getCurrentContent());
     dispatch(onEdite(data));
@@ -44,7 +46,8 @@ const EditorComponent = ({ isTitle, data }) => {
 
   return (
     <div>
-      <Editor
+      {/* <TextEditor /> */}
+      {/* <Editor
         editorState={editorState}
         toolbarClassName={styles.toolbar}
         wrapperClassName={styles.wrapper}
@@ -84,7 +87,7 @@ const EditorComponent = ({ isTitle, data }) => {
           link: { inDropdown: true, showOpenOptionOnHover: true },
           history: { inDropdown: true },
         }}
-      />
+      /> */}
 
       {/* <div>{parse(`${draftToHtml(infoData.text)}`)}</div> */}
     </div>

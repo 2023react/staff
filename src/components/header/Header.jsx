@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
@@ -18,6 +18,8 @@ import clsx from "clsx";
 import HoverMenu from "../hoverMenu/HoverMenu";
 
 const Header = () => {
+  const isUser = useSelector((state) => state.loginSlice.isUser);
+
   const dispatch = useDispatch();
   const pathname = useLocation().pathname;
   const isHomePage = pathname === "/";
@@ -63,19 +65,30 @@ const Header = () => {
                   <li> Companies</li>{" "}
                 </NavLink>
                 {currentUser ? (
-                  <NavLink
-                    to={`/company/${currentUser.displayName}`}
-                    className={style.logOutoBox}
-                  >
-                    {" "}
-                    <li>
-                      {" "}
-                      <Logo
-                        currentCompany={currentUser}
-                        isHomePage={isHomePage}
-                      />
-                    </li>{" "}
-                  </NavLink>
+                  <>
+                    {isUser ? (
+                      <NavLink to="/user" className={style.logOutoBox}>
+                        <li>
+                          <Logo
+                            currentCompany={currentUser}
+                            isHomePage={isHomePage}
+                          />
+                        </li>
+                      </NavLink>
+                    ) : (
+                      <NavLink
+                        to={`/company/${currentUser.uid}`}
+                        className={style.logOutoBox}
+                      >
+                        <li>
+                          <Logo
+                            currentCompany={currentUser}
+                            isHomePage={isHomePage}
+                          />
+                        </li>{" "}
+                      </NavLink>
+                    )}
+                  </>
                 ) : (
                   <>
                     <li className={style.item}>

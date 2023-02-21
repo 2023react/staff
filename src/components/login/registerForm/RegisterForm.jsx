@@ -4,8 +4,16 @@ import { useForm } from "react-hook-form";
 
 import InputField from "../input/Input";
 import RegisterButtons from "../../../UI/Button";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { auth, db } from "../../../firebase";
+import { doc, setDoc } from "firebase/firestore";
+import { useNavigate } from "react-router";
+import { useDispatch } from "react-redux";
+import { changeIsUser } from "../../../store/slices/loginSlice";
 
 const RegisterForm = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const {
     register,
     formState: { errors },
@@ -16,9 +24,32 @@ const RegisterForm = () => {
 
   const onSubmit = async (data) => {
     try {
-    } catch (error) {}
-  };
+      const res = await createUserWithEmailAndPassword(
+        auth,
+        data.email,
+        data.password
+      );
 
+      try {
+        await updateProfile(res.user, {
+          displayName: data.firstName,
+        });
+
+        await setDoc(doc(db, "users", res.user.uid), {
+          uid: res.user.uid,
+          email: data.email,
+          isUser: true,
+        });
+        dispatch(changeIsUser(true));
+      } catch (err) {
+        console.log(err);
+      }
+
+      navigate("/");
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <div className={style.registerForm}>
       <form onSubmit={handleSubmit(onSubmit)} className={style.form}>

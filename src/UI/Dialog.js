@@ -15,7 +15,6 @@ export default function AlertDialogSlide({
   open,
   handleClose,
   customStylesTitle,
-
   title,
 }) {
   return (
@@ -29,7 +28,7 @@ export default function AlertDialogSlide({
         fullWidth={true}
         maxWidth="md"
         PaperProps={{
-          sx: { height: "100%" },
+          sx: { height: "100%", maxWidth: "80%" },
         }}
       >
         {" "}
@@ -47,6 +46,7 @@ export default function AlertDialogSlide({
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
+            gap: "30px",
           }}
         >
           {children}

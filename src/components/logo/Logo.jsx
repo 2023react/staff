@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 import { auth } from "../../firebase";
 import ImageAvatars from "../../UI/Avatar";
-import { changeCurrentUser } from "../../store/slices/loginSlice";
+import { changeCurrentUser, changeIsUser } from "../../store/slices/loginSlice";
 import LogOutButton from "../../UI/Button";
 import styles from "./logo.module.scss";
 
@@ -16,6 +16,7 @@ const Logo = ({ isHomePage }) => {
   const onLogOut = (e) => {
     e.preventDefault();
     dispatch(changeCurrentUser(null));
+    dispatch(changeIsUser(null));
     signOut(auth);
     navigate("/");
   };
@@ -24,7 +25,7 @@ const Logo = ({ isHomePage }) => {
       <ImageAvatars
         variant="Avatar"
         companyName={currentUser.displayName}
-        photoURL={currentUser.photoURL}
+        photoURL={currentUser?.photoURL}
       />
 
       <div className={styles.logOutBtn}>

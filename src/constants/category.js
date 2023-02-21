@@ -88,6 +88,10 @@ export const LEVEL__CATEGORY__COMPANY = {
   data: ["Employer", "Training"],
 };
 
+export const JOB_TYPE = {
+  data: ["Full time", "Part time", "Remote", "Flexible schedule"],
+};
+
 export const COMPANY__INDUSTRIES = {
   categoryType: "industryCategoryCompany",
 

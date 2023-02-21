@@ -23,9 +23,17 @@ const HoverMenu = ({
         <div className={style.arrow_up}></div>
         <div className={style.block__down}>
           <div className={style.dropdown__button}>
-            <button onClick={onClickMenuItemOne} className={style.btn}>
-              {lableMenuItemOne}
-            </button>
+            {isModal ? (
+              <div className={style.dropdown__button}>
+                <button onClick={onClickMenuItemOne} className={style.btn}>
+                  {lableMenuItemOne}
+                </button>
+              </div>
+            ) : (
+              <NavLink to="/company/login">
+                <button className={style.btn}> {lableMenuItemOne}</button>
+              </NavLink>
+            )}
           </div>
 
           <div className={style.dropdown__button}>

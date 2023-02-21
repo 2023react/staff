@@ -73,6 +73,7 @@ const RegisterCompany = () => {
               industry: data.industry,
               phone: data.phoneInput,
               photoURL: downloadURL,
+              aboutUs: {},
               date: Timestamp.now(),
             });
           } catch (err) {

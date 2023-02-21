@@ -1,10 +1,12 @@
 import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { Pagination, Autoplay } from "swiper";
+
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 import styles from "./swiper.module.scss";
-import { Pagination, Autoplay } from "swiper";
+
 import Avatar from "@mui/material/Avatar";
 import LocalFireDepartmentIcon from "@mui/icons-material/LocalFireDepartment";
 import BasicButtons from "../../UI/Button";
@@ -37,8 +39,8 @@ export const SwiperComponent = () => {
       className={styles.mySwiper}
     >
       {jobData.map((item) => (
-        <div>
-          <SwiperSlide className={styles.swiper} key={uuid()}>
+        <div key={uuid()}>
+          <SwiperSlide className={styles.swiper}>
             <div className={styles.swiper_info}>
               <div className={styles.imageBlog}>
                 <img className={styles.image} src={item.item.photoUrl} />
@@ -74,7 +76,7 @@ export const SwiperComponent = () => {
       ))}
       <div className={styles.pagination_padding}></div>
       <div>
-        <div class="swiper-pagination"></div>
+        <div className="swiper-pagination"></div>
       </div>
     </Swiper>
   );

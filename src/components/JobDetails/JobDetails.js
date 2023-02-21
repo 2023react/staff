@@ -1,18 +1,35 @@
 import React from "react";
 import JobDetailsContent from "./JobDetailsContent";
 import styles from "./Jobdetails.module.scss";
-
-import { jobsData } from "../../constants/jobsdata";
 import BasicButtons from "../../UI/Button";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import { COLORS } from "../../constants/styles";
 import { useEffect } from "react";
+import { useState } from "react";
+import { useParams } from "react-router";
+import { useCallback } from "react";
+import { doc, getDoc } from "firebase/firestore";
+import { db } from "../../firebase";
+import ImageAvatars from "../../UI/Avatar";
 
-const jobData = jobsData[3];
 const JobDetails = () => {
+  const [jobData, setJobData] = useState({});
+
+  const { id } = useParams();
+
+  const getData = useCallback(async () => {
+    const docRef = doc(db, "jobs", id);
+    const docSnap = await getDoc(docRef);
+    setJobData(docSnap.data());
+  }, [id]);
+
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, []);
+    getData();
+  }, [getData]);
+
+  console.log(jobData);
+
   const customButtonStylesRed = {
     textTransform: "none",
     "&:hover": {
@@ -32,23 +49,29 @@ const JobDetails = () => {
     },
   };
 
+  const avatarCustomStyles = { width: 140, height: 140 };
+
   return (
     <div className="jobs">
       <div className="container">
         <div className={styles.search}>
           <div className={styles.header_info}>
-            <img src="/img/jobtitle.png" />
+            <img src="/img/jobtitle.png" alt={""} />
             <div className={styles.contailner_relative}>
               <div className={styles.image}>
-                <img src={jobData.photoUrl} />
+                <ImageAvatars
+                  photoURL={jobData?.img}
+                  customStyles={avatarCustomStyles}
+                />
               </div>
             </div>
 
             <div className={styles.company}>
               <div className={styles.company_info}>
                 <div className={styles.company_title}>
-                  <h1>{jobData.companyName}</h1>
+                  <h1>{jobData?.companyName}</h1>
                 </div>
+
                 <div className={styles.jobInfoButton}>
                   <BasicButtons
                     size="small"
@@ -72,9 +95,9 @@ const JobDetails = () => {
               </div>
             </div>
           </div>
-        </div>{" "}
+        </div>
         <div className="sidebar"></div>
-        <JobDetailsContent />
+        <JobDetailsContent jobData={jobData} />
       </div>
     </div>
   );

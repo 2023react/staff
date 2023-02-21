@@ -1,28 +1,10 @@
-import React, { useCallback, useEffect, useState } from "react";
-
 import styles from "./Jobdetails.module.scss";
 import BookmarkIcon from "@mui/icons-material/Bookmark";
-import { useParams } from "react-router";
-import { db } from "../../firebase";
+
 import draftToHtml from "draftjs-to-html";
 import parse from "html-react-parser";
-import { doc, getDoc } from "firebase/firestore";
 
-const JobDetailsContent = () => {
-  const [jobData, setJobData] = useState([]);
-
-  const { id } = useParams();
-
-  const getData = useCallback(async () => {
-    const docRef = doc(db, "jobs", id);
-    const docSnap = await getDoc(docRef);
-    setJobData(docSnap.data());
-  }, [id]);
-
-  useEffect(() => {
-    getData();
-  }, [getData]);
-
+const JobDetailsContent = ({ jobData }) => {
   return (
     <>
       {jobData.id && (
@@ -32,12 +14,6 @@ const JobDetailsContent = () => {
               <div className={styles.name_coloumn}>
                 <h2>{jobData.jobName}</h2>
               </div>
-
-              {/* <div className={styles.btn}>
-         <button className={styles.box1}>Apply Online</button>
-         <button className={styles.box2}>Send CV</button>
-         <p className={styles.p}>{jobData.allData.date}</p>
-       </div> */}
             </div>
             <div className={styles.bord}>
               <div className={styles.coloumn}>
@@ -101,18 +77,8 @@ const JobDetailsContent = () => {
 
               <h3>Job responsibility</h3>
               {parse(`${draftToHtml(jobData.responsibilities)}`)}
-              {/* {jobData.responsibilities.map((item) => (
-           <li style={{ textAlign: "justify" }}>{item}</li>
-         ))} */}
-
               <h3>Required qualifications</h3>
-
-              <div>
-                {parse(`${draftToHtml(jobData.qualifications)}`)}
-                {/* {jobData.qualifications.map((item) => (
-           <li style={{ textAlign: "justify" }}>{item}</li>
-         ))} */}
-              </div>
+              <div>{parse(`${draftToHtml(jobData.qualifications)}`)}</div>
 
               <h3>
                 Required candidate level:
@@ -122,9 +88,6 @@ const JobDetailsContent = () => {
               <h3>Additional information</h3>
               <div className={styles.test}>
                 {parse(`${draftToHtml(jobData.additionalInformation)}`)}
-                {/* {jobData.additionalInformation.map((item) => (
-           <li style={{ textAlign: "justify" }}>{item}</li>
-         ))} */}
               </div>
               <p className={styles.oddinfo}>
                 Please clearly mention that you have heard of this job
@@ -134,21 +97,10 @@ const JobDetailsContent = () => {
             <div className={styles.joblist_skills}>
               <div className={styles.inn}>
                 <h3>Professional skills</h3>
-                {/* <p className={styles.softskills_p}>
-           {jobData.professionalSkills.map((item) => (
-             <span className={styles.softskills}>{item}</span>
-           ))}
-         </p> */}
               </div>
 
               <div className={styles.inn}>
                 <h3>Soft Skills</h3>
-
-                {/* <p className={styles.softskills_p}>
-           {jobData.softSkills.map((item) => (
-             <span className={styles.softskills}>{item}</span>
-           ))}
-         </p> */}
               </div>
             </div>
           </div>
