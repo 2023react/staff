@@ -66,6 +66,7 @@ export const dataApi = createApi({
       },
       providesTags: ["Jobs"],
     }),
+
     addJobs: builder.mutation({
       async queryFn({ job }) {
         try {

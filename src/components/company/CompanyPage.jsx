@@ -18,12 +18,14 @@ import { useEffect, useCallback } from "react";
 import { collection, query, where, getDocs } from "firebase/firestore";
 import JobItem from "../content/JobItem";
 import { useNavigate } from "react-router";
-
+import { PATHNAME } from "../../constants/pathname";
 const CompanyPage = () => {
+  const { addNewWork } = PATHNAME;
   const navigate = useNavigate();
   const currentUser = useSelector((state) => state.loginSlice.currentUser);
 
-  const { data, isLoading } = useGetDataQuery({ id: currentUser.uid });
+  const { data, isLoading } = useGetDataQuery({ id: currentUser?.uid });
+
   const currentInfo = useSelector((state) => state.companyInfoSlice);
   const [open, setOpen] = useState(false);
   const [update, setUpdate] = useState();
@@ -54,7 +56,7 @@ const CompanyPage = () => {
   }, [currentUser?.displayName]);
 
   const onClickAdd = () => {
-    navigate("/addNewWork");
+    navigate(addNewWork);
   };
   const [updateData] = useUpdateDataMutation();
   const handleClick = async () => {
@@ -66,6 +68,7 @@ const CompanyPage = () => {
 
     handleClose();
   };
+
   return (
     <div className={styles.outContiner}>
       <div className="container">
