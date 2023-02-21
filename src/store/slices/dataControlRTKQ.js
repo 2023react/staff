@@ -33,12 +33,28 @@ export const dataApi = createApi({
           const fetchData = await getDocs(
             query(collection(db, "jobs"), ...filterHints, limit(limits))
           );
-
           const data = [];
           fetchData.forEach((doc) => {
             data.push({ item: doc.data(), id: doc.id });
           });
-
+          return { data };
+        } catch (e) {
+          console.log(e, "error");
+          return { error: e };
+        }
+      },
+      providesTags: ["Jobs"],
+    }),
+    getFiltredIN: builder.query({
+      async queryFn({ limits, filterHints }) {
+        try {
+          const fetchData = await getDocs(
+            query(collection(db, "jobs"), ...filterHints, limit(limits))
+          );
+          const data = [];
+          fetchData.forEach((doc) => {
+            data.push({ item: doc.data(), id: doc.id });
+          });
           return { data };
         } catch (e) {
           console.log(e, "error");
@@ -146,6 +162,33 @@ export const dataApi = createApi({
 
       invalidatesTags: ["Info"],
     }),
+
+    getCv: builder.query({
+      async queryFn({ id }) {
+        try {
+          const userRef = await doc(db, "users", id);
+          const data = await getDoc(userRef);
+          return { data: data.data().cvData };
+        } catch (e) {
+          return { error: e };
+        }
+      },
+      providesTags: ["Cv"],
+    }),
+    updateCv: builder.mutation({
+      async queryFn({ id, cvData }) {
+        try {
+          const userRef = doc(db, "users", id);
+          await updateDoc(userRef, {
+            cvData: cvData,
+          });
+          return { data: "ok" };
+        } catch (e) {
+          return { error: e };
+        }
+      },
+      invalidatesTags: ["Cv"],
+    }),
   }),
 });
 export const {
@@ -157,5 +200,7 @@ export const {
   useUpdateDataMutation,
   useUpdateCompanyDataMutation,
   useGetFiltredCompaniesQuery,
+  useGetCvQuery,
+  useUpdateCvMutation,
 } = dataApi;
 export const jobApi = dataApi.reducer;
