@@ -45,7 +45,6 @@ const UserNavbar = ({ user }) => {
             </div>
             <div className={styles.lable}>
               <div className={styles.itemsWraper}>
-                {" "}
                 <Travel color="customGreen" /> <span>No</span>
               </div>
               <div className={styles.itemsWraper}>
@@ -59,8 +58,7 @@ const UserNavbar = ({ user }) => {
             <FollowButton size="small" variant="Follow">
               <HeartIcon variant="heart" /> Subscriptions
             </FollowButton>
-            <NavLink to="/pdfcv">
-              {" "}
+            <NavLink to="/YourCv">
               <FollowButton variant="ViewMore">Convert CV to PDF</FollowButton>
             </NavLink>
           </div>

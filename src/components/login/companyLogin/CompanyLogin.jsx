@@ -6,32 +6,34 @@ import InputField from "../input/Input";
 
 import { auth, db } from "../../../firebase";
 import { signInWithEmailAndPassword, signOut } from "firebase/auth";
-import { useNavigate } from "react-router";
-import { useDispatch, useSelector } from "react-redux";
+import { useLocation, useNavigate } from "react-router";
+import { useDispatch } from "react-redux";
 import {
   changeCurrentUser,
+  changeIsLoading,
   changeIsUser,
-  closeLoginModal,
+  openLogin,
 } from "../../../store/slices/loginSlice";
 
 import SignInButton from "../../../UI/Button";
 import { doc, getDoc } from "firebase/firestore";
+import { Link } from "react-router-dom";
 
-const LoginForm = () => {
+const CompanyLogin = () => {
+  const location = useLocation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const isOpenModal = useSelector((state) => state.loginSlice.showLogin);
-
   const {
     register,
     formState: { errors },
     handleSubmit,
   } = useForm({
-    mode: "onBlur",
+    mode: "all",
   });
 
   const onSubmit = async (data) => {
     try {
+      dispatch(changeIsLoading(false));
       const currUser = await signInWithEmailAndPassword(
         auth,
         data.email,
@@ -42,19 +44,20 @@ const LoginForm = () => {
         const docRef = doc(db, "users", currUser.user.uid);
         const d = await getDoc(docRef);
         dispatch(changeIsUser(d?.data().isUser));
-      } catch (error) {
-        if (isOpenModal) {
+        if (location.pathname === "/company/login") {
           dispatch(changeCurrentUser(null));
           dispatch(changeIsUser(null));
           signOut(auth);
-          navigate("/company/login");
-          dispatch(closeLoginModal());
+          navigate("/");
+          dispatch(openLogin());
           return;
         }
+      } catch (error) {
         console.log(error);
       }
+
+      dispatch(changeIsLoading(true));
       navigate("/");
-      dispatch(closeLoginModal());
     } catch (error) {}
   };
 
@@ -68,7 +71,7 @@ const LoginForm = () => {
             type="email"
             placeholder="Your Email"
             register={register}
-            errors={errors}
+            errors={errors?.message}
           />
         </div>
 
@@ -79,7 +82,7 @@ const LoginForm = () => {
             type="password"
             placeholder="Your Password"
             register={register}
-            errors={errors}
+            errors={errors?.message}
           />
         </div>
 
@@ -93,10 +96,13 @@ const LoginForm = () => {
 
         <div className={style.text}>
           Don't have an account yet?
-          <span className={style.forgotPAss}> Register</span> your account now.
+          <Link to="/company/register">
+            <span className={style.forgotPAss}> Register</span> your account
+            now.
+          </Link>
         </div>
       </form>
     </div>
   );
 };
-export default LoginForm;
+export default CompanyLogin;

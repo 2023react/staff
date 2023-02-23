@@ -6,42 +6,77 @@ import AlertDialogSlide from "../../UI/Dialog";
 import styles from "./company.module.scss";
 import CompanyInfo from "./Accordion/AboutUs";
 import AddActionButtons from "./Accordion/AddIcon";
-import EditorComponent from "./Editor/Editor";
+import parse from "html-react-parser";
+
 import {
   useGetDataQuery,
-  useUpdateDataMutation,
+  useUpdateCompanyDataMutation,
+  dataApi,
 } from "../../store/slices/dataControlRTKQ";
 import BasicButtons from "../../UI/Button";
 import LinearColor from "../../UI/Progress";
 import { db } from "../../firebase";
-import { useEffect, useCallback } from "react";
-import { collection, query, where, getDocs } from "firebase/firestore";
+import { useEffect } from "react";
+import {
+  collection,
+  query,
+  where,
+  getDocs,
+  doc,
+  getDoc,
+} from "firebase/firestore";
 import JobItem from "../content/JobItem";
-import { useNavigate } from "react-router";
+
+import { useNavigate, useParams } from "react-router";
+import TextEditor from "../textEditor/TextEditor";
+import Contacts from "./contacts/Contacts";
+
 import { PATHNAME } from "../../constants/pathname";
+
 const CompanyPage = () => {
   const { addNewWork } = PATHNAME;
   const navigate = useNavigate();
+  const params = useParams();
   const currentUser = useSelector((state) => state.loginSlice.currentUser);
 
-  const { data, isLoading } = useGetDataQuery({ id: currentUser?.uid });
+  const id = params.id;
 
-  const currentInfo = useSelector((state) => state.companyInfoSlice);
   const [open, setOpen] = useState(false);
-  const [update, setUpdate] = useState();
+  const [info, setInfo] = useState();
+  const [defaultInfo, setDefaultInfo] = useState();
+  const [jobs, setJobs] = useState([]);
+  const [companyContacts, setCompanyContacts] = useState();
 
   const handleClose = () => {
     setOpen(false);
   };
 
-  const [jobs, setJobs] = useState([]);
+  useEffect(() => {
+    const getCompanyInfo = async () => {
+      try {
+        const docRef = doc(db, "companies", id);
+        const companyDoc = await getDoc(docRef);
+        setDefaultInfo(companyDoc.data().aboutUs);
+        setInfo(companyDoc.data().aboutUs);
+        setCompanyContacts({
+          address: companyDoc.data().address,
+          email: companyDoc.data().email,
+          phone: companyDoc.data().phone,
+        });
+      } catch (error) {
+        console.log(error.message);
+      }
+    };
+
+    getCompanyInfo();
+  }, []);
 
   useEffect(() => {
     const getData = async () => {
       try {
         const q = query(
           collection(db, "jobs"),
-          where("companyName", "==", currentUser.displayName)
+          where("companyName", "==", currentUser?.displayName)
         );
         const querySnapshot = await getDocs(q);
         const data = [];
@@ -53,18 +88,16 @@ const CompanyPage = () => {
     };
 
     getData();
-  }, [currentUser?.displayName]);
+  }, [currentUser?.displayName, id]);
 
   const onClickAdd = () => {
     navigate(addNewWork);
   };
-  const [updateData] = useUpdateDataMutation();
+
+  const [updateMutation] = useUpdateCompanyDataMutation();
+
   const handleClick = async () => {
-    updateData({
-      id: currentUser.uid,
-      update: update,
-      currentInfo: currentInfo,
-    }).unwrap();
+    updateMutation({ info, id }).unwrap();
 
     handleClose();
   };
@@ -72,66 +105,64 @@ const CompanyPage = () => {
   return (
     <div className={styles.outContiner}>
       <div className="container">
-        <div className={styles.company}>
-          <div>
-            <CompanyNavbar user={currentUser} />
-          </div>
-          <div className={styles.companyInfo}>
-            {isLoading ? (
-              <LinearColor />
-            ) : (
-              data &&
-              data.map((p, i) => {
-                return (
-                  <CompanyInfo
-                    title={p.title}
-                    text={p.text}
-                    key={uuid()}
-                    onClick={(currentData) => {
-                      setUpdate({ ...currentData });
-                      setOpen(true);
-                    }}
-                  />
-                );
-              })
-            )}
-          </div>
-          <div className={styles.addInfo}>
-            <AddActionButtons
-              onClick={() => {
-                setOpen(true);
-                setUpdate();
-              }}
-            />
-          </div>
-
-          <div className={styles.editorDialog}>
-            <AlertDialogSlide
-              open={open}
-              handleClose={handleClose}
-              title="Type your text"
-            >
-              <BasicButtons onClick={handleClick}> ADD</BasicButtons>
-              <EditorComponent
-                data={update}
-                handleClose={handleClose}
-                isTitle={true}
+        {
+          <div className={styles.company}>
+            <div>
+              <CompanyNavbar user={currentUser} />
+            </div>
+            <h2 className={styles.aboutTitle}>About Us</h2>
+            <div className={styles.companyInfo}>
+              <CompanyInfo
+                title={"About US"}
+                text={info}
+                key={uuid()}
+                onClick={(currentData) => {
+                  setOpen(true);
+                }}
               />
-              <EditorComponent
-                data={update}
-                handleClose={handleClose}
-                isTitle={false}
-              />
-            </AlertDialogSlide>
-          </div>
+            </div>
 
-          <BasicButtons onClick={onClickAdd} className={styles.btn}>
-            Add New Work
-          </BasicButtons>
-          {jobs.map((j) => (
-            <JobItem item={j.item} id={j.id} key={uuid()} toCompany />
-          ))}
-        </div>
+            <div className={styles.addInfo}>
+              <AddActionButtons
+                onClick={() => {
+                  setOpen(true);
+                }}
+              />
+            </div>
+
+            <div className={styles.editorDialog}>
+              <AlertDialogSlide
+                open={open}
+                handleClose={handleClose}
+                title="Type info about your company"
+              >
+                <TextEditor
+                  big
+                  value={defaultInfo}
+                  onChange={(editorState) => {
+                    setInfo({
+                      ...editorState,
+                    });
+                  }}
+                />
+
+                <BasicButtons className={styles.Addbtn} onClick={handleClick}>
+                  ADD
+                </BasicButtons>
+              </AlertDialogSlide>
+            </div>
+
+            <BasicButtons onClick={onClickAdd} className={styles.btn}>
+              Add New Work
+            </BasicButtons>
+            <h2>Active Jobs</h2>
+            {jobs.map((j) => (
+              <JobItem item={j.item} id={j.id} key={uuid()} toCompany />
+            ))}
+          </div>
+        }
+
+        <Contacts contacts={companyContacts} />
       </div>
     </div>
   );

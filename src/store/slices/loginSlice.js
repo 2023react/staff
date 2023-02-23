@@ -2,9 +2,11 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   currentUser: null,
+  isUser: null,
   showLogin: false,
   showRegister: false,
   showComponyLogin: false,
+  isLoading: true,
 };
 
 const loginSlice = createSlice({
@@ -12,6 +14,12 @@ const loginSlice = createSlice({
   initialState,
 
   reducers: {
+    changeIsLoading(state, action) {
+      state.isLoading = action.payload;
+    },
+    changeIsUser(state, action) {
+      state.isUser = action.payload;
+    },
     changeCurrentUser(state, action) {
       state.currentUser = action.payload;
     },
@@ -47,10 +55,10 @@ export const {
   openRegister,
   closeLoginModal,
   openComponyLogin,
-
+  changeIsUser,
   addCurrentCompany,
-
   changeCurrentUser,
   onClickSignUp,
+  changeIsLoading,
 } = loginSlice.actions;
 export default loginSlice.reducer;

@@ -12,13 +12,12 @@ import HeartIcon from "../../UI/HeartIcon";
 const JobItem = ({ id, item, toCompany }) => {
   const { jobs, jobInfoToCompany } = PATHNAME;
   const iconWidth = { width: "15px" };
-
   return (
     <Link
       to={!toCompany ? `${jobs}/${id}` : `${jobInfoToCompany}/${id}?current`}
     >
       <div className={styles.jobInfo}>
-        <img src={item?.photoUrl} alt="img" />
+        <img src={item?.img} alt="img" />
         <div className={styles.jobInfoTitleBlocks}>
           <h4> {item?.jobName}</h4>
 

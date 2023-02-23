@@ -6,10 +6,6 @@
 body {
   font-family: "Roboto", sans-serif !important;
 }
-.App {
-  // display: flex;
-  // flex-direction: column;
-}
 button {
   background: none;
   border: none;
@@ -72,18 +68,26 @@ a {
   padding: 1rem;
   border: 1px solid #ccc;
 }
-.editor-class {
-  background-color: rgb(244, 241, 241);
+.editor-class-big {
+  background-color: rgb(242, 241, 241);
+  padding: 1rem;
+  border: 1px solid #ccc;
+  overflow: scroll !important;
+  height: 500px !important;
+}
+
+.editor-class{
+  background-color: rgb(242, 241, 241);
   padding: 1rem;
   border: 1px solid #ccc;
 }
+
+
 .toolbar-class {
   border: 1px solid #ccc;
   gap: 10px;
+  
 }
-
-
-
 .demo-option-custom{
 display: none  !important;
 }
@@ -96,6 +100,13 @@ display: none  !important;
     width: 100% !important;
     height: 100% !important;
   }
- width: 35px !important;
- height: 35px !important;
+ width: 30px !important;
+ height: 30px !important;
+}
+
+
+.map{
+  width: 500px;
+  height: 300px;
+  margin-bottom: 50px;
 }

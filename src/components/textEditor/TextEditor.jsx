@@ -7,13 +7,23 @@ import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import { Editor } from "react-draft-wysiwyg";
 
 import style from "./editor.module.scss";
+import { useEffect } from "react";
 
-const TextEditor = ({ onChange, value }) => {
+const TextEditor = ({ onChange, value, big }) => {
   const [editor, setEditor] = useState(
     value
       ? EditorState.createWithContent(convertFromRaw(value))
       : EditorState.createEmpty()
   );
+
+  useEffect(() => {
+    const newValue = value
+      ? EditorState.createWithContent(convertFromRaw(value))
+      : EditorState.createEmpty();
+    if (JSON.stringify(newValue) !== JSON.stringify(editor)) {
+      setEditor(newValue);
+    }
+  }, [value]);
 
   const onEditorStateChange = (newEditor) => {
     setEditor(newEditor);
@@ -27,9 +37,21 @@ const TextEditor = ({ onChange, value }) => {
       <Editor
         editorState={editor}
         wrapperClassName="wrapper-class"
-        editorClassName="editor-class"
+        editorClassName={big ? "editor-class-big" : "editor-class"}
         toolbarClassName="toolbar-class"
         onEditorStateChange={onEditorStateChange}
+        hashtag={{
+          separator: " ",
+          trigger: "#",
+        }}
+        mention={{
+          separator: " ",
+          trigger: "@",
+          suggestions: [
+            { text: "JavaScript", value: "javascript", url: "js" },
+            { text: "Golang", value: "golang", url: "go" },
+          ],
+        }}
         toolbar={{
           colorPicker: {
             className: "demo-option-custom",

@@ -1,8 +1,4 @@
-import {
-  createApi,
-  fakeBaseQuery,
-  fetchBaseQuery,
-} from "@reduxjs/toolkit/query/react";
+import { createApi, fakeBaseQuery } from "@reduxjs/toolkit/query/react";
 import {
   arrayRemove,
   arrayUnion,
@@ -23,7 +19,8 @@ import { db } from "../../firebase";
 
 export const dataApi = createApi({
   reducerPath: "dataApi",
-  tagTypes: ["Jobs", "Info", "Cv"],
+
+  tagTypes: ["Jobs", "Info", "Cv", "Companies"],
   baseQuery: fakeBaseQuery(),
   endpoints: (builder) => ({
     getFiltredWhere: builder.query({
@@ -32,12 +29,10 @@ export const dataApi = createApi({
           const fetchData = await getDocs(
             query(collection(db, "jobs"), ...filterHints, limit(limits))
           );
-
           const data = [];
           fetchData.forEach((doc) => {
             data.push({ item: doc.data(), id: doc.id });
           });
-
           return { data };
         } catch (e) {
           console.log(e, "error");
@@ -52,12 +47,10 @@ export const dataApi = createApi({
           const fetchData = await getDocs(
             query(collection(db, "jobs"), ...filterHints, limit(limits))
           );
-
           const data = [];
           fetchData.forEach((doc) => {
             data.push({ item: doc.data(), id: doc.id });
           });
-
           return { data };
         } catch (e) {
           console.log(e, "error");
@@ -65,6 +58,24 @@ export const dataApi = createApi({
         }
       },
       providesTags: ["Jobs"],
+    }),
+    getFiltredCompanies: builder.query({
+      async queryFn({ filterHintsCompany }) {
+        try {
+          const fetchData = await getDocs(
+            query(collection(db, "companies"), ...filterHintsCompany)
+          );
+          const data = [];
+          fetchData.forEach((doc) => {
+            data.push({ item: doc.data(), id: doc.id });
+          });
+
+          return { data };
+        } catch (e) {
+          return { error: e };
+        }
+      },
+      providesTags: ["Companies"],
     }),
 
     addJobs: builder.mutation({
@@ -85,7 +96,6 @@ export const dataApi = createApi({
     deleteJobs: builder.mutation({
       async queryFn(id) {
         try {
-          console.log(id);
           deleteDoc(doc(db, "jobs", id));
           return { data: "ok" };
         } catch (e) {
@@ -97,11 +107,11 @@ export const dataApi = createApi({
     }),
 
     getData: builder.query({
-      async queryFn({ id }) {
+      async queryFn(id) {
         try {
           const docRef = doc(db, "companies", id);
           const data = await getDoc(docRef);
-          return { data: data.data().about };
+          return data.data().aboutUs;
         } catch (e) {
           return { error: e };
         }
@@ -132,49 +142,60 @@ export const dataApi = createApi({
 
       invalidatesTags: ["Info"],
     }),
-
-    getCv: builder.query({
-      async queryFn({ id }) {
+    updateCompanyData: builder.mutation({
+      async queryFn({ id, info }) {
         try {
-          const userRef = await doc(db, "users", id);
-          const data = await getDoc(userRef);
-
-          return { data: data.data().cvData };
-        } catch (e) {
-          return { error: e };
-        }
-      },
-
-      providesTags: ["Cv"],
-    }),
-
-    updateCv: builder.mutation({
-      async queryFn({ id, cvData }) {
-        try {
-          const userRef = doc(db, "users", id);
-
-          await updateDoc(userRef, {
-            cvData: cvData,
+          const document = doc(db, "companies", id);
+          await updateDoc(document, {
+            aboutUs: info,
           });
-
           return { data: "ok" };
         } catch (e) {
           return { error: e };
         }
       },
 
+      invalidatesTags: ["Info"],
+    }),
+
+    getCv: builder.query({
+      async queryFn({ id }) {
+        try {
+          const userRef = await doc(db, "users", id);
+          const data = await getDoc(userRef);
+          return { data: data.data().cvData };
+        } catch (e) {
+          return { error: e };
+        }
+      },
+      providesTags: ["Cv"],
+    }),
+    updateCv: builder.mutation({
+      async queryFn({ id, cvData }) {
+        try {
+          const userRef = doc(db, "users", id);
+          await updateDoc(userRef, {
+            cvData: cvData,
+          });
+          return { data: "ok" };
+        } catch (e) {
+          return { error: e };
+        }
+      },
       invalidatesTags: ["Cv"],
     }),
   }),
 });
 export const {
   useGetFiltredINQuery,
-  useGetFiltredWhereQuery,
   useAddJobsMutation,
   useDeleteJobsMutation,
   useGetDataQuery,
   useUpdateDataMutation,
+  useUpdateCompanyDataMutation,
+  useGetFiltredCompaniesQuery,
   useGetCvQuery,
   useUpdateCvMutation,
+  useGetFiltredWhereQuery,
 } = dataApi;
 export const jobApi = dataApi.reducer;

@@ -1,7 +1,6 @@
 import React from "react";
 
 import styles from "./navbar.module.scss";
-import { jobsData } from "../../../constants/jobsdata";
 import BassicVerifiedIcon from "../../../UI/VerifiedIcon";
 import FollowButton from "../../../UI/Button";
 import HeartIcon from "../../../UI/HeartIcon";
@@ -11,7 +10,7 @@ import HistorIcon from "../../../UI/HistoryIcon";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { currentSelector } from "../../../store/slices/loginSlice";
-const CompanyNavbar = ({ photoCoverUrl }) => {
+const CompanyNavbar = ({ companyName, photoURL }) => {
   const currentUser = useSelector(currentSelector);
   const verifiedIconStyles = { width: "25px" };
   const avatarCustomStyles = { width: 140, height: 140 };
@@ -27,13 +26,13 @@ const CompanyNavbar = ({ photoCoverUrl }) => {
       <div className={styles.companyInfo}>
         <div className={styles.companyPhoto}>
           <ImageAvatars
-            photoURL={currentUser?.photoURL}
+            photoURL={photoURL ? photoURL : currentUser?.photoURL}
             customStyles={avatarCustomStyles}
           />
         </div>
         <div className={styles.companyInfoBlock}>
           <div className={styles.companyName}>
-            <h1>{currentUser?.displayName}</h1>
+            <h1>{companyName ? companyName : currentUser?.displayName}</h1>
             <BassicVerifiedIcon
               customStyles={verifiedIconStyles}
             ></BassicVerifiedIcon>

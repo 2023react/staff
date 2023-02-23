@@ -4,16 +4,16 @@ import { useForm } from "react-hook-form";
 
 import InputField from "../input/Input";
 import RegisterButtons from "../../../UI/Button";
-import { useNavigate } from "react-router";
-import {
-  createUserWithEmailAndPassword,
-  getAuth,
-  updateProfile,
-} from "firebase/auth";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth, db } from "../../../firebase";
 import { doc, setDoc } from "firebase/firestore";
+import { useNavigate } from "react-router";
+import { useDispatch } from "react-redux";
+import { changeIsUser } from "../../../store/slices/loginSlice";
 
 const RegisterForm = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const {
     register,
     formState: { errors },
@@ -22,7 +22,6 @@ const RegisterForm = () => {
     mode: "onBlur",
   });
 
-  const navigate = useNavigate();
   const onSubmit = async (data) => {
     try {
       const res = await createUserWithEmailAndPassword(
@@ -33,17 +32,15 @@ const RegisterForm = () => {
 
       try {
         await updateProfile(res.user, {
-          displayName: data.firstName,
-          isAnonymous: true,
+          displayName: data.firstName + " " + data.lastName,
         });
 
         await setDoc(doc(db, "users", res.user.uid), {
           uid: res.user.uid,
-          firstName: data.firstName,
-          lastName: data.lastName,
           email: data.email,
-          isAnonymous: true,
+          isUser: true,
         });
+        dispatch(changeIsUser(true));
       } catch (err) {
         console.log(err);
       }
@@ -53,7 +50,6 @@ const RegisterForm = () => {
       console.log(error);
     }
   };
-
   return (
     <div className={style.registerForm}>
       <form onSubmit={handleSubmit(onSubmit)} className={style.form}>

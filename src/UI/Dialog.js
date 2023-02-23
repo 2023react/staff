@@ -16,7 +16,6 @@ export default function AlertDialogSlide({
   open,
   handleClose,
   customStylesTitle,
-
   title,
 }) {
   return (
@@ -30,7 +29,7 @@ export default function AlertDialogSlide({
         fullWidth={true}
         maxWidth="md"
         PaperProps={{
-          sx: {},
+          sx: { height: "100%", maxWidth: "80%" },
         }}
       >
         <div
