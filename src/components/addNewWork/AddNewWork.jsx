@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import style from "./addNewWork.module.scss";
 
 import TextEditor from "../textEditor/TextEditor";
@@ -9,9 +9,7 @@ import { changeJobSlice } from "../../store/slices/newJobSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 import Select from "../select/Select";
-
 import TextField from "@mui/material/TextField";
-
 import { useNavigate, useParams } from "react-router";
 import BasicButtons from "../../UI/Button";
 import InputField from "../login/input/Input";
@@ -83,10 +81,8 @@ const AddNewWork = () => {
 
   const {
     register,
-    formState: { errors, isValid },
+    formState: { errors },
     handleSubmit,
-    control,
-    reset,
   } = useForm({
     mode: "all",
   });
@@ -136,29 +132,6 @@ const AddNewWork = () => {
               helperText={errors?.jobName ? errors?.jobName.message : null}
             />
           </div>
-          {/* <FormControl variant="outlined" fullWidth error={!!errors.type}>
-          <InputLabel>Type</InputLabel>
-          <Controller
-            name="type"
-            control={control}
-            defaultValue=""
-            rules={{ required: "Requaired" }}
-            render={({ onChange, value }) => (
-              <Select onChange={onChange} value={value}>
-                <MenuItem value="">None</MenuItem>
-                <MenuItem value="fulltime">Full-time</MenuItem>
-                <MenuItem value="parttime">Part-time</MenuItem>
-                <MenuItem value="contract">Contract</MenuItem>
-                <MenuItem value="internship">Internship</MenuItem>
-              </Select>
-            )}
-          />
-
-          {errors?.type && (
-            <FormHelperText>{errors?.type.message}</FormHelperText>
-          )}
-        </FormControl> */}
-
           <div className={style.item}>
             <h3>Job Idustry</h3>
             <Select

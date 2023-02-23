@@ -7,6 +7,7 @@ import {
   createRoutesFromElements,
 } from "react-router-dom";
 import "./App.scss";
+
 import CompanyPage from "./components/company/CompanyPage";
 import CompanyPageDetails from "./components/company/CompanyPageDetails.jsx";
 import RegisterCompany from "./components/login/companyRegister/RegisterCompany";
@@ -22,7 +23,6 @@ import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
 import JobDetailsNewWork from "./components/JobDetails/JobDetailsNewWork";
 import AddNewWork from "./components/addNewWork/AddNewWork";
 import UserPage from "./components/user/UserPage";
-import LoginForm from "./components/login/loginForm/LoginForm";
 import { doc, getDoc } from "firebase/firestore";
 import CompanyLogin from "./components/login/companyLogin/CompanyLogin";
 import PDFConvertor from "./components/user/pdfConvertor/PDFConvertor";
@@ -32,7 +32,6 @@ const r = createBrowserRouter(
     <Route path="/" element={<Layout />}>
       <Route index element={<Home />} />
       <Route path="/jobs" element={<Jobs />} />
-
       <Route path="/company/:id" element={<CompanyPage />} />
       <Route path="/companyDetails/:id" element={<CompanyPageDetails />} />
       <Route path="/user/:name" element={<UserPage />} />
@@ -55,8 +54,6 @@ const r = createBrowserRouter(
           </ProtectedRoute>
         }
       />
-
-      {/* <Route path="/companyPage" element={<CompanyPage />} /> */}
       <Route path="/addNewWork" element={<AddNewWork />} />
 
       <Route path="/addNewWork/:id" element={<AddNewWork />} />
@@ -66,7 +63,7 @@ const r = createBrowserRouter(
       <Route path="/jobInfo/:id" element={<JobDetailsNewWork />} />
 
       <Route path="/jobInfoToCompany/:id" element={<JobDetailsNewWork />} />
-      <Route path="/pdfcv" element={<PDFConvertor />} />
+      <Route path="/YourCv" element={<PDFConvertor />} />
     </Route>
   )
 );
@@ -89,8 +86,6 @@ function App() {
   useEffect(() => {
     window.scrollTo(0, 0);
   });
-
-  console.log(useSelector((state) => state.loginSlice.isUser));
 
   return (
     <div className="App">

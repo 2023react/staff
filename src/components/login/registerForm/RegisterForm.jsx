@@ -32,7 +32,7 @@ const RegisterForm = () => {
 
       try {
         await updateProfile(res.user, {
-          displayName: data.firstName + data.lastName,
+          displayName: data.firstName + " " + data.lastName,
         });
 
         await setDoc(doc(db, "users", res.user.uid), {

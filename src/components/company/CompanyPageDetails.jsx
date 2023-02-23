@@ -65,8 +65,6 @@ const CompanyPage = () => {
     getData();
   }, [currentUser?.displayName, id]);
 
-  console.log(info, "1111");
-
   return (
     <div className={styles.outContiner}>
       <div className="container">

@@ -57,7 +57,9 @@ const InputField = ({
       ) : null}
 
       <span className={style.error__style}>
-        {errors && errors[name] && <p>{errors[name].message}</p>}
+        {errors && errors[name] && errors[name].message && (
+          <p>{errors[name].message}</p>
+        )}
       </span>
     </div>
   );

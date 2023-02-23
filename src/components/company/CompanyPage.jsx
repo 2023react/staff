@@ -41,14 +41,6 @@ const CompanyPage = () => {
 
   const id = params.id;
 
-  // const { data, isLoading } = useGetDataQuery(id);
-  // console.log(isLoading, i + 1);
-  // const currentInfo = useSelector((state) => state.companyInfoSlice);
-
-  const { data, isLoading } = useGetDataQuery({ id: currentUser?.uid });
-
-  const currentInfo = useSelector((state) => state.companyInfoSlice);
-
   const [open, setOpen] = useState(false);
   const [info, setInfo] = useState();
   const [defaultInfo, setDefaultInfo] = useState();
@@ -71,7 +63,6 @@ const CompanyPage = () => {
           email: companyDoc.data().email,
           phone: companyDoc.data().phone,
         });
-        console.log(companyDoc.data().aboutUs);
       } catch (error) {
         console.log(error.message);
       }
@@ -103,18 +94,6 @@ const CompanyPage = () => {
     navigate(addNewWork);
   };
 
-  // const [updateData] = useUpdateDataMutation();
-  // const handleClick = async () => {
-  //   if (currentInfo.text.blocks[0].text && currentInfo.title.blocks[0].text) {
-  //     updateData({
-  //       id: currentUser?.uid,
-  //       update: update,
-  //       currentInfo: currentInfo,
-  //     }).unwrap();
-  //   }
-  //   handleClose();
-  // };
-
   const [updateMutation] = useUpdateCompanyDataMutation();
 
   const handleClick = async () => {
@@ -126,9 +105,6 @@ const CompanyPage = () => {
   return (
     <div className={styles.outContiner}>
       <div className="container">
-        {/* {isLoading ? (
-          <LinearColor />
-        ) : ( */}
         {
           <div className={styles.company}>
             <div>
@@ -141,7 +117,6 @@ const CompanyPage = () => {
                 text={info}
                 key={uuid()}
                 onClick={(currentData) => {
-                  // setUpdate({ ...currentData });
                   setOpen(true);
                 }}
               />
@@ -151,7 +126,6 @@ const CompanyPage = () => {
               <AddActionButtons
                 onClick={() => {
                   setOpen(true);
-                  // setUpdate();
                 }}
               />
             </div>

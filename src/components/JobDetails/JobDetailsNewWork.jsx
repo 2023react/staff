@@ -24,8 +24,7 @@ import draftToHtml from "draftjs-to-html";
 import { currentSelector } from "../../store/slices/loginSlice";
 import { PATHNAME } from "../../constants/pathname";
 const JobDetailsNewWork = () => {
-  const { jobInfo, jobInfoToCompany, companyPage, addNewWork, current } =
-    PATHNAME;
+  const { jobInfo, jobInfoToCompany, addNewWork, current } = PATHNAME;
   const location = useLocation();
   const dispatch = useDispatch();
   const navigate = useNavigate();

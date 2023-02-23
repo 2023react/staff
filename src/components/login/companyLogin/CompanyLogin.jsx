@@ -10,13 +10,14 @@ import { useLocation, useNavigate } from "react-router";
 import { useDispatch } from "react-redux";
 import {
   changeCurrentUser,
+  changeIsLoading,
   changeIsUser,
-  closeLoginModal,
   openLogin,
 } from "../../../store/slices/loginSlice";
 
 import SignInButton from "../../../UI/Button";
 import { doc, getDoc } from "firebase/firestore";
+import { Link } from "react-router-dom";
 
 const CompanyLogin = () => {
   const location = useLocation();
@@ -27,11 +28,12 @@ const CompanyLogin = () => {
     formState: { errors },
     handleSubmit,
   } = useForm({
-    mode: "onBlur",
+    mode: "all",
   });
 
   const onSubmit = async (data) => {
     try {
+      dispatch(changeIsLoading(false));
       const currUser = await signInWithEmailAndPassword(
         auth,
         data.email,
@@ -39,12 +41,9 @@ const CompanyLogin = () => {
       );
 
       try {
-        console.log(currUser.user.uid);
         const docRef = doc(db, "users", currUser.user.uid);
         const d = await getDoc(docRef);
-
         dispatch(changeIsUser(d?.data().isUser));
-        console.log("try meja");
         if (location.pathname === "/company/login") {
           dispatch(changeCurrentUser(null));
           dispatch(changeIsUser(null));
@@ -56,38 +55,12 @@ const CompanyLogin = () => {
       } catch (error) {
         console.log(error);
       }
+
+      dispatch(changeIsLoading(true));
       navigate("/");
     } catch (error) {}
   };
 
-  // const onSubmit = async (data) => {
-  //   try {
-  //     signInWithEmailAndPassword(auth, data.email, data.password)
-  //       .then((currUser) => {
-  //         return currUser;
-  //       })
-  //       .then(async (currUser) => {
-  //         console.log(currUser.user.uid);
-  //         const docRef = doc(db, "users", currUser.user.uid);
-  //         const d = await getDoc(docRef);
-  //         dispatch(changeIsUser(d?.data().isUser));
-  //         try {
-  //           if (location.pathname === "/company/login") {
-  //             dispatch(changeIsUser(null));
-  //             dispatch(openLogin());
-  //             dispatch(changeCurrentUser(null));
-  //             signOut(auth);
-  //             navigate("/");
-  //             return;
-  //           }
-  //         } catch (error) {
-  //           console.log(error);
-  //         }
-  //       });
-
-  //     navigate("/");
-  //   } catch (error) {}
-  // };
   return (
     <div className={style.loginForm}>
       <form onSubmit={handleSubmit(onSubmit)} className={style.form}>
@@ -98,7 +71,7 @@ const CompanyLogin = () => {
             type="email"
             placeholder="Your Email"
             register={register}
-            errors={errors}
+            errors={errors?.message}
           />
         </div>
 
@@ -109,7 +82,7 @@ const CompanyLogin = () => {
             type="password"
             placeholder="Your Password"
             register={register}
-            errors={errors}
+            errors={errors?.message}
           />
         </div>
 
@@ -123,7 +96,10 @@ const CompanyLogin = () => {
 
         <div className={style.text}>
           Don't have an account yet?
-          <span className={style.forgotPAss}> Register</span> your account now.
+          <Link to="/company/register">
+            <span className={style.forgotPAss}> Register</span> your account
+            now.
+          </Link>
         </div>
       </form>
     </div>

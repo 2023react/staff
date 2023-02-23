@@ -43,14 +43,18 @@
       gap: 6px;
       .dropdown__button {
         padding: 12px;
+        cursor: pointer;
         .btn {
           font-size: 18px;
+          background-color: #ffff;
+          padding: 8px 16px;
           cursor: pointer;
         }
       }
 
       .dropdown__button:hover {
         background: rgb(234, 231, 231);
+        
       }
     }
   }

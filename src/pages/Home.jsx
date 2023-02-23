@@ -11,9 +11,9 @@ import { JOB__CATEGORY, CITIES } from "../constants/category";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import MenuItem from "@mui/material/MenuItem";
-import { WrapperJob } from "./HomeWrapperJob";
+import { WrapperJob } from "../components/wrapper/HomeWrapperJob";
 import { useState } from "react";
-import { WrapperCompany } from "./HomeWrapperCompany";
+import { WrapperCompany } from "../components/wrapper/HomeWrapperCompany";
 import { SwiperComponent } from "../components/swiper/Swiper";
 
 const Home = () => {

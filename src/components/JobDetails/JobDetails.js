@@ -28,8 +28,6 @@ const JobDetails = () => {
     getData();
   }, [getData]);
 
-  console.log(jobData);
-
   const customButtonStylesRed = {
     textTransform: "none",
     "&:hover": {

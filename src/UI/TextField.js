@@ -1,8 +1,6 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
-import { useDispatch, useSelector } from "react-redux";
-import { changeSearchJob } from "../store/slices/filterSlice";
 
 export default function SearchTextField() {
   return (
@@ -23,8 +21,6 @@ export default function SearchTextField() {
         label="Search"
         variant="outlined"
         placeholder="All keywords"
-        value={"value"}
-        onChange={"onChange"}
       />
     </Box>
   );

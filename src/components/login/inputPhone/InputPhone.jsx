@@ -1,7 +1,7 @@
 import PhoneInput from "react-phone-number-input";
 import "react-phone-number-input/style.css";
 
-const InputPhone = ({ name, placeholder, register, errors }) => {
+const InputPhone = ({ name, register, errors }) => {
   return (
     <div>
       <PhoneInput

@@ -23,7 +23,7 @@ const TextEditor = ({ onChange, value, big }) => {
     if (JSON.stringify(newValue) !== JSON.stringify(editor)) {
       setEditor(newValue);
     }
-  }, [ value]);
+  }, [value]);
 
   const onEditorStateChange = (newEditor) => {
     setEditor(newEditor);
@@ -88,28 +88,6 @@ const TextEditor = ({ onChange, value, big }) => {
             dropdownClassName: "demo-dropdown-custom",
           },
         }}
-        // toolbar={{
-        //   options: [
-        //     "inline",
-        //     "blockType",
-        //     "fontSize",
-        //     "fontFamily",
-        //     "list",
-        //     "textAlign",
-        //     "colorPicker",
-        //     "link",
-        //     "embedded",
-        //     "emoji",
-        //     "image",
-        //     "remove",
-        //     "history",
-        //   ],
-        //   inline: { inDropdown: true },
-        //   list: { inDropdown: true },
-        //   textAlign: { inDropdown: true },
-        //   link: { inDropdown: true, showOpenOptionOnHover: true },
-        //   history: { inDropdown: true },
-        // }}
       />
     </div>
   );
