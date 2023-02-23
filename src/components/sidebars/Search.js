@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useLocation } from "react-router";
 import Button from "../../UI/Button";
 import SearchTextField from "../../UI/TextField";
@@ -6,7 +6,11 @@ import SearchTextField from "../../UI/TextField";
 import styles from "./sidebars.module.scss";
 const Search = () => {
   const location = useLocation().pathname;
-
+  const [value, setValue] = useState();
+  const onChange = (value) => {
+    setValue(value);
+  };
+  console.log(value, "value");
   let titleText =
     location === "/companies"
       ? "Search all staff.am companies"
@@ -17,7 +21,7 @@ const Search = () => {
       <div className={styles.searchSidebarBlock}>
         <h1>{titleText}</h1>
 
-        <SearchTextField />
+        <SearchTextField onChange={onChange} value={value} />
 
         <div className={styles.searchButton}>
           <Button size="small" variant="solid">

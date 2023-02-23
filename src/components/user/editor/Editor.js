@@ -77,8 +77,6 @@ const EditorComponent = ({ isTitle, update, onEdit }) => {
           history: { inDropdown: true },
         }}
       />
-
-      {/* <div>{parse(`${draftToHtml(infoData.text)}`)}</div> */}
     </div>
   );
 };

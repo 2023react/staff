@@ -1,17 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
-import {
-  Controller,
-  useController,
-  useForm,
-  useFormState,
-} from "react-hook-form";
+import { Controller, useForm, useFormState } from "react-hook-form";
 import BasicButtons from "../../../UI/Button";
 import TextField from "@mui/material/TextField";
 import { v4 as uuid } from "uuid";
 import styles from "./formCv.module.scss";
 import EditorComponent from "../editor/Editor";
-const FormCV = ({ onClick, cvData, update, onEdit, handleClose }) => {
+const FormCV = ({ onClick, update, handleClose }) => {
   const [editor, setEditor] = useState();
   const { handleSubmit, reset, control } = useForm({ mode: "onBlur" });
   const onSubmit = (data) => {
@@ -32,7 +27,7 @@ const FormCV = ({ onClick, cvData, update, onEdit, handleClose }) => {
         );
       })}
       <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
-        {update?.data?.levels.map((level, i) => {
+        {update?.data?.levels.map((level) => {
           return (
             <div key={uuid()} className={styles.inputBox}>
               <lable>{level}</lable>
@@ -45,7 +40,6 @@ const FormCV = ({ onClick, cvData, update, onEdit, handleClose }) => {
                     error={errors[level] ? true : false}
                     color="customGreen"
                     size="small"
-                    // label={level}
                     defaultValue={update?.cvInfo?.formData[level]}
                     fullWidth={true}
                     onChange={onChange}

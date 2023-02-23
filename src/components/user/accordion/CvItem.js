@@ -36,7 +36,7 @@ export default function CvItem({
           <div className={styles.changeButtons}>
             {children}
             <div className={styles.editorText}>
-              <Typography sx={{ maxWidth: "100%" }}>
+              <Typography sx={{ maxWidth: "100%" }} component={"span"}>
                 {cvData[title]?.editorData || cvData[title]?.formData.length ? (
                   <div className={styles.editorText}>
                     {parse(`${draftToHtml(cvData[title]?.editorData)}`)}
@@ -65,18 +65,3 @@ export default function CvItem({
     </div>
   );
 }
-
-// {
-//   <Typography>
-//     {cvData[title] ? (
-//       <>
-//         {parse(`${draftToHtml(cvData[title]?.editorData)}`)}{" "}
-//         {cvData[title]?.formData.map((elem) => {
-//           return <Details tag={elem.tags.label} level={elem.level} />;
-//         })}{" "}
-//       </>
-//     ) : (
-//       lable
-//     )}
-//   </Typography>;
-// }

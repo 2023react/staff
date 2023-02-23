@@ -169,7 +169,7 @@ export const dataApi = createApi({
 });
 export const {
   useGetFiltredINQuery,
-  useLazyGetFiltredWhereQuery,
+  useGetFiltredWhereQuery,
   useAddJobsMutation,
   useDeleteJobsMutation,
   useGetDataQuery,

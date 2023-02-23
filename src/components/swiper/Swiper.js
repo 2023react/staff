@@ -13,7 +13,7 @@ import HeartIcon from "../../UI/HeartIcon";
 import { useSelector } from "react-redux";
 import { useLocation } from "react-router";
 import { v4 as uuid } from "uuid";
-import { useGetFiltredDataQuery } from "../../store/slices/dataControlRTKQ";
+import { useGetFiltredWhereQuery } from "../../store/slices/dataControlRTKQ";
 
 import { where } from "firebase/firestore";
 
@@ -27,7 +27,7 @@ export const SwiperComponent = () => {
   const jobsType = jobCategory.map((item) => where("jobCategory", "==", item));
 
   const filterHints = [...jobsType];
-  const { data: jobData } = useGetFiltredDataQuery({
+  const { data: jobData } = useGetFiltredWhereQuery({
     filterHints,
   });
 

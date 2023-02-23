@@ -5,6 +5,7 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import Slide from "@mui/material/Slide";
 import CloseIcon from "@mui/icons-material/Close";
+import { makeStyles } from "@mui/material";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="down" ref={ref} {...props} />;
@@ -29,9 +30,7 @@ export default function AlertDialogSlide({
         fullWidth={true}
         maxWidth="md"
         PaperProps={{
-          sx: {
-            // height: "100%",
-          },
+          sx: {},
         }}
       >
         <div

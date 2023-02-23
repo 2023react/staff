@@ -42,11 +42,6 @@ const UserPage = () => {
       dispatch(changeCv(data));
     }
   }, [data, dispatch, currentUser]);
-  // useEffect(() => {
-  //   if (cvData && currentUser) {
-  //     updateCv({ id: currentUser?.uid, cvData: cvData }).unwrap();
-  //   }
-  // }, [cvData]);
 
   const handleClose = () => {
     setOpen(false);

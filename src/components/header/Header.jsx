@@ -104,8 +104,6 @@ const Header = () => {
                     </li>{" "}
                   </>
                 )}
-
-                <NavLink to="/user">User page</NavLink>
               </ul>
             </div>
           </div>

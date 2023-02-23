@@ -69,7 +69,11 @@ export function WrapperJob() {
 
       <div className={styles.fields}>
         <Link to={jobs}>
-          <Button className={styles.searchbtn} variant="contained">
+          <Button
+            className={styles.searchbtn}
+            variant="contained"
+            onClick={console.log("sfbhgsdv")}
+          >
             <SearchIcon />
           </Button>
         </Link>
