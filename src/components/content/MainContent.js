@@ -50,10 +50,7 @@ const MainContent = () => {
     ? [where("industry", "in", industry)]
     : [];
 
-    return [...industryType];
-  };
-
-  const { data, isLoading } = useGetFiltredDataQuery({
+  const { data, isLoading } = useGetFiltredINQuery({
     limits: limit,
     filterHints,
   });
@@ -98,7 +95,8 @@ const MainContent = () => {
         <SwiperComponent />
       </div>
       <div className={styles.contentNavbar}>
-        {location === "jobs" ? (
+        {" "}
+        {location === jobs ? (
           <Navbar />
         ) : (
           <p className={styles.companiesNavbarSuccessor}>
