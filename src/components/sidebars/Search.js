@@ -44,7 +44,7 @@ const Search = () => {
       );
     }
   };
-  console.log(filtredJobsData, "filtredJobsData");
+
   return (
     <div className={styles.searchSidebar}>
       <div className={styles.searchSidebarBlock}>
