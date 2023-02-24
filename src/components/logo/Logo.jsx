@@ -7,7 +7,6 @@ import ImageAvatars from "../../UI/Avatar";
 import { changeCurrentUser, changeIsUser } from "../../store/slices/loginSlice";
 import LogOutButton from "../../UI/Button";
 import styles from "./logo.module.scss";
-import { divideIcon } from "@progress/kendo-svg-icons";
 
 const Logo = ({ isHomePage }) => {
   const currentUser = useSelector((state) => state.loginSlice.currentUser);

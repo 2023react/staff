@@ -29,7 +29,7 @@ export default function AlertDialogSlide({
         fullWidth={true}
         maxWidth="md"
         PaperProps={{
-          sx: { height: "100%", maxWidth: "80%" },
+          sx: {},
         }}
       >
         <div
@@ -56,7 +56,6 @@ export default function AlertDialogSlide({
             flexDirection: "column",
             alignItems: "center",
             width: "100%",
-            // fullWidth: "true",
           }}
         >
           {children}

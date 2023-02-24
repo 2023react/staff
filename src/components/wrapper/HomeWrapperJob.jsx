@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Button from "@mui/material/Button";
 import SearchIcon from "@mui/icons-material/Search";
 
@@ -65,11 +65,7 @@ export function WrapperJob() {
 
       <div className={styles.fields}>
         <Link to={jobs}>
-          <Button
-            className={styles.searchbtn}
-            variant="contained"
-            onClick={console.log("sfbhgsdv")}
-          >
+          <Button className={styles.searchbtn} variant="contained">
             <SearchIcon />
           </Button>
         </Link>

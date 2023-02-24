@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import JobItem from "./JobItem";
 import Navbar from "./Navbar";
@@ -12,7 +12,7 @@ import {
 } from "../../store/slices/dataControlRTKQ";
 
 import { where } from "firebase/firestore";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import Selectlimit from "../../UI/Selectlimit";
 
@@ -20,27 +20,28 @@ import LinearColor from "../../UI/Progress";
 
 import CompanyItem from "../company/companyItem/CompanyItem";
 import { SwiperComponent } from "../swiper/Swiper";
-
+import { addCompaniesData, addJobsData } from "../../store/slices/jobsSlice";
 import { PATHNAME } from "../../constants/pathname";
 
 const MainContent = () => {
   const { jobs } = PATHNAME;
   const [limit, setLimit] = useState();
   const location = useLocation().pathname;
-
-  const handleChange = (e) => {
-    setLimit(e.target.value);
+  const dispatch = useDispatch();
+  const handleChange = (value) => {
+    setLimit(value);
   };
-  const [jobsData, setJobsData] = useState([]);
 
   const levelCategory = useSelector((state) => state.filterSlice.levelCategory);
   const jobCategory = useSelector((state) => state.filterSlice.jobCategory);
   const industry = useSelector(
     (state) => state.filterSlice.industryCategoryCompany
   );
+  const jobsData = useSelector((state) => state.jobsSlice.jobsData);
+  const companyData = useSelector((state) => state.jobsSlice.companyData);
 
   const filterHints = jobCategory.length
-    ? [where("category", "in", jobCategory)]
+    ? [where("jobCategory", "in", jobCategory)]
     : levelCategory.length
     ? [where("level", "in", levelCategory)]
     : [];
@@ -55,8 +56,13 @@ const MainContent = () => {
   });
 
   const { data: comData, isLoading: loading } = useGetFiltredCompaniesQuery({
+    limits: limit,
     filterHintsCompany,
   });
+
+  useEffect(() => {
+    dispatch(addCompaniesData(comData));
+  }, [comData, dispatch]);
 
   useEffect(() => {
     let filtredJobs = data;
@@ -66,11 +72,11 @@ const MainContent = () => {
           levelCategory.includes(value.item.level)
         );
       }
-      setJobsData(filtredJobs);
+      dispatch(addJobsData(filtredJobs));
     } catch (e) {
       console.log(e);
     }
-  }, [data, jobCategory, levelCategory]);
+  }, [data, jobCategory, levelCategory, dispatch]);
 
   const getData = () => {
     if (location !== "/companies") {
@@ -78,11 +84,12 @@ const MainContent = () => {
         <JobItem item={job?.item} id={job?.id} key={uuid()} />
       ));
     }
-    return comData?.map((c) => (
+    return companyData?.map((c) => (
       <CompanyItem item={c?.item} id={c?.id} key={uuid()} />
     ));
   };
-
+  console.log(jobsData, "jobsData");
+  console.log(companyData, "companyData");
   return (
     <div className={styles.mainContent}>
       <div className={styles.contentHotJobs}>
@@ -90,27 +97,21 @@ const MainContent = () => {
       </div>
       <div className={styles.contentNavbar}>
         {" "}
-        <div className={styles.selectLimit}>
-          {" "}
-          <Selectlimit limit={limit} handleChange={handleChange} />
-        </div>
         {location === jobs ? (
           <Navbar />
         ) : (
           <p className={styles.companiesNavbarSuccessor}>
             1 - 50 company results from 4360 total companies on staff.am
           </p>
-        )}
+        )}{" "}
+        <div className={styles.selectLimit}>
+          {" "}
+          <Selectlimit limit={limit} handleChange={handleChange} />
+        </div>
       </div>
 
       <div className={styles.jobsColections}>
-        {isLoading ? (
-          <LinearColor />
-        ) : (
-          jobsData?.map((job) => {
-            return <JobItem item={job?.item} id={job?.id} key={uuid()} />;
-          })
-        )}
+        {isLoading || loading ? <LinearColor /> : getData()}
       </div>
     </div>
   );
