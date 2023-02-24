@@ -18,6 +18,7 @@ const EditorComponent = ({ isTitle, update, onEdit }) => {
       setEditorState(EditorState.createEmpty());
     }
   }, [update]);
+
   useEffect(() => {
     onEdit(convertToRaw(editorState.getCurrentContent()));
   }, [editorState, onEdit]);
@@ -77,8 +78,6 @@ const EditorComponent = ({ isTitle, update, onEdit }) => {
           history: { inDropdown: true },
         }}
       />
-
-      {/* <div>{parse(`${draftToHtml(infoData.text)}`)}</div> */}
     </div>
   );
 };

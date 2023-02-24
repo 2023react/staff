@@ -1,18 +1,16 @@
-import React, { useState } from "react";
+import React from "react";
 import Button from "@mui/material/Button";
 import SearchIcon from "@mui/icons-material/Search";
-import { margin } from "@mui/system";
-import Slider from "../components/carusel/Carousel";
-import styles from "./Home.module.scss";
+
+import styles from "../../pages/Home.module.scss";
 import { useDispatch, useSelector } from "react-redux";
 
 import { v4 as uuid } from "uuid";
-import { JOB__CATEGORY, LEVEL_CATEGORY } from "../constants/category";
+import { JOB__CATEGORY, LEVEL_CATEGORY } from "../../constants/category";
 
-import MenuItem from "@mui/material/MenuItem";
 import { Link } from "react-router-dom";
-import { PATHNAME } from "../constants/pathname";
-import { emptyFilter, setFilter } from "../store/slices/filterSlice";
+import { PATHNAME } from "../../constants/pathname";
+import { emptyFilter, setFilter } from "../../store/slices/filterSlice";
 
 export function WrapperJob() {
   const { jobs } = PATHNAME;
@@ -21,8 +19,7 @@ export function WrapperJob() {
   const level = useSelector((state) => state.filterSlice.levelCategory);
   const value = String(category);
   const lev = String(level);
-  const onClickButton = async (value) => {
-    console.log(value, "dd");
+  const onClickButton = (value) => {
     if (category.length > 0) {
       dispatch(emptyFilter({ category: JOB__CATEGORY.categoryType }));
     }
@@ -30,8 +27,7 @@ export function WrapperJob() {
     dispatch(setFilter({ value: value, category: JOB__CATEGORY.categoryType }));
   };
 
-  const onClick = async (value) => {
-    console.log(value);
+  const onClick = (value) => {
     if (level.length > 0) {
       dispatch(emptyFilter({ category: LEVEL_CATEGORY.categoryType }));
     }

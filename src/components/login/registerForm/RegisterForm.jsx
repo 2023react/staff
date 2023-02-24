@@ -9,7 +9,10 @@ import { auth, db } from "../../../firebase";
 import { doc, setDoc } from "firebase/firestore";
 import { useNavigate } from "react-router";
 import { useDispatch } from "react-redux";
-import { changeIsUser } from "../../../store/slices/loginSlice";
+import {
+  changeIsUser,
+  closeLoginModal,
+} from "../../../store/slices/loginSlice";
 
 const RegisterForm = () => {
   const dispatch = useDispatch();
@@ -32,7 +35,7 @@ const RegisterForm = () => {
 
       try {
         await updateProfile(res.user, {
-          displayName: data.firstName + data.lastName,
+          displayName: data.firstName + " " + data.lastName,
         });
 
         await setDoc(doc(db, "users", res.user.uid), {
@@ -46,6 +49,7 @@ const RegisterForm = () => {
       }
 
       navigate("/");
+      dispatch(closeLoginModal());
     } catch (error) {
       console.log(error);
     }

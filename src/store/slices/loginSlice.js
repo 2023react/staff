@@ -6,6 +6,7 @@ const initialState = {
   showLogin: false,
   showRegister: false,
   showComponyLogin: false,
+  isLoading: true,
 };
 
 const loginSlice = createSlice({
@@ -13,6 +14,9 @@ const loginSlice = createSlice({
   initialState,
 
   reducers: {
+    changeIsLoading(state, action) {
+      state.isLoading = action.payload;
+    },
     changeIsUser(state, action) {
       state.isUser = action.payload;
     },
@@ -55,5 +59,6 @@ export const {
   addCurrentCompany,
   changeCurrentUser,
   onClickSignUp,
+  changeIsLoading,
 } = loginSlice.actions;
 export default loginSlice.reducer;

@@ -88,8 +88,7 @@ const LoginForm = () => {
         </a>
 
         <SignInButton type="submit" variant="solid">
-          {" "}
-          Sign In{" "}
+          Sign In
         </SignInButton>
 
         <div className={style.text}>

@@ -67,7 +67,10 @@ const Header = () => {
                 {currentUser ? (
                   <>
                     {isUser ? (
-                      <NavLink to="/user" className={style.logOutoBox}>
+                      <NavLink
+                        to={`/user/${currentUser.uid}`}
+                        className={style.logOutoBox}
+                      >
                         <li>
                           <Logo
                             currentCompany={currentUser}
@@ -113,8 +116,6 @@ const Header = () => {
                     </li>{" "}
                   </>
                 )}
-
-                <NavLink to="/user">User page</NavLink>
               </ul>
             </div>
           </div>

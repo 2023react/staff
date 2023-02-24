@@ -6,8 +6,6 @@ import styles from "./companyItem.module.scss";
 import ClockIcon from "../../../UI/ClockIcon";
 import { Link } from "react-router-dom";
 const CompanyItem = ({ item, id }) => {
-  console.log(item, "item ");
-  console.log(id);
   return (
     <Link to={`/companyDetails/${id}`}>
       <div className={styles.jobInfo}>
@@ -22,9 +20,7 @@ const CompanyItem = ({ item, id }) => {
           </div>
         </div>
         <div className={styles.jobInfoTitleBlocks}>
-          <div className={styles.jobInfoTitle}>
-            {/* <CalendarMonthIcon color="customGreen" /> */}
-          </div>
+          <div className={styles.jobInfoTitle}></div>
           <div className={styles.jobInfoTitle}>
             <ClockIcon color="customGreen" fontSize="small" />{" "}
             <span>{"active Jobs"}</span>

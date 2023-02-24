@@ -10,7 +10,7 @@ import styles from "./logo.module.scss";
 
 const Logo = ({ isHomePage }) => {
   const currentUser = useSelector((state) => state.loginSlice.currentUser);
-
+  const isLoading = useSelector((state) => state.loginSlice.isLoading);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const onLogOut = (e) => {
@@ -22,28 +22,31 @@ const Logo = ({ isHomePage }) => {
   };
   return (
     <div className={styles.logoBox}>
-      <ImageAvatars
-        variant="Avatar"
-        companyName={currentUser.displayName}
-        photoURL={currentUser?.photoURL}
-      />
-
-      <div className={styles.logOutBtn}>
-        <h3
-          className={`${styles.title} ${[
-            !isHomePage ? "" : styles.whiteTitle,
-          ]}  `}
-        >
-          {currentUser?.displayName}
-        </h3>
-        <LogOutButton
-          size="small"
-          onClick={(e) => onLogOut(e)}
-          variant={isHomePage ? "HomeBtn" : "LogOut"}
-        >
-          LogOut{" "}
-        </LogOutButton>
-      </div>
+      {isLoading && (
+        <>
+          <ImageAvatars
+            variant="Avatar"
+            companyName={currentUser.displayName}
+            photoURL={currentUser?.photoURL}
+          />
+          <div className={styles.logOutBtn}>
+            <h3
+              className={`${styles.title} ${[
+                !isHomePage ? "" : styles.whiteTitle,
+              ]}  `}
+            >
+              {currentUser?.displayName}
+            </h3>
+            <LogOutButton
+              size="small"
+              onClick={(e) => onLogOut(e)}
+              variant={isHomePage ? "HomeBtn" : "LogOut"}
+            >
+              LogOut{" "}
+            </LogOutButton>
+          </div>
+        </>
+      )}
     </div>
   );
 };

@@ -12,6 +12,7 @@ import HeartIcon from "../../UI/HeartIcon";
 const JobItem = ({ id, item, toCompany }) => {
   const { jobs, jobInfoToCompany } = PATHNAME;
   const iconWidth = { width: "15px" };
+
   return (
     <Link
       to={!toCompany ? `${jobs}/${id}` : `${jobInfoToCompany}/${id}?current`}

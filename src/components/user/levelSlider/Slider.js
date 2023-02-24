@@ -32,7 +32,9 @@ export default function DiscreteSliderValues({
         color="customGreen"
         min={0}
         max={3}
-        defaultValue={marks.findIndex((option) => option.label === level)}
+        defaultValue={
+          level && marks.findIndex((option) => option?.label === level)
+        }
         valueLabelFormat={valueLabelFormat}
         step={1}
         valueLabelDisplay="auto"

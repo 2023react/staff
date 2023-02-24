@@ -16,8 +16,9 @@ margin-top: 20px;
     display: flex;
     justify-content: center;
     gap: 30px;
+    align-items: center;
     input{
-        height: 30px;
+        height: 50px;
     }
 
     .parag{
@@ -33,4 +34,17 @@ margin-top: 20px;
 .phoneInput{
 max-width: 350px;
 width: 100%;
+}
+
+.btnBlock{
+   
+    display: flex;
+    justify-content: center;
+   text-align: center;
+   margin: 50px auto;
+   padding: 10px;
+}
+
+.btn{
+width: 500px;
 }

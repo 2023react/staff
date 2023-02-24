@@ -1,7 +1,6 @@
 import React from "react";
 
 import styles from "./navbar.module.scss";
-import { jobsData } from "../../../constants/jobsdata";
 import BassicVerifiedIcon from "../../../UI/VerifiedIcon";
 import FollowButton from "../../../UI/Button";
 import HeartIcon from "../../../UI/HeartIcon";
@@ -12,7 +11,6 @@ import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { currentSelector } from "../../../store/slices/loginSlice";
 const CompanyNavbar = ({ companyName, photoURL }) => {
-  console.log(companyName, photoURL);
   const currentUser = useSelector(currentSelector);
   const verifiedIconStyles = { width: "25px" };
   const avatarCustomStyles = { width: 140, height: 140 };

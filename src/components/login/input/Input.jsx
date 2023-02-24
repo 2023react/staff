@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 import style from "../input/input.module.scss";
-import { AiFillFileImage } from "react-icons/ai";
+import PersonIcon from "@mui/icons-material/Person";
 
 const InputField = ({
   name,
@@ -44,11 +44,9 @@ const InputField = ({
             </div>
           ) : (
             <>
-              <AiFillFileImage
-                style={{
-                  width: "30px",
-                  height: "30px",
-                }}
+              <PersonIcon
+                color="customGreen"
+                sx={{ width: "50px", height: "50px", marginRight: "10px" }}
               />
               <span>Add a image</span>
             </>
@@ -57,7 +55,9 @@ const InputField = ({
       ) : null}
 
       <span className={style.error__style}>
-        {errors && errors[name] && <p>{errors[name].message}</p>}
+        {errors && errors[name] && errors[name].message && (
+          <p>{errors[name].message}</p>
+        )}
       </span>
     </div>
   );

@@ -1,8 +1,4 @@
-import {
-  createApi,
-  fakeBaseQuery,
-  fetchBaseQuery,
-} from "@reduxjs/toolkit/query/react";
+import { createApi, fakeBaseQuery } from "@reduxjs/toolkit/query/react";
 import {
   arrayRemove,
   arrayUnion,
@@ -64,10 +60,14 @@ export const dataApi = createApi({
       providesTags: ["Jobs"],
     }),
     getFiltredCompanies: builder.query({
-      async queryFn({ filterHintsCompany }) {
+      async queryFn({ filterHintsCompany, limits }) {
         try {
           const fetchData = await getDocs(
-            query(collection(db, "companies"), ...filterHintsCompany)
+            query(
+              collection(db, "companies"),
+              ...filterHintsCompany,
+              limit(limits)
+            )
           );
           const data = [];
           fetchData.forEach((doc) => {
@@ -100,7 +100,6 @@ export const dataApi = createApi({
     deleteJobs: builder.mutation({
       async queryFn(id) {
         try {
-          console.log(id);
           deleteDoc(doc(db, "jobs", id));
           return { data: "ok" };
         } catch (e) {
@@ -193,7 +192,6 @@ export const dataApi = createApi({
 });
 export const {
   useGetFiltredINQuery,
-  useLazyGetFiltredWhereQuery,
   useAddJobsMutation,
   useDeleteJobsMutation,
   useGetDataQuery,
@@ -202,5 +200,6 @@ export const {
   useGetFiltredCompaniesQuery,
   useGetCvQuery,
   useUpdateCvMutation,
+  useGetFiltredWhereQuery,
 } = dataApi;
 export const jobApi = dataApi.reducer;
