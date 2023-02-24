@@ -17,9 +17,13 @@ const TextEditor = ({ onChange, value, big }) => {
   );
 
   useEffect(() => {
+    console.log(EditorState.createEmpty());
     const newValue = value
       ? EditorState.createWithContent(convertFromRaw(value))
       : EditorState.createEmpty();
+
+    console.log(value, "value");
+    console.log(JSON.stringify(newValue) !== JSON.stringify(editor));
     if (JSON.stringify(newValue) !== JSON.stringify(editor)) {
       setEditor(newValue);
     }
