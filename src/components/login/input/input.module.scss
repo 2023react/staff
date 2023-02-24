@@ -46,7 +46,6 @@
     img{
         width: 150px;
         height: 75px;
-        object-fit: cover;
-
+        object-fit: contain;
     }
 }

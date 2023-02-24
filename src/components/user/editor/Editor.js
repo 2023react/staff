@@ -18,6 +18,7 @@ const EditorComponent = ({ isTitle, update, onEdit }) => {
       setEditorState(EditorState.createEmpty());
     }
   }, [update]);
+
   useEffect(() => {
     onEdit(convertToRaw(editorState.getCurrentContent()));
   }, [editorState, onEdit]);

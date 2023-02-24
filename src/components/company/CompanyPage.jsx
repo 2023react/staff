@@ -9,7 +9,6 @@ import AddActionButtons from "./Accordion/AddIcon";
 import parse from "html-react-parser";
 
 import {
-  useGetDataQuery,
   useUpdateCompanyDataMutation,
   dataApi,
 } from "../../store/slices/dataControlRTKQ";

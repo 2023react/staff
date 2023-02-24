@@ -72,6 +72,7 @@ function App() {
   useEffect(() => {
     const getData = () => {
       onAuthStateChanged(auth, async (currentUser) => {
+        console.log(currentUser?.displayName);
         dispatch(changeCurrentUser(currentUser));
         try {
           const docRef = doc(db, "users", currentUser.uid);

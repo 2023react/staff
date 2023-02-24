@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import style from "../companyRegister/registerCompany.module.scss";
 import { Controller, useForm } from "react-hook-form";
-import Select from "../../select/Select";
+import SelectMy from "../../select/Select";
 
 import {
   CITIES,
@@ -19,6 +19,8 @@ import { useNavigate } from "react-router";
 
 import RegisterButton from "../../../UI/Button";
 import InputField from "../input/Input";
+import { InputLabel, MenuItem, Select, TextField } from "@mui/material";
+import PhoneInputComp from "../inputPhone/InputPhone";
 
 const RegisterCompany = () => {
   const navigate = useNavigate();
@@ -46,6 +48,8 @@ const RegisterCompany = () => {
   }, [imgChange]);
 
   const onSubmit = async (data) => {
+    console.log(data.country);
+    console.log(data);
     try {
       const res = await createUserWithEmailAndPassword(
         auth,
@@ -73,8 +77,8 @@ const RegisterCompany = () => {
               industry: data.industry,
               phone: data.phoneInput,
               photoURL: downloadURL,
-              aboutUs: {},
               date: Timestamp.now(),
+              aboutUs: "",
             });
           } catch (err) {
             console.log(err);
@@ -97,54 +101,125 @@ const RegisterCompany = () => {
           <div className={style.block}>
             <div className={style.inputBlock}>
               <p className={style.parag}>Company name</p>
-              <InputField
-                heigth="large"
+              <Controller
                 name="CompanyName"
-                type="text"
-                placeholder="Company name"
-                register={register}
-                errors={errors}
+                control={control}
+                rules={{ required: "wrong name" }}
+                render={({ field }) => (
+                  <TextField
+                    size="small"
+                    sx={{ width: "400px" }}
+                    {...field}
+                    label="Company Name"
+                    variant="outlined"
+                    InputLabelProps={{
+                      shrink: true,
+                    }}
+                    error={!!errors.CompanyName}
+                    helperText={
+                      errors.CompanyName ? "Company Name is required" : ""
+                    }
+                  />
+                )}
               />
             </div>
 
             <div className={style.inputBlock}>
-              <p className={style.parag}>Company Address</p>
-              <InputField
+              <p className={style.parag}>Company Address </p>
+              <Controller
                 name="address"
-                type="text"
-                placeholder="Company Address"
-                register={register}
-                errors={errors}
+                control={control}
+                rules={{ required: "wrong adress" }}
+                render={({ field }) => (
+                  <TextField
+                    size="small"
+                    sx={{ width: "400px" }}
+                    {...field}
+                    label="Address"
+                    variant="outlined"
+                    InputLabelProps={{
+                      shrink: true,
+                    }}
+                    error={!!errors.address}
+                    helperText={
+                      errors.address ? "Company Name is required" : ""
+                    }
+                  />
+                )}
               />
             </div>
 
             <div className={style.inputBlock}>
               <p className={style.parag}>Country</p>
-              <Select
+              <Controller
                 name="country"
-                register={register}
-                errors={errors}
-                options={COUNTRIES}
+                control={control}
+                rules={{ required: "required" }}
+                render={({ field }) => (
+                  <Select
+                    size="small"
+                    sx={{ width: "400px" }}
+                    {...field}
+                    label="country"
+                    variant="outlined"
+                    error={!!errors.country}
+                    helperText={errors.country ? "Select an option" : ""}
+                  >
+                    {COUNTRIES.map((c) => (
+                      <MenuItem value={c}>{c}</MenuItem>
+                    ))}
+                  </Select>
+                )}
               />
             </div>
 
             <div className={style.inputBlock}>
               <p className={style.parag}>City</p>
-              <Select
+              <Controller
                 name="city"
-                register={register}
-                errors={errors}
-                options={CITIES}
+                control={control}
+                rules={{ required: true }}
+                render={({ field }) => (
+                  <Select
+                    size="small"
+                    sx={{ width: "400px" }}
+                    {...field}
+                    label="city"
+                    variant="outlined"
+                    error={!!errors.city}
+                    helperText={errors.city ? "Select an option" : ""}
+                  >
+                    {CITIES.map((c) => (
+                      <MenuItem value={c}>{c}</MenuItem>
+                    ))}
+                  </Select>
+                )}
               />
             </div>
 
             <div className={style.inputBlock}>
               <p className={style.parag}>Industry</p>
-              <Select
+              <Controller
                 name="industry"
-                register={register}
-                errors={errors}
-                options={INDUSTRIES_LEVELS}
+                control={control}
+                rules={{ required: true }}
+                render={({ field }) => (
+                  <>
+                    <Select
+                      size="small"
+                      sx={{ width: "400px" }}
+                      {...field}
+                      label="industry"
+                      variant="outlined"
+                      error={!!errors.industry}
+                      helperText={errors.industry ? "Select an option" : ""}
+                    >
+                      {INDUSTRIES_LEVELS.map((c) => (
+                        <MenuItem value={c}>{c}</MenuItem>
+                      ))}
+                    </Select>
+                  </>
+                )}
               />
             </div>
 
@@ -153,7 +228,7 @@ const RegisterCompany = () => {
               <Controller
                 name="phoneInput"
                 control={control}
-                render={({ field: { onChange, value } }) => (
+                render={({ field: { onChange, onBlur, value, ref } }) => (
                   <PhoneInput
                     className={style.phoneInput}
                     value={value}
@@ -184,36 +259,74 @@ const RegisterCompany = () => {
 
             <div className={style.inputBlock}>
               <p className={style.parag}>Email</p>
-              <InputField
+              <Controller
                 name="email"
                 type="email"
-                placeholder="Your email"
-                register={register}
-                errors={errors}
+                control={control}
+                rules={{ required: "wrong email" }}
+                render={({ field }) => (
+                  <TextField
+                    size="small"
+                    sx={{ width: "400px" }}
+                    {...field}
+                    label="Your email"
+                    variant="outlined"
+                    InputLabelProps={{
+                      shrink: true,
+                    }}
+                    error={!!errors.email}
+                    helperText={errors.email ? "Email is required" : ""}
+                  />
+                )}
               />
             </div>
 
             <div className={style.inputBlock}>
               <p className={style.parag}>Password</p>
 
-              <InputField
+              <Controller
                 name="password"
-                type="password"
-                placeholder="Your Password"
-                register={register}
-                errors={errors}
+                control={control}
+                rules={{ required: "wrong password" }}
+                render={({ field }) => (
+                  <TextField
+                    size="small"
+                    sx={{ width: "400px" }}
+                    {...field}
+                    type="password"
+                    label=" password"
+                    variant="outlined"
+                    InputLabelProps={{
+                      shrink: true,
+                    }}
+                    error={!!errors.password}
+                    helperText={errors.password ? "password is required" : ""}
+                  />
+                )}
               />
             </div>
 
             <div className={style.inputBlock}>
               <p className={style.parag}>Repeat passsword</p>
-
-              <InputField
+              <Controller
                 name="pas"
-                type="password"
-                placeholder="Repeat Password"
-                register={register}
-                errors={errors}
+                control={control}
+                rules={{ required: "wrong password" }}
+                render={({ field }) => (
+                  <TextField
+                    size="small"
+                    sx={{ width: "400px" }}
+                    {...field}
+                    type="password"
+                    label=" password"
+                    variant="outlined"
+                    InputLabelProps={{
+                      shrink: true,
+                    }}
+                    error={!!errors.pas}
+                    helperText={errors.pas ? "password is required" : ""}
+                  />
+                )}
               />
             </div>
 
