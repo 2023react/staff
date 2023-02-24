@@ -7,7 +7,6 @@ import { TYPES } from "../../../constants/userdata";
 import { PDFExport, savePDF } from "@progress/kendo-react-pdf";
 import PDFNavbar from "./PDFNavbar";
 import { NavLink } from "react-router-dom";
-
 import FormCvDetails from "../formEditor/FormCvDetails";
 import LevelSliderDetails from "../levelSlider/LevelSliderDetails";
 import LimitTagsDetails from "../limitTags/LimitTagsDetails";
@@ -17,7 +16,6 @@ const PDFConvertor = () => {
   const pdfExportComponent = React.useRef(null);
 
   const currentUser = useSelector((state) => state.loginSlice.currentUser);
-
   const cvData = useSelector((state) => state.userSlice.cvData);
 
   const exportPDFWithComponent = () => {
