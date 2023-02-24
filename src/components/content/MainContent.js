@@ -41,7 +41,7 @@ const MainContent = () => {
   const companyData = useSelector((state) => state.jobsSlice.companyData);
 
   const filterHints = jobCategory.length
-    ? [where("jobCategory", "in", jobCategory)]
+    ? [where("category", "in", jobCategory)]
     : levelCategory.length
     ? [where("level", "in", levelCategory)]
     : [];
