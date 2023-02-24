@@ -7,7 +7,7 @@ import { useLocation } from "react-router";
 import { v4 as uuid } from "uuid";
 import {
   useGetFiltredCompaniesQuery,
-  useGetFiltredDataQuery,
+  useGetFiltredINQuery,
 } from "../../store/slices/dataControlRTKQ";
 import { where } from "firebase/firestore";
 
@@ -47,7 +47,7 @@ const MainContent = () => {
     return [...industryType];
   };
 
-  const { data, isLoading } = useGetFiltredDataQuery({
+  const { data, isLoading } = useGetFiltredINQuery({
     limits: limit,
     filterHints: getFilteredJobs(),
   });
@@ -120,7 +120,7 @@ const MainContent = () => {
         <SwiperComponent />
       </div>
       <div className={styles.contentNavbar}>
-        {location === "jobs" ? (
+        {location === "/jobs" ? (
           <Navbar />
         ) : (
           <p className={styles.companiesNavbarSuccessor}>

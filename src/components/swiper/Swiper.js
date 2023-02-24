@@ -5,7 +5,7 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 import styles from "./swiper.module.scss";
-
+import { Link } from "react-router-dom";
 import { Pagination, Autoplay, Navigation } from "swiper";
 import Avatar from "@mui/material/Avatar";
 import LocalFireDepartmentIcon from "@mui/icons-material/LocalFireDepartment";
@@ -13,9 +13,9 @@ import BasicButtons from "../../UI/Button";
 import parse from "html-react-parser";
 import HeartIcon from "../../UI/HeartIcon";
 import { useSelector } from "react-redux";
-import { useLocation } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 import { v4 as uuid } from "uuid";
-import { useGetFiltredDataQuery } from "../../store/slices/dataControlRTKQ";
+import { useGetFiltredINQuery } from "../../store/slices/dataControlRTKQ";
 
 import { where } from "firebase/firestore";
 
@@ -27,9 +27,9 @@ export const SwiperComponent = () => {
   const pathname = useLocation().pathname;
   const isHomePage = pathname === "/";
   const jobsType = jobCategory.map((item) => where("jobCategory", "==", item));
-
+  const navigate = useNavigate();
   const filterHints = [...jobsType];
-  const { data: jobData } = useGetFiltredDataQuery({
+  const { data: jobData } = useGetFiltredINQuery({
     filterHints,
   });
 
@@ -104,9 +104,12 @@ export const SwiperComponent = () => {
               <HeartIcon />
               Follow
             </BasicButtons>
-            <BasicButtons size="small" variant="ViewMore">
-              View more
-            </BasicButtons>
+
+            <Link to={`jobs/${item.id}`}>
+              <BasicButtons size="small" variant="ViewMore">
+                View more
+              </BasicButtons>
+            </Link>
           </div>
         </SwiperSlide>
       ))}
