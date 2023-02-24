@@ -4,18 +4,26 @@ import TextField from "@mui/material/TextField";
 import BasicButtons from "../../../UI/Button";
 import styles from "./limitTags.module.scss";
 import { useState } from "react";
-export default function LimitTags({ update, onClick, cvData, handleClose }) {
+export default function LimitTags({ update, onClick, handleClose }) {
   const options = React.useMemo(() => {
     return update?.data.options.map((option) => {
       return { title: option };
     });
   }, [update]);
 
-  const [tags, setTags] = useState();
-  console.log(tags);
+  const [tags, setTags] = useState([]);
+
+  React.useEffect(() => {
+    if (update?.cvInfo?.formData) {
+      setTags(update?.cvInfo?.formData);
+    }
+  }, [update]);
+
   const handleClick = () => {
-    onClick(tags ? tags : []);
-    setTags();
+    if (tags) {
+      onClick(tags);
+      setTags([]);
+    }
   };
 
   return (
@@ -30,7 +38,7 @@ export default function LimitTags({ update, onClick, cvData, handleClose }) {
         options={options}
         getOptionLabel={(option) => option.title}
         filterOptions={(options, state) => {
-          const filteredOptions = options.filter(
+          const filteredOptions = options?.filter(
             (option) =>
               state.inputValue === "" ||
               option.title
@@ -39,7 +47,14 @@ export default function LimitTags({ update, onClick, cvData, handleClose }) {
           );
           return filteredOptions;
         }}
-        defaultValue={update?.cvInfo?.formData}
+        getOptionDisabled={(option) => {
+          if (tags?.some((tag) => tag.title === option.title)) {
+            return true;
+          }
+
+          return false;
+        }}
+        value={tags}
         renderInput={(params) => <TextField color="customGreen" {...params} />}
         sx={{ width: "500px" }}
       />

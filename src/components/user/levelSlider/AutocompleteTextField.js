@@ -7,6 +7,7 @@ export default function ComboBox({
   setValue,
   disabled,
   defaultValue,
+  selectedValue,
 }) {
   const options = optionsData.map((option) => {
     return { label: option };
@@ -15,17 +16,31 @@ export default function ComboBox({
   return (
     <Autocomplete
       disabled={disabled}
-      onChange={(event, value) => setValue(value.label)}
-      defaultValue={options.find((option) => option.label === defaultValue)}
+      onChange={(event, value) => {
+        setValue(value?.label);
+      }}
+      defaultValue={defaultValue && { label: defaultValue }}
       size="small"
       options={options}
-      getOptionLabel={(option) => option.label}
+      getOptionLabel={(option) => option?.label}
       filterOptions={(options, { inputValue }) =>
         options.filter(
           (option) =>
-            option.label.toLowerCase().indexOf(inputValue.toLowerCase()) !== -1
+            option?.label.toLowerCase().indexOf(inputValue.toLowerCase()) !== -1
         )
       }
+      getOptionDisabled={(option) => {
+        if (
+          selectedValue?.some(
+            (item) =>
+              item.value === option?.label && item.value !== defaultValue
+          )
+        ) {
+          return true;
+        }
+
+        return false;
+      }}
       sx={{ width: 300 }}
       renderInput={(params) => <TextField color="customGreen" {...params} />}
     />

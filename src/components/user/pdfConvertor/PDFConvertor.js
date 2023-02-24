@@ -15,14 +15,11 @@ import draftToHtml from "draftjs-to-html";
 import parse from "html-react-parser";
 const PDFConvertor = () => {
   const pdfExportComponent = React.useRef(null);
-  const contentArea = React.useRef(null);
+
   const currentUser = useSelector((state) => state.loginSlice.currentUser);
 
   const cvData = useSelector((state) => state.userSlice.cvData);
 
-  const exportPDFWithMethod = () => {
-    savePDF(contentArea.current, { paperSize: "A4" });
-  };
   const exportPDFWithComponent = () => {
     if (pdfExportComponent.current) {
       pdfExportComponent.current.save();

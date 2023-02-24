@@ -105,7 +105,8 @@ const AutocompleteLevelSlider = ({ update, handleClose, handleClick }) => {
           <div className={styles.optionBlock} key={item.key}>
             <div className={styles.selectBlock}>
               <ComboBox
-                defaultValue={item.value ? item.value : value}
+                defaultValue={item.value && item.value}
+                selectedValue={update?.cvInfo?.formData}
                 disabled={item.disabled}
                 optionsData={update.data.options}
                 setValue={setValue}
@@ -114,7 +115,7 @@ const AutocompleteLevelSlider = ({ update, handleClose, handleClick }) => {
             <div>
               <DiscreteSliderValues
                 disabled={item.disabled}
-                level={item?.level ? item.level : level}
+                level={item?.level && item.level}
                 levels={update.data.levels}
                 setLevel={setLevel}
               />

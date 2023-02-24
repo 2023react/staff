@@ -2,7 +2,7 @@ import * as React from "react";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 
-export default function SearchTextField() {
+export default function SearchTextField({ onChange, value }) {
   return (
     <Box
       size="small"
@@ -15,12 +15,14 @@ export default function SearchTextField() {
       autoComplete="off"
     >
       <TextField
+        onChange={(e) => onChange(e.target.value)}
         fullWidth
         size="small"
         color="customGreen"
         label="Search"
         variant="outlined"
         placeholder="All keywords"
+        value={value}
       />
     </Box>
   );

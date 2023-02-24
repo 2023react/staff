@@ -5,7 +5,7 @@ import AlertDialogSlide from "../../UI/Dialog";
 import styles from "./user.module.scss";
 import EditorComponent from "./editor/Editor";
 import BasicButtons from "../../UI/Button";
-import { useEffect, useCallback } from "react";
+import { useEffect } from "react";
 import UserNavbar from "./navbars/UserNavbar";
 import { CV, TYPES } from "../../constants/userdata";
 import CvItem from "./accordion/CvItem";
@@ -42,11 +42,6 @@ const UserPage = () => {
       dispatch(changeCv(data));
     }
   }, [data, dispatch, currentUser]);
-  // useEffect(() => {
-  //   if (cvData && currentUser) {
-  //     updateCv({ id: currentUser?.uid, cvData: cvData }).unwrap();
-  //   }
-  // }, [cvData]);
 
   const handleClose = () => {
     setOpen(false);
