@@ -88,8 +88,7 @@ const MainContent = () => {
       <CompanyItem item={c?.item} id={c?.id} key={uuid()} />
     ));
   };
-  console.log(jobsData, "jobsData");
-  console.log(companyData, "companyData");
+
   return (
     <div className={styles.mainContent}>
       <div className={styles.contentHotJobs}>
